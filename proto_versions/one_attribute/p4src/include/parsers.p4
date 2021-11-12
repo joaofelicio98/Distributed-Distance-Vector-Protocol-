@@ -14,9 +14,9 @@ parser MyParser(packet_in packet,
     state parse_ethernet {
         packet.extract(hdr.ethernet);
         transition select(hdr.ethernet.etherType) {
-            TYPE_ARP:  parse_arp;
-            TYPE_IPV4: parse_ipv4;
-            default:   accept;
+            TYPE_ARP:           parse_arp;
+            TYPE_IPV4:          parse_ipv4;
+            default:            accept;
         }
     }
 
@@ -28,17 +28,11 @@ parser MyParser(packet_in packet,
     state parse_ipv4 {
         packet.extract(hdr.ipv4);
         transition select(hdr.ipv4.protocol) {
-            MY_HEADER_PROTO: parse_my_header;
-            CPU_HEADER_PROTO:       parse_cpu;
+            CPU_HEADER_PROTO: parse_cpu;
             TCP_PROTOCOL:     parse_tcp;
             UDP_PROTOCOL:     parse_udp;
             default:          accept;
         }
-    }
-
-    state parse_my_header {
-        packet.extract(hdr.my_header);
-        transition accept;
     }
 
     state parse_cpu {
@@ -100,7 +94,6 @@ control MyDeparser(packet_out packet, in headers hdr) {
         packet.emit(hdr.ethernet);
         packet.emit(hdr.arp);
         packet.emit(hdr.ipv4);
-        packet.emit(hdr.my_header);
         packet.emit(hdr.cpu);
         packet.emit(hdr.tcp);
         packet.emit(hdr.udp);

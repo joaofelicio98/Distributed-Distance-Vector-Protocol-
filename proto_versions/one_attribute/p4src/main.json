@@ -74,8 +74,15 @@
       ]
     },
     {
-      "name" : "tcp_t",
+      "name" : "cpu_t",
       "id" : 5,
+      "fields" : [
+        ["ingress_port", 16, false]
+      ]
+    },
+    {
+      "name" : "tcp_t",
+      "id" : 6,
       "fields" : [
         ["srcPort", 16, false],
         ["dstPort", 16, false],
@@ -92,31 +99,12 @@
     },
     {
       "name" : "udp_t",
-      "id" : 6,
+      "id" : 7,
       "fields" : [
         ["srcPort", 16, false],
         ["dstPort", 16, false],
         ["length", 16, false],
         ["checksum", 16, false]
-      ]
-    },
-    {
-      "name" : "my_header_t",
-      "id" : 7,
-      "fields" : [
-        ["dst_addr", 32, false],
-        ["distance", 16, false],
-        ["seq_no", 32, false]
-      ]
-    },
-    {
-      "name" : "cpu_t",
-      "id" : 8,
-      "fields" : [
-        ["dst_addr", 32, false],
-        ["distance", 16, false],
-        ["seq_no", 32, false],
-        ["ingress_port", 16, false]
       ]
     }
   ],
@@ -157,30 +145,23 @@
       "pi_omit" : true
     },
     {
-      "name" : "tcp",
+      "name" : "cpu",
       "id" : 5,
+      "header_type" : "cpu_t",
+      "metadata" : false,
+      "pi_omit" : true
+    },
+    {
+      "name" : "tcp",
+      "id" : 6,
       "header_type" : "tcp_t",
       "metadata" : false,
       "pi_omit" : true
     },
     {
       "name" : "udp",
-      "id" : 6,
-      "header_type" : "udp_t",
-      "metadata" : false,
-      "pi_omit" : true
-    },
-    {
-      "name" : "my_header",
       "id" : 7,
-      "header_type" : "my_header_t",
-      "metadata" : false,
-      "pi_omit" : true
-    },
-    {
-      "name" : "cpu",
-      "id" : 8,
-      "header_type" : "cpu_t",
+      "header_type" : "udp_t",
       "metadata" : false,
       "pi_omit" : true
     }
@@ -189,24 +170,7 @@
   "header_union_types" : [],
   "header_unions" : [],
   "header_union_stacks" : [],
-  "field_lists" : [
-    {
-      "id" : 1,
-      "name" : "fl",
-      "source_info" : {
-        "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-        "line" : 43,
-        "column" : 35,
-        "source_fragment" : "meta"
-      },
-      "elements" : [
-        {
-          "type" : "field",
-          "value" : ["scalars", "userMetadata.ingress_port"]
-        }
-      ]
-    }
-  ],
+  "field_lists" : [],
   "errors" : [
     ["NoError", 0],
     ["PacketTooShort", 1],
@@ -305,12 +269,6 @@
           "transitions" : [
             {
               "type" : "hexstr",
-              "value" : "0xfe",
-              "mask" : null,
-              "next_state" : "parse_my_header"
-            },
-            {
-              "type" : "hexstr",
               "value" : "0xfd",
               "mask" : null,
               "next_state" : "parse_cpu"
@@ -342,32 +300,8 @@
           ]
         },
         {
-          "name" : "parse_my_header",
-          "id" : 3,
-          "parser_ops" : [
-            {
-              "parameters" : [
-                {
-                  "type" : "regular",
-                  "value" : "my_header"
-                }
-              ],
-              "op" : "extract"
-            }
-          ],
-          "transitions" : [
-            {
-              "type" : "default",
-              "value" : null,
-              "mask" : null,
-              "next_state" : null
-            }
-          ],
-          "transition_key" : []
-        },
-        {
           "name" : "parse_cpu",
-          "id" : 4,
+          "id" : 3,
           "parser_ops" : [
             {
               "parameters" : [
@@ -391,7 +325,7 @@
         },
         {
           "name" : "parse_tcp",
-          "id" : 5,
+          "id" : 4,
           "parser_ops" : [
             {
               "parameters" : [
@@ -415,7 +349,7 @@
         },
         {
           "name" : "parse_udp",
-          "id" : 6,
+          "id" : 5,
           "parser_ops" : [
             {
               "parameters" : [
@@ -447,11 +381,11 @@
       "id" : 0,
       "source_info" : {
         "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/include/parsers.p4",
-        "line" : 98,
+        "line" : 92,
         "column" : 8,
         "source_fragment" : "MyDeparser"
       },
-      "order" : ["ethernet", "arp", "ipv4", "my_header", "cpu", "tcp", "udp"],
+      "order" : ["ethernet", "arp", "ipv4", "cpu", "tcp", "udp"],
       "primitives" : []
     }
   ],
@@ -464,7 +398,7 @@
       "id" : 0,
       "source_info" : {
         "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/include/parsers.p4",
-        "line" : 76,
+        "line" : 70,
         "column" : 1,
         "source_fragment" : "update_checksum( ..."
       },
@@ -721,44 +655,96 @@
     {
       "name" : "MyIngress.send_to_cpu",
       "id" : 7,
-      "runtime_data" : [],
+      "runtime_data" : [
+        {
+          "name" : "cpu_port",
+          "bitwidth" : 9
+        }
+      ],
       "primitives" : [
         {
           "op" : "assign",
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "userMetadata.ingress_port"]
+              "value" : ["ipv4", "protocol"]
             },
             {
-              "type" : "field",
-              "value" : ["standard_metadata", "ingress_port"]
+              "type" : "hexstr",
+              "value" : "0xfd"
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 42,
-            "column" : 8,
-            "source_fragment" : "meta.ingress_port = standard_metadata.ingress_port"
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/include/headers.p4",
+            "line" : 6,
+            "column" : 32,
+            "source_fragment" : "253; ..."
           }
         },
         {
-          "op" : "clone_ingress_pkt_to_egress",
+          "op" : "add_header",
           "parameters" : [
             {
-              "type" : "hexstr",
-              "value" : "0x00000064"
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x1"
+              "type" : "header",
+              "value" : "cpu"
             }
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
             "line" : 43,
             "column" : 8,
-            "source_fragment" : "clone3(CloneType.I2E, 100, meta)"
+            "source_fragment" : "hdr.cpu.setValid()"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["cpu", "ingress_port"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "field",
+                    "value" : ["standard_metadata", "ingress_port"]
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
+            "line" : 44,
+            "column" : 8,
+            "source_fragment" : "hdr.cpu.ingress_port = (bit<16>)standard_metadata.ingress_port"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "egress_spec"]
+            },
+            {
+              "type" : "runtime_data",
+              "value" : 0
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
+            "line" : 45,
+            "column" : 8,
+            "source_fragment" : "standard_metadata.egress_spec = cpu_port"
           }
         }
       ]
@@ -774,135 +760,6 @@
       ],
       "primitives" : [
         {
-          "op" : "add_header",
-          "parameters" : [
-            {
-              "type" : "header",
-              "value" : "my_header"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 62,
-            "column" : 8,
-            "source_fragment" : "hdr.my_header.setValid()"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["my_header", "dst_addr"]
-            },
-            {
-              "type" : "field",
-              "value" : ["cpu", "dst_addr"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 63,
-            "column" : 8,
-            "source_fragment" : "hdr.my_header.dst_addr = hdr.cpu.dst_addr"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["my_header", "distance"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "&",
-                  "left" : {
-                    "type" : "expression",
-                    "value" : {
-                      "op" : "+",
-                      "left" : {
-                        "type" : "field",
-                        "value" : ["cpu", "distance"]
-                      },
-                      "right" : {
-                        "type" : "hexstr",
-                        "value" : "0x0001"
-                      }
-                    }
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0xffff"
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 64,
-            "column" : 8,
-            "source_fragment" : "hdr.my_header.distance = hdr.cpu.distance + 1"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["my_header", "seq_no"]
-            },
-            {
-              "type" : "field",
-              "value" : ["cpu", "seq_no"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 65,
-            "column" : 8,
-            "source_fragment" : "hdr.my_header.seq_no = hdr.cpu.seq_no"
-          }
-        },
-        {
-          "op" : "remove_header",
-          "parameters" : [
-            {
-              "type" : "header",
-              "value" : "cpu"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 66,
-            "column" : 8,
-            "source_fragment" : "hdr.cpu.setInvalid()"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["ipv4", "protocol"]
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0xfe"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/include/headers.p4",
-            "line" : 5,
-            "column" : 31,
-            "source_fragment" : "254; ..."
-          }
-        },
-        {
           "op" : "assign",
           "parameters" : [
             {
@@ -916,7 +773,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 68,
+            "line" : 64,
             "column" : 8,
             "source_fragment" : "standard_metadata.mcast_grp = mcast_id"
           }
@@ -924,7 +781,7 @@
       ]
     },
     {
-      "name" : "main87",
+      "name" : "main83",
       "id" : 9,
       "runtime_data" : [],
       "primitives" : [
@@ -955,20 +812,13 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 87,
+            "line" : 83,
             "column" : 12,
             "source_fragment" : "meta.ingress_port = (bit<9>)hdr.cpu.ingress_port"
           }
-        }
-      ]
-    },
-    {
-      "name" : "main109",
-      "id" : 10,
-      "runtime_data" : [],
-      "primitives" : [
+        },
         {
-          "op" : "add_header",
+          "op" : "remove_header",
           "parameters" : [
             {
               "type" : "header",
@@ -977,113 +827,9 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 109,
+            "line" : 84,
             "column" : 12,
-            "source_fragment" : "hdr.cpu.setValid()"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["cpu", "dst_addr"]
-            },
-            {
-              "type" : "field",
-              "value" : ["my_header", "dst_addr"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 110,
-            "column" : 12,
-            "source_fragment" : "hdr.cpu.dst_addr = hdr.my_header.dst_addr"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["cpu", "distance"]
-            },
-            {
-              "type" : "field",
-              "value" : ["my_header", "distance"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 111,
-            "column" : 12,
-            "source_fragment" : "hdr.cpu.distance = hdr.my_header.distance"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["cpu", "seq_no"]
-            },
-            {
-              "type" : "field",
-              "value" : ["my_header", "seq_no"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 112,
-            "column" : 12,
-            "source_fragment" : "hdr.cpu.seq_no = hdr.my_header.seq_no"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["cpu", "ingress_port"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "&",
-                  "left" : {
-                    "type" : "field",
-                    "value" : ["scalars", "userMetadata.ingress_port"]
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0xffff"
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 113,
-            "column" : 12,
-            "source_fragment" : "hdr.cpu.ingress_port = (bit<16>)meta.ingress_port"
-          }
-        },
-        {
-          "op" : "remove_header",
-          "parameters" : [
-            {
-              "type" : "header",
-              "value" : "my_header"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 114,
-            "column" : 12,
-            "source_fragment" : "hdr.my_header.setInvalid()"
+            "source_fragment" : "hdr.cpu.setInvalid()"
           }
         },
         {
@@ -1095,29 +841,14 @@
             },
             {
               "type" : "hexstr",
-              "value" : "0xfd"
+              "value" : "0xfe"
             }
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/include/headers.p4",
-            "line" : 6,
-            "column" : 32,
-            "source_fragment" : "253; ..."
-          }
-        },
-        {
-          "op" : "truncate",
-          "parameters" : [
-            {
-              "type" : "hexstr",
-              "value" : "0x0000002e"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 116,
-            "column" : 12,
-            "source_fragment" : "truncate((bit<32>)46)"
+            "line" : 5,
+            "column" : 31,
+            "source_fragment" : "254; ..."
           }
         }
       ]
@@ -1136,13 +867,13 @@
       "init_table" : "node_2",
       "tables" : [
         {
-          "name" : "tbl_main87",
+          "name" : "tbl_main83",
           "id" : 0,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 87,
+            "line" : 83,
             "column" : 30,
-            "source_fragment" : "="
+            "source_fragment" : "= (bit<9>)hdr.cpu.ingress_port; ..."
           },
           "key" : [],
           "match_type" : "exact",
@@ -1152,10 +883,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [9],
-          "actions" : ["main87"],
+          "actions" : ["main83"],
           "base_default_next" : "MyIngress.broadcast_elected_attr",
           "next_tables" : {
-            "main87" : "MyIngress.broadcast_elected_attr"
+            "main83" : "MyIngress.broadcast_elected_attr"
           },
           "default_entry" : {
             "action_id" : 9,
@@ -1169,7 +900,7 @@
           "id" : 1,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 71,
+            "line" : 67,
             "column" : 10,
             "source_fragment" : "broadcast_elected_attr"
           },
@@ -1207,7 +938,7 @@
           "id" : 2,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 48,
+            "line" : 50,
             "column" : 10,
             "source_fragment" : "cpu_table"
           },
@@ -1286,7 +1017,7 @@
           "id" : 0,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 86,
+            "line" : 82,
             "column" : 12,
             "source_fragment" : "hdr.cpu.isValid()"
           },
@@ -1301,7 +1032,7 @@
               }
             }
           },
-          "true_next" : "tbl_main87",
+          "true_next" : "tbl_main83",
           "false_next" : "node_5"
         },
         {
@@ -1309,18 +1040,21 @@
           "id" : 1,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 91,
+            "line" : 89,
             "column" : 17,
-            "source_fragment" : "hdr.my_header.isValid()"
+            "source_fragment" : "hdr.ipv4.protocol == MY_HEADER_PROTO"
           },
           "expression" : {
             "type" : "expression",
             "value" : {
-              "op" : "d2b",
-              "left" : null,
-              "right" : {
+              "op" : "==",
+              "left" : {
                 "type" : "field",
-                "value" : ["my_header", "$valid$"]
+                "value" : ["ipv4", "protocol"]
+              },
+              "right" : {
+                "type" : "hexstr",
+                "value" : "0xfe"
               }
             }
           },
@@ -1332,7 +1066,7 @@
           "id" : 2,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 94,
+            "line" : 92,
             "column" : 17,
             "source_fragment" : "hdr.ipv4.isValid()"
           },
@@ -1357,71 +1091,14 @@
       "id" : 1,
       "source_info" : {
         "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-        "line" : 104,
+        "line" : 102,
         "column" : 8,
         "source_fragment" : "MyEgress"
       },
-      "init_table" : "node_11",
-      "tables" : [
-        {
-          "name" : "tbl_main109",
-          "id" : 4,
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 109,
-            "column" : 12,
-            "source_fragment" : "hdr.cpu.setValid(); ..."
-          },
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [10],
-          "actions" : ["main109"],
-          "base_default_next" : null,
-          "next_tables" : {
-            "main109" : null
-          },
-          "default_entry" : {
-            "action_id" : 10,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        }
-      ],
+      "init_table" : null,
+      "tables" : [],
       "action_profiles" : [],
-      "conditionals" : [
-        {
-          "name" : "node_11",
-          "id" : 3,
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
-            "line" : 108,
-            "column" : 12,
-            "source_fragment" : "standard_metadata.instance_type == 1"
-          },
-          "expression" : {
-            "type" : "expression",
-            "value" : {
-              "op" : "==",
-              "left" : {
-                "type" : "field",
-                "value" : ["standard_metadata", "instance_type"]
-              },
-              "right" : {
-                "type" : "hexstr",
-                "value" : "0x00000001"
-              }
-            }
-          },
-          "false_next" : null,
-          "true_next" : "tbl_main109"
-        }
-      ]
+      "conditionals" : []
     }
   ],
   "checksums" : [
@@ -1430,7 +1107,7 @@
       "id" : 0,
       "source_info" : {
         "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/include/parsers.p4",
-        "line" : 76,
+        "line" : 70,
         "column" : 1,
         "source_fragment" : "update_checksum( ..."
       },

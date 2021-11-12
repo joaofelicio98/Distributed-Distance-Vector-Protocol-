@@ -4,13 +4,12 @@ import sys
 import socket
 import random
 import struct
-
+from p4utils.utils.helper import load_topo
 from scapy.all import *
 
 class CPU_header(Packet):
     name = 'CPU'
-    fields_desc = [IPField('dst_addr','127.0.0.1'), BitField('distance',0,16),
-                   BitField('seq_no',0,32), BitField('ingress_port',0,16)]
+    fields_desc = [BitField('ingress_port', 0, 16)]
 
 def get_if():
     ifs=get_if_list()
@@ -26,21 +25,28 @@ def get_if():
 
 def main():
 
-    if len(sys.argv)<4:
-        print ('pass 2 arguments: <destination> "<distance> <seq_no>"')
+    if len(sys.argv)<6:
+        print ('pass 4 arguments: <destination> <distance> <seq_no> <port> <sw_name>')
         exit(1)
+
+    sw_name = sys.argv[5]
+    topo = load_topo('topology.json')
+    cpu_port_intf = str(topo.get_cpu_port_intf(sw_name))
 
     addr = socket.gethostbyname(str(sys.argv[1]))
     iface = get_if()
 
-    my_header = CPU_header(dst_addr = str(sys.argv[1]), distance = int(sys.argv[2]), seq_no = int(sys.argv[3]), ingress_port=1)
+    my_header = CPU_header(ingress_port=int(sys.argv[4]))
+    bind_layers(IP, CPU_header, proto = 253)
 
-    my_header.show2()
-    print
+    data = "destination=" + str(sys.argv[1])
+    data = data + " | distance=" + str(sys.argv[2])
+    data = data + " | seq_no=" + str(sys.argv[3])
+    data = data + " | port=" + str(sys.argv[4])
 
-    print ("sending on interface %s to %s" % (iface, str(addr)))
+    print ("sending on interface %s for dst %s" % (iface, str(addr)))
     pkt =  Ether(src=get_if_hwaddr(iface), dst='ff:ff:ff:ff:ff:ff')
-    pkt = pkt /IP(proto=253) / my_header
+    pkt = pkt / IP(src=sys.argv[1], proto=253) / my_header / data
     pkt.show2()
     sendp(pkt, iface=iface, verbose=False)
 

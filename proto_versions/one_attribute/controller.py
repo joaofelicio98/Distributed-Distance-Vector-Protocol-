@@ -13,20 +13,17 @@ from p4utils.utils.sswitch_p4runtime_API import SimpleSwitchP4RuntimeAPI
 from p4utils.utils.sswitch_thrift_API import SimpleSwitchThriftAPI
 
 CPU_HEADER_PROTO = 253
-TOLERANCE = 2
+MY_HEADER_PROTO = 254
 
 class CPU_header(Packet):
     name = 'CPU'
-    fields_desc = [IPField('dst_addr','127.0.0.1'), BitField('distance',0,16),
-                   BitField('seq_no',0,32), BitField('ingress_port', 0, 16)]
+    fields_desc = [BitField('ingress_port', 0, 16)]
 
-class ControllerThread(Thread):
+class Controller():
 
-    def __init__(self, sw_name, lock):
-        threading.Thread.__init__(self)
+    def __init__(self, sw_name):
         self.topo = load_topo('topology.json')
         self.sw_name = sw_name
-        self.lock = lock
         self.cpu_port = self.topo.get_cpu_port_index(self.sw_name)
         device_id = self.topo.get_p4switch_id(sw_name)
         grpc_port = self.topo.get_grpc_port(sw_name)
@@ -34,15 +31,16 @@ class ControllerThread(Thread):
         self.controller = SimpleSwitchP4RuntimeAPI(device_id, grpc_port,
                                                    p4rt_path=sw_data['p4rt_path'],
                                                    json_path=sw_data['json_path'])
+        self.lock = threading.Lock()
 
         #stored elected attributes -> {destination:  [distance,seq_no,port]}
         # destination -> Destination IP into which the attribute is refering to
         # distance -> Distance to reach the destination
         # seq_no -> Sequence Number of the attribute
         # port -> Next port into which the packet will send packets to reach the destination
-        self.elected_attr = []
+        self.elected_attr = {}
         #stored promised attributes -> {destination:  [distance,seq_no,port]}
-        self.promised_attr = []
+        self.promised_attr = {}
         self.init()
 
 
@@ -69,7 +67,7 @@ class ControllerThread(Thread):
         self.add_boadcast_groups()
         self.add_initial_ipv4_rules()
         self.add_CPU_rules()
-        self.add_clone_session()
+        #self.add_clone_session()
         self.send_first_computation()
         #create a new thread to start a new computation in x by x seconds
         thread = threading.Thread(target=self.send_new_computation, args=())
@@ -113,34 +111,35 @@ class ControllerThread(Thread):
                 self.controller.table_add("ipv4_lpm", "ipv4_forward", [dst_ip], [dst_mac, str(port)])
 
     def add_CPU_rules(self):
-        self.controller.table_add("cpu_table", "send_to_cpu", [str(CPU_HEADER_PROTO)])
+        self.controller.table_add("cpu_table", "send_to_cpu", [str(MY_HEADER_PROTO)], [str(self.cpu_port)])
 
-    def add_clone_session(self):
-        if self.cpu_port:
-            self.controller.cs_create(100, [self.cpu_port])
+    #def add_clone_session(self):
+    #    if self.cpu_port:
+    #        self.controller.cs_create(100, [self.cpu_port])
 
-    def start_computation(self, dst, seq_no, port, new):
+    def start_computation(self, dst, seq_no, port):
         print ("DEBUG: Starting a new computation for destination ", dst)
 
         dstAddr = self.topo.get_host_ip(dst)
 
         #save attribute on dictionary elected_attr
         attr = [0, seq_no, port]
-        self.save_attribute(dstAddr, attr, "elected", new)
+        self.save_attribute(dstAddr, attr, "elected")
 
-        cpu_header = CPU_header(dst_addr = dstAddr, distance = 0,
-                                seq_no = seq_no, ingress_port = port)
+        cpu_header = CPU_header(ingress_port = port)
 
         bind_layers(IP, CPU_header, proto = CPU_HEADER_PROTO)
 
-        cpu_port_intf = str(self.topo.get_cpu_port_intf(self.sw_name).replace("eth0", "eth1"))
-
-        packet = Ether(src=get_if_hwaddr(cpu_port_intf), dst='ff:ff:ff:ff:ff:ff')
-        packet = packet /IP(src=dstAddr, proto=CPU_HEADER_PROTO)/cpu_header
-        packet.show2()
-
         iface = self.topo.get_cpu_port_intf(self.sw_name)
 
+        data = "destination=" + str(dstAddr)
+        data = data + " | distance=0 | seq_no=" + str(seq_no)
+
+        packet = Ether(src=get_if_hwaddr(str(iface)), dst='ff:ff:ff:ff:ff:ff')
+        packet = packet / IP(src=dstAddr, proto=CPU_HEADER_PROTO) / cpu_header / data
+        packet.show2()
+
+        #intf = get_if()
         sendp(packet, iface=iface, verbose=False)
 
     def send_first_computation(self):
@@ -150,7 +149,7 @@ class ControllerThread(Thread):
 
             for host in hosts:
                 port = self.topo.node_to_node_port_num(self.sw_name, host)
-                self.start_computation(host, 1, port, True)
+                self.start_computation(host, 1, port)
 
     def send_new_computation(self):
         while True:
@@ -167,38 +166,57 @@ class ControllerThread(Thread):
                     list = self.search_stored_attr(host, "elected")
                     seq_no = list[1] + 1
                     port = list[2]
-                    self.start_computation(host, seq_no, port, False)
+                    self.start_computation(host, seq_no, port)
 
     # Main loop of the thread
     def run(self):
         try:
-            sleep(0.2)
+            #sleep(0.2)
             while True:
-                cpu_port_intf = str(self.topo.get_cpu_port_intf(self.sw_name).replace("eth0", "eth1"))
+                cpu_port_intf = str(self.topo.get_cpu_port_intf(self.sw_name))
                 print("DEBUG: sniffing at port: {}".format(cpu_port_intf))
                 sniff(iface=cpu_port_intf, prn=self.recv_msg_cpu)
-        finally:
+        except KeyboardInterrupt:
             print("Ending controller {}".format(self.sw_name))
+            self.reset()
 
-#TODO nao esta a receber os pacotes
+#TODO nao esta a receber os pacotes | ler no payload
     def recv_msg_cpu(self, pkt):
-        print('DEBUG: recebeu novo pacote!')
+        print('DEBUG: Received a new packet!')
+        print(pkt[IP].proto)
         with self.lock:
-            packet = IP(raw(pkt))
-            if packet.protocol == CPU_HEADER_PROTO:
+            if pkt[IP].proto == CPU_HEADER_PROTO:
                 print("DEBUG: Received a new attribute!")
-                cpu_header = CPU_header(bytes(packet.load))
-                if (self.make_decision([(cpu_header.dst_addr, cpu_header.distance,
-                                    cpu_header.seq_no, cpu_header.ingress_port)])):
-                    self.announce_attribute(pkt)
+                print()
+                pkt.show2()
+                print()
+                port = pkt[CPU_header].ingress_port
+                data = str(pkt[Raw].load)
+                dst = data.rsplit(" | ")[0].rsplit("=")[1]
+                print("DEBUG: destination = ",dst)
+                distance = int(data.rsplit(" | ")[1].rsplit("=")[1]) + 1
+                print("DEBUG: distance = ",distance)
+                seq_no = int(data.rsplit(" | ")[2].rsplit("=")[1])
+                print("DEBUG: seq_no = ",seq_no)
+                port = pkt[CPU_header].ingress_port
+                print("DEBUG: port = ",port)
+                params = [dst, distance, seq_no, port]
+                if self.make_decision(self.sw_name, params):
+                    self.announce_attribute(pkt, params)
 
-    def announce_attribute(self, packet):
+    def announce_attribute(self, packet, params):
         print("DEBUG: announcing an elected attribute")
+
+        # Update packets payload info
+        data = "destination=" + params[0]
+        data = data + " | distance=" + str(params[1])
+        data = data + " | seq_no=" + str(params[2])
+        packet[Raw].load = data
         iface = self.topo.get_cpu_port_intf(self.sw_name)
         sendp(packet, iface=iface, verbose=False)
 
     #Get the name of the neighbor attached to the given port
-    def port_to_neighbor_name(port):
+    def port_to_neighbor_name(self, port):
         interfaces_to_port = self.topo.get_node_intfs(fields=['port'])[self.sw_name].copy()
         for intf in interfaces_to_port:
             if interfaces_to_port[intf] == port:
@@ -214,55 +232,60 @@ class ControllerThread(Thread):
             raise AssertionError('Type must be elected or promised')
 
         if type == "elected":
-            for attr in self.elected_attr:
-                if dst in attr:
-                    return attr[dst]
+            for host in self.elected_attr:
+                if dst == host:
+                    return self.elected_attr[dst]
         elif type == "promised":
-            for attr in self.promised_attr:
-                if dst in attr:
-                    return attr[dst]
+            for host in self.promised_attr:
+                if dst == host:
+                    return self.promised_attr[dst]
         return None
 
     #This function will update or add a new attribute in the elected or promised attributes
     # attr : list[] -> list with [distance, seq_no, port]
     #type : string -> "elected" or "promised"
-    #new : boolean -> True if it is a new destination to add, False if it is to update
-    def save_attribute(self, dst, attr, type:str, new:bool):
+    def save_attribute(self, dst, attr, type:str):
         if not len(attr) == 3:
             raise AssertionError('attr must have length 3: [distance, seq_no, port]')
         if not(type == "elected" or type == "promised"):
             raise AssertionError('Type must be elected or promised')
-        #if not(type(new) == bool):
-        #    raise AssertionError("Parameter new must be type boolean")
 
-        if new:
-            if type == "elected":
-                self.elected_attr.append({dst:attr})
-                return
-            elif type == "promised":
-                self.promised_attr.append({dst:attr})
-                return
-        else:
-            if type == "elected":
-                for i in range(len(self.elected_attr)):
-                    if dst in self.elected_attr[i]:
-                        self.elected_attr[i][dst] = attr
-                        return
-            elif type == "promised":
-                for i in range(len(self.promised_attr)):
-                    if dst in self.promised_attr[i]:
-                        self.promised_attr[i][dst] = attr
-                        return
+        if type == "elected":
+            self.elected_attr[dst] = attr
+            return
+        elif type == "promised":
+            self.promised_attr[dst] = attr
+            return
 
-    def delete_promised(dst):
-        for i in range(len(self.promised_attr)):
-            if dst in self.promised_attr[i]:
-                del self.promised_attr[i]
-                return
+    def delete_promised(self, dst):
+        del self.promised_attr[dst]
+        return
+
+    # returns True if first is better than second
+    # type : string -> says which type of metric it is (distance, congestion ...)
+    def compare_metric(self, first, second, type):
+        if type == "distance" or type == "delay":
+            return first < second
+
+        elif type == "capacity" or type == "bandwidth":
+            return first > second
+
+        raise AssertionError('This metric type is unknwon')
+
+    # This function will save the attribute in the elected_attr dict
+    # and modify the ipv4_lpm table
+    def elect_attribute(ingress_port, dst, attr):
+        neighbor = self.port_to_neighbor_name(ingress_port)
+        dst_mac = self.topo.node_to_node_mac(self.sw_name, neighbor)
+        self.save_attribute(dst_addr, attr, "elected")
+        success = self.controller.table_modify_match("ipv4_lpm", "ipv4_forward",
+                                [dst], [dst_mac, ingress_port])
+        return success
+
 
     #This function will decide if the new attribute is to elected, promised or discarded
     # Returns True if the attribute is elected
-    def make_decision(p4info_helper, topo_utils, sw, packetIn_params):
+    def make_decision(self, sw, packetIn_params):
         dst_addr = packetIn_params[0]
         distance = packetIn_params[1]
         seq_no = packetIn_params[2]
@@ -276,153 +299,99 @@ class ControllerThread(Thread):
         if elected is None:
             neighbor = self.port_to_neighbor_name(ingress_port)
             dst_mac = self.topo.node_to_node_mac(self.sw_name, neighbor)
-            self.save_attribute(dst_addr, attr, "elected", True)
+            self.save_attribute(dst_addr, attr, "elected")
             self.controller.table_add("ipv4_lpm", "ipv4_forward",
                                     [dst_addr], [dst_mac, ingress_port])
+            distance_pro = float('inf')
+            attr_pro = (distance_pro, seq_no, 0)
+            # add an infinite promised for the new destination
+            self.save_attribute(dst_addr, attr_pro, "promised")
             print ("DEBUG: Elected attribute for a new destination")
             return True
 
-        # Packet received is from an older computation -> discard
-        elif elected[1] > seq_no:
-            print ("DEBUG: Older sequence number -> discard")
-            return False
-
-        # Better metric and >= sequence number -> always elect
-        elif compare_metric(distance, elected[0], "distance") and seq_no >= elected[1]:
-            save_attribute(dst_addr, attr, "elected", False)
-            # Different next hop -> change forwarding table
-            if ingress_port != elected[2]:
-                neighbor = self.port_to_neighbor_name(ingress_port)
-                dst_mac = self.topo.node_to_node_mac(self.sw_name, neighbor)
-                self.controller.table_modify_match("ipv4_lpm", "ipv4_forward",
-                                        [dst_addr], [dst_mac, ingress_port])
-            if promised is not None:
-                if seq_no >= promised[1]:
-                    self.delete_promised(dst_addr)
-            print ("DEBUG: Elected new attribute with better metric and >= seq_no")
-            return True
-
-        # If sequence number is much more recent should always elect
-        elif seq_no - elected[1] > TOLERANCE:
-            self.save_attribute(dst_addr, attr, "elected", False)
-            if ingress_port != elected[2]:
-                neighbor = self.port_to_neighbor_name(ingress_port)
-                dst_mac = self.topo.node_to_node_mac(self.sw_name, neighbor)
-                self.controller.table_modify_match("ipv4_lpm", "ipv4_forward",
-                                        [dst_addr], [dst_mac, ingress_port])
-            if promised is not None:
-                self.delete_promised(dst_addr)
-            print ("DEBUG: Elected new attribute with much more recent seq_no")
-            return True
-
-        # Same next hop as the elected
+        # same next hop as the elected
         elif ingress_port == elected[2]:
-            # Sequence number more recent than the elected or equal
-            # Worse metric -> there was a change in the topology
-            if self.compare_metric(elected[0], distance, "distance"):
-                if promised is not None:
-                    # Compare with promised first
-                    if self.compare_metric(distance, promised[0], "distance"):
-                        self.save_attribute(dst_addr, attr, "elected", False)
-                        print ("DEBUG: elected attribute with worse metric, same next hop")
-                        return True
-                    # elect promised
-                    else:
-                        self.save_attribute(dst_addr, promised, "elected", False)
-                        neighbor = self.port_to_neighbor_name(ingress_port)
-                        dst_mac = self.topo.node_to_node_mac(self.sw_name, neighbor)
-                        self.controller.table_modify_match("ipv4_lpm", "ipv4_forward",
-                                                [dst_addr], [dst_mac, promised[2]])
-                        self.delete_promised(dst_addr)
-                        print ("DEBUG Elected promised attribute")
-                        return True
-                else:
-                    self.save_attribute(dst_addr, attr, "elected", False)
-                    print ("DEBUG: Attribute with worse metric, same next hop, no promised")
-                    return True
-            # Same attribute as the elected only with a more recent sequence number
-            else:
-                self.save_attribute(dst_addr, attr, "elected", False)
-                print ("DEBUG: Same attribute, more recent seq_no")
-                if promised is not None:
-                    if seq_no >= promised[1]:
-                        self.delete_promised(dst_addr)
-                        print ("DEBUG: Also deleted promised")
+
+            if seq_no > promised[1]:
+                self.save_attribute(dst_addr, attr, "elected")
+                self.delete_promised(dst_addr)
+                print("DEBUG: Same attribute as the elected, more recent than promised")
                 return True
 
-        # Different next hop
-        # The condition with better metric is already checked so only <= metric
-        # is missing at this point : action -> save in promised_attr or do nothing
-        else:
-            # Different next hop than promised
-            if promised is not None:
-                if seq_no > promised[1]:
-                    self.save_attribute(dst_addr, attr, "promised", False)
-                    print ("DEBUG: Changed promised, better seq_no")
-                elif ingress_port != promised[2]:
-                    if self.compare_metric(distance, promised[0], "distance"):
-                        self.save_attribute(dst_addr, attr, "promised", False)
-                        print ("DEBUG: Changed promised, better metric")
+            elif seq_no == promised[1]:
+
+                if distance < promised[0]:
+                    self.save_attribute(dst_addr, attr, "elected")
+                    self.delete_promised(dst_addr)
+                    print("DEBUG: Same attribute as the elected, same computation as promised")
+                    return True
+
+                else:
+                    self.elect_attribute(ingress_port, dst_addr, promised)
+                    self.delete_promised(dst_addr)
+                    print("DEBUG: elected got worse, promised elected")
+                    return True
+
+            # seq_no < promised[1]
             else:
-                self.save_attribute(dst_addr, attr, "promised", True)
-                print ("DEBUG: New promised added, there was no promised for this destination")
-            return False
 
+                if distance < promised[0]:
+                    self.save_attribute(dst_addr, attr, "elected")
+                    print("DEBUG: Same attribute as the elected, older than promised")
+                    return True
 
-    #returns the ID of the respective thread
-    def get_id(self):
-        if hasattr(self, '_thread_id'):
-            return self._thread_id
-        for id, thread in threading._active.items():
-            if thread is self:
-                return id
+                else:
+                    self.elect_attribute(ingress_port, dst_addr, promised)
+                    self.delete_promised(dst_addr)
+                    print("DEBUG: promised elected, elected got worse")
 
-    def raise_exception(self):
-        thread_id = self.get_id()
-        res = ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id,
-                ctypes.py_object(SystemExit))
+        # same next hop as the promised
+        elif ingress_port == promised[2]:
 
-        if res > 1:
-            ctypes.pythonapi.PyThreadState_SetAsyncExc(thread_id, 0)
-            print('Exception raise failure')
+            if distance < elected[0]:
+                self.elect_attribute(ingress_port, dst_addr, attr)
+                self.delete_promised(dst_addr)
+                print("DEBUG: promised got better, is now the elected")
+                return True
 
-#TODO: This class will temporarilly read all match-action tables from every controller
-class Debugger:
+            else:
+                self.save_attribute(dst_addr, attr, "promised")
+                print("DEBUG: promised got updated")
+                return
 
-    def __init__(self, controllers):
-        self.controllers = controllers
+        # Different next hop
+        else:
 
-    def run_loop(self):
-        try:
-            while True:
-                continue
-        except KeyboardInterrupt:
-            print (" Shutting down.")
-            for c in controllers:
-                c.raise_exception()
+            if seq_no > promised[1]:
+
+                if distance < elected[0]:
+                    self.elect_attribute(ingress_port, dst_addr, attr)
+                    self.delete_promised(dst_addr)
+                    print("DEBUG: new attribute elected more recent than promised")
+                    return True
+
+                else:
+                    self.save_attribute(dst_addr, attr, "promised")
+                    print("DEBUG: new promised")
+                    return
+
+            else:
+
+                if seq_no == promised[1]:
+
+                    if distance < elected[0]:
+                        self.elect_attribute(ingress_port, dst_addr, attr)
+                        self.delete_promised(dst_addr)
+                        print("DEBUG: new attribute elected with same seq_no as promised")
+                        return True
+
+                    elif distance < promised[0]:
+                        self.save_attribute(dst_addr, attr, "promised")
+                        print("promised changed with a better attribute from the same computation")
+                        return
+        return
 
 if __name__ == "__main__":
-    #testing
-    #import sys
-    #sw_name = sys.argv[1]
-    #controller = ControllerThread(sw_name).run()
-
-    topo = load_topo('topology.json')
-
-    nodes = topo.get_nodes(fields=['isSwitch'])
-    for node in list(nodes):
-        if node == 'sw-cpu' or not nodes[node]:
-            del nodes[node]
-
-
-    # creating a controller per P4switch
-    controllers = []
-    for sw in list(nodes):
-        # creating a lock
-        lock = threading.Lock()
-        controller = ControllerThread(sw, lock)
-        controller.start()
-        controllers.append(controller)
-
-    # debugger for reading all tables
-    debugger = Debugger(controllers).run_loop()
+    import sys
+    sw_name = sys.argv[1]
+    controller = Controller(sw_name).run()

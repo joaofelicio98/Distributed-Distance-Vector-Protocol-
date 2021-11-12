@@ -46,6 +46,10 @@ header ipv4_t {
     ip4Addr_t dstAddr;
 }
 
+header cpu_t {
+    bit<16> ingress_port;
+}
+
 header tcp_t {
     bit<16> srcPort;
     bit<16> dstPort;
@@ -67,19 +71,6 @@ header udp_t {
     bit<16> checksum;
 }
 
-header my_header_t {
-    ip4Addr_t dst_addr;
-    bit<16> distance; //hop count
-    bit<32> seq_no;  //sequence number
-}
-
-header cpu_t {
-    ip4Addr_t dst_addr;
-    bit<16> distance; //hop count
-    bit<32> seq_no;  //sequence number
-    bit<16> ingress_port;
-}
-
 
 struct metadata {
     bit<9> ingress_port;
@@ -89,8 +80,7 @@ struct headers {
     ethernet_t   ethernet;
     arp_t        arp;
     ipv4_t       ipv4;
+    cpu_t        cpu;
     tcp_t        tcp;
     udp_t        udp;
-    my_header_t  my_header;
-    cpu_t        cpu;
 }

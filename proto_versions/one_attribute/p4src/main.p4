@@ -38,9 +38,11 @@ control MyIngress(inout headers hdr,
         default_action = drop;
     }
 
-    action send_to_cpu() {
-        meta.ingress_port = standard_metadata.ingress_port;
-        clone3(CloneType.I2E, 100, meta);
+    action send_to_cpu(egressSpec_t cpu_port) {
+        hdr.ipv4.protocol = CPU_HEADER_PROTO;
+        hdr.cpu.setValid();
+        hdr.cpu.ingress_port = (bit<16>)standard_metadata.ingress_port;
+        standard_metadata.egress_spec = cpu_port;
     }
 
 //for now it will always send to the CPU, it may do other actions
@@ -59,12 +61,6 @@ control MyIngress(inout headers hdr,
     }
 
     action set_mcast_grp(bit<16> mcast_id) {
-        hdr.my_header.setValid();
-        hdr.my_header.dst_addr = hdr.cpu.dst_addr;
-        hdr.my_header.distance = hdr.cpu.distance + 1;
-        hdr.my_header.seq_no = hdr.cpu.seq_no;
-        hdr.cpu.setInvalid();
-        hdr.ipv4.protocol = MY_HEADER_PROTO;
         standard_metadata.mcast_grp = mcast_id;
     }
 
@@ -85,10 +81,12 @@ control MyIngress(inout headers hdr,
 
         if (hdr.cpu.isValid()) {
             meta.ingress_port = (bit<9>)hdr.cpu.ingress_port;
+            hdr.cpu.setInvalid();
+            hdr.ipv4.protocol = MY_HEADER_PROTO;
             broadcast_elected_attr.apply();
         }
 
-        else if (hdr.my_header.isValid()) {
+        else if (hdr.ipv4.protocol == MY_HEADER_PROTO) {
             cpu_table.apply();
         }
         else if (hdr.ipv4.isValid()) {
@@ -105,16 +103,6 @@ control MyEgress(inout headers hdr,
                  inout metadata meta,
                  inout standard_metadata_t standard_metadata) {
     apply {
-        if (standard_metadata.instance_type == 1) {
-            hdr.cpu.setValid();
-            hdr.cpu.dst_addr = hdr.my_header.dst_addr;
-            hdr.cpu.distance = hdr.my_header.distance;
-            hdr.cpu.seq_no = hdr.my_header.seq_no;
-            hdr.cpu.ingress_port = (bit<16>)meta.ingress_port;
-            hdr.my_header.setInvalid();
-            hdr.ipv4.protocol = CPU_HEADER_PROTO;
-            truncate((bit<32>)46); //ether + ipv4 + cpu
-        }
      }
 }
 
