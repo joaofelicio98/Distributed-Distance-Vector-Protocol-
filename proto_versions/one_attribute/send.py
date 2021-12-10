@@ -42,7 +42,6 @@ def main():
     data = "destination=" + str(sys.argv[1])
     data = data + " | distance=" + str(sys.argv[2])
     data = data + " | seq_no=" + str(sys.argv[3])
-    data = data + " | port=" + str(sys.argv[4])
 
     print ("sending on interface %s for dst %s" % (iface, str(addr)))
     pkt =  Ether(src=get_if_hwaddr(iface), dst='ff:ff:ff:ff:ff:ff')

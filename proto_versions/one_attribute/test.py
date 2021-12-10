@@ -47,6 +47,12 @@ def main():
 
     packet[Raw].load = "destination=23.14.43.4 | distance=23 | seq_no=5 | port=690"
     packet.show2()
+    print()
+    #cpu_header = CPU_header(bytes(packet.load))
+    #print(cpu_header.ingress_port)
+    print(packet[CPU_header].ingress_port)
+    print()
+    print(packet.load)
     #packet = Ether(raw(packet))
     #cpu_header = CPU_header(bytes(packet.load))
     #print("port: ",packet[CPU_header].ingress_port)
