@@ -1019,16 +1019,19 @@
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/p4src/main.p4",
             "line" : 82,
             "column" : 12,
-            "source_fragment" : "hdr.cpu.isValid()"
+            "source_fragment" : "hdr.ipv4.protocol == CPU_HEADER_PROTO"
           },
           "expression" : {
             "type" : "expression",
             "value" : {
-              "op" : "d2b",
-              "left" : null,
-              "right" : {
+              "op" : "==",
+              "left" : {
                 "type" : "field",
-                "value" : ["cpu", "$valid$"]
+                "value" : ["ipv4", "protocol"]
+              },
+              "right" : {
+                "type" : "hexstr",
+                "value" : "0xfd"
               }
             }
           },

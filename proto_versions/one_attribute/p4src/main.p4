@@ -79,7 +79,7 @@ control MyIngress(inout headers hdr,
 
     apply {
 
-        if (hdr.cpu.isValid()) {
+        if (hdr.ipv4.protocol == CPU_HEADER_PROTO) {
             meta.ingress_port = (bit<9>)hdr.cpu.ingress_port;
             hdr.cpu.setInvalid();
             hdr.ipv4.protocol = MY_HEADER_PROTO;
