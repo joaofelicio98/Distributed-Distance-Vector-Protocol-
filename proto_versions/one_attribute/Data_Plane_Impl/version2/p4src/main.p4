@@ -64,73 +64,29 @@ control MyIngress(inout headers hdr,
         clone3(CloneType.I2E, 100, meta);
     }
 
-    action get_registers_info() {
-        // Read elected distance
-        elected_distance.read(meta.E_distance, meta.register_index);
-        // Read elected sequence number
-        elected_seq_num.read(meta.E_seq_no, meta.register_index);
-        //Read elected next hop
-        elected_NH.read(meta.E_NH, meta.register_index);
+    action get_info(bit<9> next_hop, bit<14> distance, bit<32> seq_no) {
 
-        //Read promised distance
-        promised_distance.read(meta.P_distance, meta.register_index);
-        //Read promised sequence number
-        promised_seq_num.read(meta.P_seq_no, meta.register_index);
-        //Read promised next hop
-        promised_NH.read(meta.P_NH, meta.register_index);
     }
 
-    action elect_attribute() {
-        elected_distance.write(meta.register_index, hdr.probe.distance);
-        elected_seq_num.write(meta.register_index, hdr.probe.seq_no);
-        elected_NH.write(meta.register_index, standard_metadata.ingress_port);
+    action elect_attribute(bit<9> cpu_port) {
+        hdr.cpu.setValid();
+        hdr.cpu.destination = hdr.probe.destination;
+        hdr.cpu.next_hop = standard_metadata.ingress_port;
+        hdr.cpu.new_destination = 1;
+        hdr.cpu.distance = hdr.probe.distance;
+        hdr.cpu.seq_no = hdr.probe.seq_no;
+        hdr.probe.setInvalid();
+        hdr.ipv4.protocol = CPU_HEADER_PROTO;
 
-        // No promised yet so distance is infinite
-        promised_distance.write(meta.register_index, (bit<16>) 9999);
-        promised_seq_num.write(meta.register_index, hdr.probe.seq_no + 1);
-        promised_NH.write(meta.register_index, (bit<9>) 0);
-
-        // update metadata
-        meta.E_distance = hdr.probe.distance;
-        meta.E_seq_no = hdr.probe.seq_no;
-        meta.E_NH = standard_metadata.ingress_port;
-
-        // Update probe's distance to broadcast it
-        hdr.probe.distance = meta.E_distance + 1;
+        standard_metadata.egress_spec = port;
     }
 
-    action elect_promise() {
-        elected_distance.write(meta.register_index, meta.P_distance);
-        elected_seq_num.write(meta.register_index, meta.P_seq_no);
-        elected_NH.write(meta.register_index, meta.P_NH);
-
-        // Update probe to broadcast it
-        hdr.probe.distance = meta.P_distance + 1;
-        hdr.probe.seq_no = meta.P_seq_no;
-
-        // No promised yet so distance is infinite
-        promised_distance.write(meta.register_index, (bit<16>) 9999);
-        promised_seq_num.write(meta.register_index, meta.P_seq_no + 1);
-        promised_NH.write(meta.register_index, (bit<9>) 0);
-
-        // update metadata
-        meta.E_distance = meta.P_distance;
-        meta.E_seq_no = meta.P_seq_no;
-        meta.E_NH = meta.P_NH;
-    }
-
-    action change_promise() {
-        promised_distance.write(meta.register_index, hdr.probe.distance);
-        promised_seq_num.write(meta.register_index, hdr.probe.seq_no);
-        promised_NH.write(meta.register_index, standard_metadata.ingress_port);
-    }
-
-    table check_destination_known {
+    table check_destination {
         key = {
             hdr.probe.destination: lpm;
         }
         actions = {
-            get_registers_info;
+            get_info;
             elect_attribute;
         }
         size = 1024;

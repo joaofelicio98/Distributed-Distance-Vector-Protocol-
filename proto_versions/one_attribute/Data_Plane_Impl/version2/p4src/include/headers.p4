@@ -49,9 +49,10 @@ header ipv4_t {
 // Header used to clone packets to the cpu
 header cpu_t {
     ip4Addr_t destination;
-    bit<16>   next_hop;
-    bit<8>    new_destination; // 1 => Is a new destination
-    bit<8>    test;
+    bit<9>   next_hop;
+    bit<1>    new_destination; // 1 => Is a new destination
+    bit<14>   distance;
+    bit<32>   seq_no;
 }
 
 header probe_t {

@@ -1,0 +1,244 @@
+pkg_info {
+  arch: "v1model"
+}
+tables {
+  preamble {
+    id: 37375156
+    name: "MyIngress.ipv4_lpm"
+    alias: "ipv4_lpm"
+  }
+  match_fields {
+    id: 1
+    name: "hdr.ipv4.dstAddr"
+    bitwidth: 32
+    match_type: LPM
+  }
+  action_refs {
+    id: 28792405
+  }
+  action_refs {
+    id: 25652968
+  }
+  action_refs {
+    id: 21257015
+  }
+  size: 1024
+}
+tables {
+  preamble {
+    id: 39311890
+    name: "MyIngress.check_destination_known"
+    alias: "check_destination_known"
+  }
+  match_fields {
+    id: 1
+    name: "hdr.probe.destination"
+    bitwidth: 32
+    match_type: LPM
+  }
+  action_refs {
+    id: 24122967
+  }
+  action_refs {
+    id: 21471545
+  }
+  size: 1024
+}
+tables {
+  preamble {
+    id: 41262067
+    name: "MyIngress.broadcast_elected_attr"
+    alias: "broadcast_elected_attr"
+  }
+  match_fields {
+    id: 1
+    name: "meta.E_NH"
+    bitwidth: 9
+    match_type: EXACT
+  }
+  action_refs {
+    id: 24840994
+  }
+  action_refs {
+    id: 25652968
+  }
+  size: 1024
+}
+actions {
+  preamble {
+    id: 21257015
+    name: "NoAction"
+    alias: "NoAction"
+    annotations: "@noWarn(\"unused\")"
+  }
+}
+actions {
+  preamble {
+    id: 25652968
+    name: "MyIngress.drop"
+    alias: "drop"
+  }
+}
+actions {
+  preamble {
+    id: 17650767
+    name: "MyIngress.get_registers_index"
+    alias: "get_registers_index"
+  }
+}
+actions {
+  preamble {
+    id: 28792405
+    name: "MyIngress.ipv4_forward"
+    alias: "ipv4_forward"
+  }
+  params {
+    id: 1
+    name: "dstAddr"
+    bitwidth: 48
+  }
+  params {
+    id: 2
+    name: "port"
+    bitwidth: 9
+  }
+}
+actions {
+  preamble {
+    id: 31417104
+    name: "MyIngress.update_table"
+    alias: "update_table"
+  }
+}
+actions {
+  preamble {
+    id: 24122967
+    name: "MyIngress.get_registers_info"
+    alias: "get_registers_info"
+  }
+}
+actions {
+  preamble {
+    id: 21471545
+    name: "MyIngress.elect_attribute"
+    alias: "elect_attribute"
+  }
+}
+actions {
+  preamble {
+    id: 17386235
+    name: "MyIngress.elect_promise"
+    alias: "elect_promise"
+  }
+}
+actions {
+  preamble {
+    id: 32771191
+    name: "MyIngress.change_promise"
+    alias: "change_promise"
+  }
+}
+actions {
+  preamble {
+    id: 24840994
+    name: "MyIngress.set_mcast_grp"
+    alias: "set_mcast_grp"
+  }
+  params {
+    id: 1
+    name: "mcast_id"
+    bitwidth: 16
+  }
+}
+registers {
+  preamble {
+    id: 373383286
+    name: "MyIngress.elected_distance"
+    alias: "elected_distance"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 16
+      }
+    }
+  }
+  size: 1024
+}
+registers {
+  preamble {
+    id: 382368791
+    name: "MyIngress.elected_seq_num"
+    alias: "elected_seq_num"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 32
+      }
+    }
+  }
+  size: 1024
+}
+registers {
+  preamble {
+    id: 382129994
+    name: "MyIngress.elected_NH"
+    alias: "elected_NH"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 9
+      }
+    }
+  }
+  size: 1024
+}
+registers {
+  preamble {
+    id: 379571135
+    name: "MyIngress.promised_distance"
+    alias: "promised_distance"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 16
+      }
+    }
+  }
+  size: 1024
+}
+registers {
+  preamble {
+    id: 376703908
+    name: "MyIngress.promised_seq_num"
+    alias: "promised_seq_num"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 32
+      }
+    }
+  }
+  size: 1024
+}
+registers {
+  preamble {
+    id: 373634717
+    name: "MyIngress.promised_NH"
+    alias: "promised_NH"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 9
+      }
+    }
+  }
+  size: 1024
+}
+type_info {
+}
