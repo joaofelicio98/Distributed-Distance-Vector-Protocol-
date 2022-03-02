@@ -37,10 +37,10 @@ tables {
     match_type: LPM
   }
   action_refs {
-    id: 24122967
+    id: 23822898
   }
   action_refs {
-    id: 21471545
+    id: 31605643
   }
   size: 1024
 }
@@ -112,30 +112,82 @@ actions {
 }
 actions {
   preamble {
-    id: 24122967
-    name: "MyIngress.get_registers_info"
-    alias: "get_registers_info"
+    id: 20460177
+    name: "MyIngress.elect_attribute_2"
+    alias: "elect_attribute_2"
   }
 }
 actions {
   preamble {
-    id: 21471545
-    name: "MyIngress.elect_attribute"
-    alias: "elect_attribute"
+    id: 19203692
+    name: "MyIngress.elect_attribute_1"
+    alias: "elect_attribute_1"
   }
 }
 actions {
   preamble {
-    id: 17386235
-    name: "MyIngress.elect_promise"
-    alias: "elect_promise"
+    id: 32326780
+    name: "MyIngress.elect_promise_2"
+    alias: "elect_promise_2"
   }
 }
 actions {
   preamble {
-    id: 32771191
-    name: "MyIngress.change_promise"
-    alias: "change_promise"
+    id: 28652043
+    name: "MyIngress.elect_promise_1"
+    alias: "elect_promise_1"
+  }
+}
+actions {
+  preamble {
+    id: 30054352
+    name: "MyIngress.change_promise_2"
+    alias: "change_promise_2"
+  }
+}
+actions {
+  preamble {
+    id: 20202657
+    name: "MyIngress.change_promise_1"
+    alias: "change_promise_1"
+  }
+}
+actions {
+  preamble {
+    id: 23822898
+    name: "MyIngress.get_info"
+    alias: "get_info"
+  }
+  params {
+    id: 1
+    name: "next_hop"
+    bitwidth: 9
+  }
+  params {
+    id: 2
+    name: "p_counter"
+    bitwidth: 32
+  }
+}
+actions {
+  preamble {
+    id: 23852090
+    name: "MyIngress.read_registers_1"
+    alias: "read_registers_1"
+  }
+}
+actions {
+  preamble {
+    id: 17673086
+    name: "MyIngress.read_registers_2"
+    alias: "read_registers_2"
+  }
+}
+actions {
+  preamble {
+    id: 31605643
+    name: "MyIngress.elect_new_destination"
+    alias: "elect_new_destination"
   }
 }
 actions {
@@ -150,11 +202,22 @@ actions {
     bitwidth: 16
   }
 }
+counters {
+  preamble {
+    id: 318359884
+    name: "MyIngress.packet_counter"
+    alias: "packet_counter"
+  }
+  spec {
+    unit: PACKETS
+  }
+  size: 1024
+}
 registers {
   preamble {
-    id: 373383286
-    name: "MyIngress.elected_distance"
-    alias: "elected_distance"
+    id: 372107054
+    name: "MyIngress.elected_distance_1"
+    alias: "elected_distance_1"
   }
   type_spec {
     bitstring {
@@ -167,9 +230,24 @@ registers {
 }
 registers {
   preamble {
-    id: 382368791
-    name: "MyIngress.elected_seq_num"
-    alias: "elected_seq_num"
+    id: 375931811
+    name: "MyIngress.elected_distance_2"
+    alias: "elected_distance_2"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 16
+      }
+    }
+  }
+  size: 1024
+}
+registers {
+  preamble {
+    id: 381278347
+    name: "MyIngress.elected_seq_no_1"
+    alias: "elected_seq_no_1"
   }
   type_spec {
     bitstring {
@@ -182,9 +260,84 @@ registers {
 }
 registers {
   preamble {
-    id: 382129994
-    name: "MyIngress.elected_NH"
-    alias: "elected_NH"
+    id: 378682428
+    name: "MyIngress.elected_seq_no_2"
+    alias: "elected_seq_no_2"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 32
+      }
+    }
+  }
+  size: 1024
+}
+registers {
+  preamble {
+    id: 370794615
+    name: "MyIngress.promised_distance_1"
+    alias: "promised_distance_1"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 16
+      }
+    }
+  }
+  size: 1024
+}
+registers {
+  preamble {
+    id: 381436860
+    name: "MyIngress.promised_distance_2"
+    alias: "promised_distance_2"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 16
+      }
+    }
+  }
+  size: 1024
+}
+registers {
+  preamble {
+    id: 380904227
+    name: "MyIngress.promised_seq_no_1"
+    alias: "promised_seq_no_1"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 32
+      }
+    }
+  }
+  size: 1024
+}
+registers {
+  preamble {
+    id: 384403342
+    name: "MyIngress.promised_seq_no_2"
+    alias: "promised_seq_no_2"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 32
+      }
+    }
+  }
+  size: 1024
+}
+registers {
+  preamble {
+    id: 369397905
+    name: "MyIngress.promised_NH_1"
+    alias: "promised_NH_1"
   }
   type_spec {
     bitstring {
@@ -197,39 +350,9 @@ registers {
 }
 registers {
   preamble {
-    id: 379571135
-    name: "MyIngress.promised_distance"
-    alias: "promised_distance"
-  }
-  type_spec {
-    bitstring {
-      bit {
-        bitwidth: 16
-      }
-    }
-  }
-  size: 1024
-}
-registers {
-  preamble {
-    id: 376703908
-    name: "MyIngress.promised_seq_num"
-    alias: "promised_seq_num"
-  }
-  type_spec {
-    bitstring {
-      bit {
-        bitwidth: 32
-      }
-    }
-  }
-  size: 1024
-}
-registers {
-  preamble {
-    id: 373634717
-    name: "MyIngress.promised_NH"
-    alias: "promised_NH"
+    id: 373148419
+    name: "MyIngress.promised_NH_2"
+    alias: "promised_NH_2"
   }
   type_spec {
     bitstring {

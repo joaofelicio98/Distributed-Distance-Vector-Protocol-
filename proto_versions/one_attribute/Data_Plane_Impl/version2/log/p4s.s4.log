@@ -1,0 +1,1089 @@
+Warning: you requested the nanomsg event logger, but bmv2 was compiled without -DBMELOG, and the event logger cannot be activated
+Calling target program-options parser
+[19:03:15.738] [bmv2] [D] [thread 2629] Set default default entry for table 'MyIngress.ipv4_lpm': MyIngress.drop - 
+[19:03:15.738] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_get_registers_index': MyIngress.get_registers_index - 
+[19:03:15.738] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main216': main216 - 
+[19:03:15.738] [bmv2] [D] [thread 2629] Set default default entry for table 'MyIngress.check_destination_known': MyIngress.elect_new_destination - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main221': main221 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_update_table': MyIngress.update_table - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'MyIngress.broadcast_elected_attr': MyIngress.drop - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_read_registers': MyIngress.read_registers_1 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_read_registers_0': MyIngress.read_registers_2 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_elect_attribute': MyIngress.elect_attribute_2 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_elect_attribute_0': MyIngress.elect_attribute_1 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_update_table_0': MyIngress.update_table - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main245': main245 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_elect_attribute_1': MyIngress.elect_attribute_2 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_elect_attribute_2': MyIngress.elect_attribute_1 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main257': main257 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_elect_attribute_3': MyIngress.elect_attribute_2 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_elect_attribute_4': MyIngress.elect_attribute_1 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main267': main267 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_elect_promise': MyIngress.elect_promise_2 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_elect_promise_0': MyIngress.elect_promise_1 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main276': main276 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_update_table_1': MyIngress.update_table - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_elect_attribute_5': MyIngress.elect_attribute_2 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_elect_attribute_6': MyIngress.elect_attribute_1 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main292': main292 - 
+[19:03:15.739] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_update_table_2': MyIngress.update_table - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_change_promise': MyIngress.change_promise_2 - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_change_promise_0': MyIngress.change_promise_1 - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main303': main303 - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_elect_attribute_7': MyIngress.elect_attribute_2 - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_elect_attribute_8': MyIngress.elect_attribute_1 - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main316': main316 - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_update_table_3': MyIngress.update_table - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_change_promise_1': MyIngress.change_promise_2 - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_change_promise_2': MyIngress.change_promise_1 - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main327': main327 - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_elect_attribute_9': MyIngress.elect_attribute_2 - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_elect_attribute_10': MyIngress.elect_attribute_1 - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main337': main337 - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_update_table_4': MyIngress.update_table - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_change_promise_3': MyIngress.change_promise_2 - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_change_promise_4': MyIngress.change_promise_1 - 
+[19:03:15.740] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main348': main348 - 
+[19:03:15.742] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main371': main371 - 
+[19:03:15.742] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main376': main376 - 
+[19:03:15.742] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main379': main379 - 
+[19:03:15.743] [bmv2] [D] [thread 2629] Set default default entry for table 'tbl_main381': main381 - 
+Adding interface s4-eth1 as port 1
+[19:03:15.761] [bmv2] [D] [thread 2629] Adding interface s4-eth1 as port 1
+Adding interface s4-eth2 as port 2
+[19:03:15.807] [bmv2] [D] [thread 2629] Adding interface s4-eth2 as port 2
+Adding interface s4-eth3 as port 3
+[19:03:15.843] [bmv2] [D] [thread 2629] Adding interface s4-eth3 as port 3
+Adding interface s4-eth4 as port 4
+[19:03:15.879] [bmv2] [D] [thread 2629] Adding interface s4-eth4 as port 4
+Adding interface s4-cpu-eth0 as port 5
+[19:03:15.936] [bmv2] [D] [thread 2629] Adding interface s4-cpu-eth0 as port 5
+Server listening on 0.0.0.0:9562
+[19:03:15.995] [bmv2] [I] [thread 2629] Starting Thrift server on port 9093
+[19:03:15.996] [bmv2] [I] [thread 2629] Thrift server was started
+[19:03:15.999] [bmv2] [D] [thread 2644] [0.0] [cxt 0] Processing packet received on port 1
+[19:03:15.999] [bmv2] [D] [thread 2644] [0.0] [cxt 0] Parser 'parser': start
+[19:03:15.999] [bmv2] [D] [thread 2644] [0.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:15.999] [bmv2] [D] [thread 2644] [0.0] [cxt 0] Extracting header 'ethernet'
+[19:03:15.999] [bmv2] [D] [thread 2644] [0.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:15.999] [bmv2] [T] [thread 2644] [0.0] [cxt 0] Bytes parsed: 14
+[19:03:16.000] [bmv2] [D] [thread 2644] [0.0] [cxt 0] Parser 'parser': end
+[19:03:16.000] [bmv2] [D] [thread 2644] [0.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.000] [bmv2] [T] [thread 2644] [0.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.000] [bmv2] [D] [thread 2644] [0.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.000] [bmv2] [D] [thread 2644] [0.0] [cxt 0] Egress port is 0
+[19:03:16.000] [bmv2] [D] [thread 2644] [1.0] [cxt 0] Processing packet received on port 2
+[19:03:16.000] [bmv2] [D] [thread 2644] [1.0] [cxt 0] Parser 'parser': start
+[19:03:16.000] [bmv2] [D] [thread 2644] [1.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.000] [bmv2] [D] [thread 2644] [1.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.000] [bmv2] [D] [thread 2644] [1.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.000] [bmv2] [T] [thread 2644] [1.0] [cxt 0] Bytes parsed: 14
+[19:03:16.000] [bmv2] [D] [thread 2644] [1.0] [cxt 0] Parser 'parser': end
+[19:03:16.000] [bmv2] [D] [thread 2644] [1.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.000] [bmv2] [T] [thread 2644] [1.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.000] [bmv2] [D] [thread 2644] [1.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.000] [bmv2] [D] [thread 2644] [1.0] [cxt 0] Egress port is 0
+[19:03:16.000] [bmv2] [D] [thread 2644] [2.0] [cxt 0] Processing packet received on port 3
+[19:03:16.000] [bmv2] [D] [thread 2644] [2.0] [cxt 0] Parser 'parser': start
+[19:03:16.000] [bmv2] [D] [thread 2644] [2.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.000] [bmv2] [D] [thread 2644] [2.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.000] [bmv2] [D] [thread 2644] [2.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.001] [bmv2] [T] [thread 2644] [2.0] [cxt 0] Bytes parsed: 14
+[19:03:16.001] [bmv2] [D] [thread 2644] [2.0] [cxt 0] Parser 'parser': end
+[19:03:16.001] [bmv2] [D] [thread 2644] [2.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.001] [bmv2] [T] [thread 2644] [2.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.001] [bmv2] [D] [thread 2644] [2.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.001] [bmv2] [D] [thread 2644] [2.0] [cxt 0] Egress port is 0
+[19:03:16.001] [bmv2] [D] [thread 2644] [3.0] [cxt 0] Processing packet received on port 4
+[19:03:16.001] [bmv2] [D] [thread 2644] [3.0] [cxt 0] Parser 'parser': start
+[19:03:16.001] [bmv2] [D] [thread 2644] [3.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.001] [bmv2] [D] [thread 2645] [0.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.001] [bmv2] [T] [thread 2645] [0.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.001] [bmv2] [D] [thread 2645] [0.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.001] [bmv2] [D] [thread 2645] [0.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.002] [bmv2] [T] [thread 2645] [0.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.001] [bmv2] [D] [thread 2644] [3.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.002] [bmv2] [D] [thread 2645] [0.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.002] [bmv2] [D] [thread 2644] [3.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.002] [bmv2] [D] [thread 2645] [0.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.002] [bmv2] [T] [thread 2644] [3.0] [cxt 0] Bytes parsed: 14
+[19:03:16.002] [bmv2] [D] [thread 2644] [3.0] [cxt 0] Parser 'parser': end
+[19:03:16.002] [bmv2] [D] [thread 2644] [3.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.002] [bmv2] [T] [thread 2644] [3.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.002] [bmv2] [D] [thread 2644] [3.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.002] [bmv2] [D] [thread 2644] [3.0] [cxt 0] Egress port is 0
+[19:03:16.002] [bmv2] [D] [thread 2649] [0.0] [cxt 0] Transmitting packet of size 208 out of port 0
+[19:03:16.002] [bmv2] [D] [thread 2644] [4.0] [cxt 0] Processing packet received on port 3
+[19:03:16.002] [bmv2] [D] [thread 2645] [1.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.002] [bmv2] [T] [thread 2645] [1.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.002] [bmv2] [D] [thread 2645] [1.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.002] [bmv2] [D] [thread 2645] [1.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.002] [bmv2] [T] [thread 2645] [1.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.002] [bmv2] [D] [thread 2644] [4.0] [cxt 0] Parser 'parser': start
+[19:03:16.003] [bmv2] [D] [thread 2644] [4.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.003] [bmv2] [D] [thread 2644] [4.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.003] [bmv2] [D] [thread 2644] [4.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.003] [bmv2] [T] [thread 2644] [4.0] [cxt 0] Bytes parsed: 14
+[19:03:16.003] [bmv2] [D] [thread 2644] [4.0] [cxt 0] Parser 'parser': end
+[19:03:16.003] [bmv2] [D] [thread 2644] [4.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.003] [bmv2] [T] [thread 2644] [4.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.003] [bmv2] [D] [thread 2644] [4.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.003] [bmv2] [D] [thread 2644] [4.0] [cxt 0] Egress port is 0
+[19:03:16.003] [bmv2] [D] [thread 2644] [5.0] [cxt 0] Processing packet received on port 3
+[19:03:16.004] [bmv2] [D] [thread 2644] [5.0] [cxt 0] Parser 'parser': start
+[19:03:16.004] [bmv2] [D] [thread 2644] [5.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.004] [bmv2] [D] [thread 2644] [5.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.004] [bmv2] [D] [thread 2644] [5.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.004] [bmv2] [T] [thread 2644] [5.0] [cxt 0] Bytes parsed: 14
+[19:03:16.004] [bmv2] [D] [thread 2644] [5.0] [cxt 0] Parser 'parser': end
+[19:03:16.004] [bmv2] [D] [thread 2644] [5.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.004] [bmv2] [T] [thread 2644] [5.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.004] [bmv2] [D] [thread 2644] [5.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.004] [bmv2] [D] [thread 2644] [5.0] [cxt 0] Egress port is 0
+[19:03:16.004] [bmv2] [D] [thread 2644] [6.0] [cxt 0] Processing packet received on port 3
+[19:03:16.005] [bmv2] [D] [thread 2644] [6.0] [cxt 0] Parser 'parser': start
+[19:03:16.005] [bmv2] [D] [thread 2644] [6.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.005] [bmv2] [D] [thread 2644] [6.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.005] [bmv2] [D] [thread 2644] [6.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.005] [bmv2] [T] [thread 2644] [6.0] [cxt 0] Bytes parsed: 14
+[19:03:16.005] [bmv2] [D] [thread 2644] [6.0] [cxt 0] Parser 'parser': end
+[19:03:16.005] [bmv2] [D] [thread 2644] [6.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.006] [bmv2] [T] [thread 2644] [6.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.006] [bmv2] [D] [thread 2644] [6.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.006] [bmv2] [D] [thread 2644] [6.0] [cxt 0] Egress port is 0
+[19:03:16.002] [bmv2] [D] [thread 2645] [1.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.006] [bmv2] [D] [thread 2645] [1.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.006] [bmv2] [D] [thread 2649] [1.0] [cxt 0] Transmitting packet of size 208 out of port 0
+[19:03:16.006] [bmv2] [D] [thread 2645] [2.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.006] [bmv2] [T] [thread 2645] [2.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.006] [bmv2] [D] [thread 2645] [2.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.006] [bmv2] [D] [thread 2645] [2.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.006] [bmv2] [T] [thread 2645] [2.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.006] [bmv2] [D] [thread 2645] [2.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.006] [bmv2] [D] [thread 2645] [2.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.006] [bmv2] [D] [thread 2649] [2.0] [cxt 0] Transmitting packet of size 90 out of port 0
+[19:03:16.006] [bmv2] [D] [thread 2645] [3.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.006] [bmv2] [T] [thread 2645] [3.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.006] [bmv2] [D] [thread 2645] [3.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.006] [bmv2] [D] [thread 2645] [3.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.006] [bmv2] [T] [thread 2645] [3.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.006] [bmv2] [D] [thread 2645] [3.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.006] [bmv2] [D] [thread 2645] [3.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.006] [bmv2] [D] [thread 2649] [3.0] [cxt 0] Transmitting packet of size 196 out of port 0
+[19:03:16.006] [bmv2] [D] [thread 2645] [4.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.006] [bmv2] [T] [thread 2645] [4.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.006] [bmv2] [D] [thread 2645] [4.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.006] [bmv2] [D] [thread 2645] [4.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.006] [bmv2] [T] [thread 2645] [4.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.006] [bmv2] [D] [thread 2645] [4.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.006] [bmv2] [D] [thread 2645] [4.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.006] [bmv2] [D] [thread 2649] [4.0] [cxt 0] Transmitting packet of size 70 out of port 0
+[19:03:16.006] [bmv2] [D] [thread 2645] [5.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.006] [bmv2] [T] [thread 2645] [5.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.006] [bmv2] [D] [thread 2645] [5.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.006] [bmv2] [D] [thread 2645] [5.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.006] [bmv2] [T] [thread 2645] [5.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.006] [bmv2] [D] [thread 2645] [5.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.007] [bmv2] [D] [thread 2645] [5.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.007] [bmv2] [D] [thread 2649] [5.0] [cxt 0] Transmitting packet of size 90 out of port 0
+[19:03:16.007] [bmv2] [D] [thread 2645] [6.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.007] [bmv2] [T] [thread 2645] [6.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.007] [bmv2] [D] [thread 2645] [6.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.007] [bmv2] [D] [thread 2645] [6.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.007] [bmv2] [T] [thread 2645] [6.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.007] [bmv2] [D] [thread 2645] [6.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.007] [bmv2] [D] [thread 2645] [6.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.007] [bmv2] [D] [thread 2649] [6.0] [cxt 0] Transmitting packet of size 208 out of port 0
+[19:03:16.013] [bmv2] [D] [thread 2644] [7.0] [cxt 0] Processing packet received on port 3
+[19:03:16.013] [bmv2] [D] [thread 2644] [7.0] [cxt 0] Parser 'parser': start
+[19:03:16.013] [bmv2] [D] [thread 2644] [7.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.013] [bmv2] [D] [thread 2644] [7.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.014] [bmv2] [D] [thread 2644] [7.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.014] [bmv2] [T] [thread 2644] [7.0] [cxt 0] Bytes parsed: 14
+[19:03:16.014] [bmv2] [D] [thread 2644] [7.0] [cxt 0] Parser 'parser': end
+[19:03:16.014] [bmv2] [D] [thread 2644] [7.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.014] [bmv2] [T] [thread 2644] [7.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.014] [bmv2] [D] [thread 2644] [7.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.014] [bmv2] [D] [thread 2644] [7.0] [cxt 0] Egress port is 0
+[19:03:16.014] [bmv2] [D] [thread 2644] [8.0] [cxt 0] Processing packet received on port 5
+[19:03:16.014] [bmv2] [D] [thread 2644] [8.0] [cxt 0] Parser 'parser': start
+[19:03:16.014] [bmv2] [D] [thread 2644] [8.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.014] [bmv2] [D] [thread 2644] [8.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.014] [bmv2] [D] [thread 2644] [8.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.014] [bmv2] [T] [thread 2644] [8.0] [cxt 0] Bytes parsed: 14
+[19:03:16.014] [bmv2] [D] [thread 2644] [8.0] [cxt 0] Parser 'parser': end
+[19:03:16.015] [bmv2] [D] [thread 2644] [8.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.015] [bmv2] [T] [thread 2644] [8.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.015] [bmv2] [D] [thread 2644] [8.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.015] [bmv2] [D] [thread 2644] [8.0] [cxt 0] Egress port is 0
+[19:03:16.015] [bmv2] [D] [thread 2645] [7.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.015] [bmv2] [T] [thread 2645] [7.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.015] [bmv2] [D] [thread 2645] [7.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.015] [bmv2] [D] [thread 2645] [7.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.015] [bmv2] [T] [thread 2645] [7.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.015] [bmv2] [D] [thread 2645] [7.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.015] [bmv2] [D] [thread 2645] [7.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.015] [bmv2] [D] [thread 2645] [8.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.015] [bmv2] [T] [thread 2645] [8.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.016] [bmv2] [D] [thread 2645] [8.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.016] [bmv2] [D] [thread 2645] [8.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.016] [bmv2] [T] [thread 2645] [8.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.016] [bmv2] [D] [thread 2649] [7.0] [cxt 0] Transmitting packet of size 107 out of port 0
+[19:03:16.015] [bmv2] [D] [thread 2644] [9.0] [cxt 0] Processing packet received on port 1
+[19:03:16.016] [bmv2] [D] [thread 2644] [9.0] [cxt 0] Parser 'parser': start
+[19:03:16.016] [bmv2] [D] [thread 2644] [9.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.016] [bmv2] [D] [thread 2644] [9.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.016] [bmv2] [D] [thread 2644] [9.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.016] [bmv2] [T] [thread 2644] [9.0] [cxt 0] Bytes parsed: 14
+[19:03:16.016] [bmv2] [D] [thread 2644] [9.0] [cxt 0] Parser 'parser': end
+[19:03:16.016] [bmv2] [D] [thread 2644] [9.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.016] [bmv2] [T] [thread 2644] [9.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.016] [bmv2] [D] [thread 2644] [9.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.016] [bmv2] [D] [thread 2644] [9.0] [cxt 0] Egress port is 0
+[19:03:16.016] [bmv2] [D] [thread 2645] [8.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.016] [bmv2] [D] [thread 2645] [8.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.017] [bmv2] [D] [thread 2645] [9.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.017] [bmv2] [D] [thread 2649] [8.0] [cxt 0] Transmitting packet of size 107 out of port 0
+[19:03:16.017] [bmv2] [T] [thread 2645] [9.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.017] [bmv2] [D] [thread 2645] [9.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.017] [bmv2] [D] [thread 2645] [9.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.017] [bmv2] [T] [thread 2645] [9.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.017] [bmv2] [D] [thread 2645] [9.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.017] [bmv2] [D] [thread 2645] [9.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.017] [bmv2] [D] [thread 2649] [9.0] [cxt 0] Transmitting packet of size 110 out of port 0
+[19:03:16.025] [bmv2] [D] [thread 2644] [10.0] [cxt 0] Processing packet received on port 3
+[19:03:16.025] [bmv2] [D] [thread 2644] [10.0] [cxt 0] Parser 'parser': start
+[19:03:16.026] [bmv2] [D] [thread 2644] [10.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.026] [bmv2] [D] [thread 2644] [10.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.026] [bmv2] [D] [thread 2644] [10.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.026] [bmv2] [T] [thread 2644] [10.0] [cxt 0] Bytes parsed: 14
+[19:03:16.026] [bmv2] [D] [thread 2644] [10.0] [cxt 0] Parser 'parser': end
+[19:03:16.026] [bmv2] [D] [thread 2644] [10.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.026] [bmv2] [T] [thread 2644] [10.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.026] [bmv2] [D] [thread 2644] [10.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.026] [bmv2] [D] [thread 2644] [10.0] [cxt 0] Egress port is 0
+[19:03:16.026] [bmv2] [D] [thread 2644] [11.0] [cxt 0] Processing packet received on port 5
+[19:03:16.026] [bmv2] [D] [thread 2644] [11.0] [cxt 0] Parser 'parser': start
+[19:03:16.026] [bmv2] [D] [thread 2644] [11.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.026] [bmv2] [D] [thread 2644] [11.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.026] [bmv2] [D] [thread 2644] [11.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.026] [bmv2] [T] [thread 2644] [11.0] [cxt 0] Bytes parsed: 14
+[19:03:16.026] [bmv2] [D] [thread 2644] [11.0] [cxt 0] Parser 'parser': end
+[19:03:16.026] [bmv2] [D] [thread 2644] [11.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.026] [bmv2] [T] [thread 2644] [11.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.026] [bmv2] [D] [thread 2644] [11.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.026] [bmv2] [D] [thread 2644] [11.0] [cxt 0] Egress port is 0
+[19:03:16.026] [bmv2] [D] [thread 2645] [10.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.026] [bmv2] [T] [thread 2645] [10.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.026] [bmv2] [D] [thread 2645] [10.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.027] [bmv2] [D] [thread 2645] [10.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.027] [bmv2] [T] [thread 2645] [10.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.027] [bmv2] [D] [thread 2645] [10.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.027] [bmv2] [D] [thread 2645] [10.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.027] [bmv2] [D] [thread 2645] [11.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.027] [bmv2] [T] [thread 2645] [11.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.027] [bmv2] [D] [thread 2645] [11.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.027] [bmv2] [D] [thread 2645] [11.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.027] [bmv2] [T] [thread 2645] [11.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.027] [bmv2] [D] [thread 2645] [11.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.027] [bmv2] [D] [thread 2645] [11.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.027] [bmv2] [D] [thread 2649] [10.0] [cxt 0] Transmitting packet of size 208 out of port 0
+[19:03:16.027] [bmv2] [D] [thread 2649] [11.0] [cxt 0] Transmitting packet of size 208 out of port 0
+[19:03:16.030] [bmv2] [D] [thread 2644] [12.0] [cxt 0] Processing packet received on port 5
+[19:03:16.030] [bmv2] [D] [thread 2644] [12.0] [cxt 0] Parser 'parser': start
+[19:03:16.030] [bmv2] [D] [thread 2644] [12.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.030] [bmv2] [D] [thread 2644] [12.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.030] [bmv2] [D] [thread 2644] [12.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.030] [bmv2] [T] [thread 2644] [12.0] [cxt 0] Bytes parsed: 14
+[19:03:16.030] [bmv2] [D] [thread 2644] [12.0] [cxt 0] Parser 'parser': end
+[19:03:16.030] [bmv2] [D] [thread 2644] [12.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.030] [bmv2] [T] [thread 2644] [12.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.030] [bmv2] [D] [thread 2644] [12.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.030] [bmv2] [D] [thread 2644] [12.0] [cxt 0] Egress port is 0
+[19:03:16.030] [bmv2] [D] [thread 2645] [12.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.030] [bmv2] [T] [thread 2645] [12.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.030] [bmv2] [D] [thread 2645] [12.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.030] [bmv2] [D] [thread 2645] [12.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.030] [bmv2] [T] [thread 2645] [12.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.030] [bmv2] [D] [thread 2645] [12.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.030] [bmv2] [D] [thread 2645] [12.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.030] [bmv2] [D] [thread 2649] [12.0] [cxt 0] Transmitting packet of size 208 out of port 0
+[19:03:16.053] [bmv2] [D] [thread 2644] [13.0] [cxt 0] Processing packet received on port 1
+[19:03:16.053] [bmv2] [D] [thread 2644] [13.0] [cxt 0] Parser 'parser': start
+[19:03:16.053] [bmv2] [D] [thread 2644] [13.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.053] [bmv2] [D] [thread 2644] [13.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.053] [bmv2] [D] [thread 2644] [13.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.053] [bmv2] [T] [thread 2644] [13.0] [cxt 0] Bytes parsed: 14
+[19:03:16.053] [bmv2] [D] [thread 2644] [13.0] [cxt 0] Parser 'parser': end
+[19:03:16.053] [bmv2] [D] [thread 2644] [13.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.053] [bmv2] [T] [thread 2644] [13.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.053] [bmv2] [D] [thread 2644] [13.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.053] [bmv2] [D] [thread 2644] [13.0] [cxt 0] Egress port is 0
+[19:03:16.053] [bmv2] [D] [thread 2645] [13.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.054] [bmv2] [T] [thread 2645] [13.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.054] [bmv2] [D] [thread 2645] [13.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.054] [bmv2] [D] [thread 2645] [13.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.054] [bmv2] [T] [thread 2645] [13.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.054] [bmv2] [D] [thread 2645] [13.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.054] [bmv2] [D] [thread 2645] [13.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.054] [bmv2] [D] [thread 2649] [13.0] [cxt 0] Transmitting packet of size 90 out of port 0
+[19:03:16.072] [bmv2] [D] [thread 2644] [14.0] [cxt 0] Processing packet received on port 2
+[19:03:16.072] [bmv2] [D] [thread 2644] [14.0] [cxt 0] Parser 'parser': start
+[19:03:16.072] [bmv2] [D] [thread 2644] [14.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.072] [bmv2] [D] [thread 2644] [14.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.072] [bmv2] [D] [thread 2644] [14.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.072] [bmv2] [T] [thread 2644] [14.0] [cxt 0] Bytes parsed: 14
+[19:03:16.072] [bmv2] [D] [thread 2644] [14.0] [cxt 0] Parser 'parser': end
+[19:03:16.072] [bmv2] [D] [thread 2644] [14.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.072] [bmv2] [T] [thread 2644] [14.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.072] [bmv2] [D] [thread 2644] [14.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.072] [bmv2] [D] [thread 2644] [14.0] [cxt 0] Egress port is 0
+[19:03:16.073] [bmv2] [D] [thread 2645] [14.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.073] [bmv2] [T] [thread 2645] [14.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.073] [bmv2] [D] [thread 2645] [14.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.073] [bmv2] [D] [thread 2645] [14.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.073] [bmv2] [T] [thread 2645] [14.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.073] [bmv2] [D] [thread 2645] [14.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.073] [bmv2] [D] [thread 2645] [14.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.073] [bmv2] [D] [thread 2649] [14.0] [cxt 0] Transmitting packet of size 196 out of port 0
+[19:03:16.095] [bmv2] [D] [thread 2644] [15.0] [cxt 0] Processing packet received on port 4
+[19:03:16.095] [bmv2] [D] [thread 2644] [15.0] [cxt 0] Parser 'parser': start
+[19:03:16.096] [bmv2] [D] [thread 2644] [15.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.096] [bmv2] [D] [thread 2644] [15.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.096] [bmv2] [D] [thread 2644] [15.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.096] [bmv2] [T] [thread 2644] [15.0] [cxt 0] Bytes parsed: 14
+[19:03:16.096] [bmv2] [D] [thread 2644] [15.0] [cxt 0] Parser 'parser': end
+[19:03:16.096] [bmv2] [D] [thread 2644] [15.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.096] [bmv2] [T] [thread 2644] [15.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.096] [bmv2] [D] [thread 2644] [15.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.096] [bmv2] [D] [thread 2644] [15.0] [cxt 0] Egress port is 0
+[19:03:16.096] [bmv2] [D] [thread 2645] [15.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.096] [bmv2] [T] [thread 2645] [15.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.096] [bmv2] [D] [thread 2645] [15.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.096] [bmv2] [D] [thread 2645] [15.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.096] [bmv2] [T] [thread 2645] [15.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.096] [bmv2] [D] [thread 2645] [15.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.096] [bmv2] [D] [thread 2645] [15.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.096] [bmv2] [D] [thread 2649] [15.0] [cxt 0] Transmitting packet of size 196 out of port 0
+[19:03:16.126] [bmv2] [D] [thread 2644] [16.0] [cxt 0] Processing packet received on port 2
+[19:03:16.126] [bmv2] [D] [thread 2644] [16.0] [cxt 0] Parser 'parser': start
+[19:03:16.126] [bmv2] [D] [thread 2644] [16.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.126] [bmv2] [D] [thread 2644] [16.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.126] [bmv2] [D] [thread 2644] [16.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.126] [bmv2] [T] [thread 2644] [16.0] [cxt 0] Bytes parsed: 14
+[19:03:16.126] [bmv2] [D] [thread 2644] [16.0] [cxt 0] Parser 'parser': end
+[19:03:16.126] [bmv2] [D] [thread 2644] [16.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.126] [bmv2] [T] [thread 2644] [16.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.126] [bmv2] [D] [thread 2644] [16.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.126] [bmv2] [D] [thread 2644] [16.0] [cxt 0] Egress port is 0
+[19:03:16.126] [bmv2] [D] [thread 2645] [16.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.127] [bmv2] [T] [thread 2645] [16.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.127] [bmv2] [D] [thread 2645] [16.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.127] [bmv2] [D] [thread 2645] [16.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.127] [bmv2] [T] [thread 2645] [16.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.127] [bmv2] [D] [thread 2645] [16.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.127] [bmv2] [D] [thread 2645] [16.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.127] [bmv2] [D] [thread 2649] [16.0] [cxt 0] Transmitting packet of size 107 out of port 0
+[19:03:16.148] [bmv2] [D] [thread 2644] [17.0] [cxt 0] Processing packet received on port 3
+[19:03:16.149] [bmv2] [D] [thread 2644] [17.0] [cxt 0] Parser 'parser': start
+[19:03:16.149] [bmv2] [D] [thread 2644] [17.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.149] [bmv2] [D] [thread 2644] [17.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.149] [bmv2] [D] [thread 2644] [17.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.149] [bmv2] [T] [thread 2644] [17.0] [cxt 0] Bytes parsed: 14
+[19:03:16.149] [bmv2] [D] [thread 2644] [17.0] [cxt 0] Parser 'parser': end
+[19:03:16.149] [bmv2] [D] [thread 2644] [17.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.149] [bmv2] [T] [thread 2644] [17.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.149] [bmv2] [D] [thread 2644] [17.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.149] [bmv2] [D] [thread 2644] [17.0] [cxt 0] Egress port is 0
+[19:03:16.149] [bmv2] [D] [thread 2645] [17.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.149] [bmv2] [T] [thread 2645] [17.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.149] [bmv2] [D] [thread 2645] [17.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.149] [bmv2] [D] [thread 2645] [17.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.149] [bmv2] [T] [thread 2645] [17.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.149] [bmv2] [D] [thread 2645] [17.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.149] [bmv2] [D] [thread 2645] [17.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.150] [bmv2] [D] [thread 2649] [17.0] [cxt 0] Transmitting packet of size 90 out of port 0
+[19:03:16.162] [bmv2] [D] [thread 2644] [18.0] [cxt 0] Processing packet received on port 1
+[19:03:16.162] [bmv2] [D] [thread 2644] [18.0] [cxt 0] Parser 'parser': start
+[19:03:16.162] [bmv2] [D] [thread 2644] [18.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.162] [bmv2] [D] [thread 2644] [18.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.162] [bmv2] [D] [thread 2644] [18.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.162] [bmv2] [T] [thread 2644] [18.0] [cxt 0] Bytes parsed: 14
+[19:03:16.162] [bmv2] [D] [thread 2644] [18.0] [cxt 0] Parser 'parser': end
+[19:03:16.162] [bmv2] [D] [thread 2644] [18.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.162] [bmv2] [T] [thread 2644] [18.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.162] [bmv2] [D] [thread 2644] [18.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.162] [bmv2] [D] [thread 2644] [18.0] [cxt 0] Egress port is 0
+[19:03:16.162] [bmv2] [D] [thread 2645] [18.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.162] [bmv2] [T] [thread 2645] [18.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.162] [bmv2] [D] [thread 2645] [18.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.162] [bmv2] [D] [thread 2645] [18.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.162] [bmv2] [T] [thread 2645] [18.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.162] [bmv2] [D] [thread 2645] [18.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.162] [bmv2] [D] [thread 2645] [18.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.163] [bmv2] [D] [thread 2649] [18.0] [cxt 0] Transmitting packet of size 196 out of port 0
+[19:03:16.191] [bmv2] [D] [thread 2644] [19.0] [cxt 0] Processing packet received on port 3
+[19:03:16.192] [bmv2] [D] [thread 2644] [19.0] [cxt 0] Parser 'parser': start
+[19:03:16.192] [bmv2] [D] [thread 2644] [19.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.192] [bmv2] [D] [thread 2644] [19.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.192] [bmv2] [D] [thread 2644] [19.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.192] [bmv2] [T] [thread 2644] [19.0] [cxt 0] Bytes parsed: 14
+[19:03:16.192] [bmv2] [D] [thread 2644] [19.0] [cxt 0] Parser 'parser': end
+[19:03:16.192] [bmv2] [D] [thread 2644] [19.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.192] [bmv2] [T] [thread 2644] [19.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.192] [bmv2] [D] [thread 2644] [19.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.192] [bmv2] [D] [thread 2644] [19.0] [cxt 0] Egress port is 0
+[19:03:16.192] [bmv2] [D] [thread 2645] [19.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.192] [bmv2] [T] [thread 2645] [19.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.192] [bmv2] [D] [thread 2645] [19.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.192] [bmv2] [D] [thread 2645] [19.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.192] [bmv2] [T] [thread 2645] [19.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.192] [bmv2] [D] [thread 2645] [19.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.192] [bmv2] [D] [thread 2645] [19.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.193] [bmv2] [D] [thread 2649] [19.0] [cxt 0] Transmitting packet of size 196 out of port 0
+[19:03:16.229] [bmv2] [D] [thread 2644] [20.0] [cxt 0] Processing packet received on port 4
+[19:03:16.229] [bmv2] [D] [thread 2644] [20.0] [cxt 0] Parser 'parser': start
+[19:03:16.229] [bmv2] [D] [thread 2644] [20.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.229] [bmv2] [D] [thread 2644] [20.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.229] [bmv2] [D] [thread 2644] [20.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.229] [bmv2] [T] [thread 2644] [20.0] [cxt 0] Bytes parsed: 14
+[19:03:16.229] [bmv2] [D] [thread 2644] [20.0] [cxt 0] Parser 'parser': end
+[19:03:16.229] [bmv2] [D] [thread 2644] [20.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.229] [bmv2] [T] [thread 2644] [20.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.229] [bmv2] [D] [thread 2644] [20.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.229] [bmv2] [D] [thread 2644] [20.0] [cxt 0] Egress port is 0
+[19:03:16.229] [bmv2] [D] [thread 2645] [20.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.229] [bmv2] [T] [thread 2645] [20.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.229] [bmv2] [D] [thread 2645] [20.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.229] [bmv2] [D] [thread 2645] [20.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.229] [bmv2] [T] [thread 2645] [20.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.229] [bmv2] [D] [thread 2645] [20.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.229] [bmv2] [D] [thread 2645] [20.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.230] [bmv2] [D] [thread 2649] [20.0] [cxt 0] Transmitting packet of size 107 out of port 0
+[19:03:16.275] [bmv2] [D] [thread 2644] [21.0] [cxt 0] Processing packet received on port 5
+[19:03:16.275] [bmv2] [D] [thread 2644] [21.0] [cxt 0] Parser 'parser': start
+[19:03:16.275] [bmv2] [D] [thread 2644] [21.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.275] [bmv2] [D] [thread 2644] [21.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.275] [bmv2] [D] [thread 2644] [21.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.275] [bmv2] [T] [thread 2644] [21.0] [cxt 0] Bytes parsed: 14
+[19:03:16.275] [bmv2] [D] [thread 2644] [21.0] [cxt 0] Parser 'parser': end
+[19:03:16.276] [bmv2] [D] [thread 2644] [21.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.276] [bmv2] [T] [thread 2644] [21.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.276] [bmv2] [D] [thread 2644] [21.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.276] [bmv2] [D] [thread 2644] [21.0] [cxt 0] Egress port is 0
+[19:03:16.276] [bmv2] [D] [thread 2645] [21.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.276] [bmv2] [T] [thread 2645] [21.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.276] [bmv2] [D] [thread 2645] [21.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.276] [bmv2] [D] [thread 2645] [21.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.276] [bmv2] [T] [thread 2645] [21.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.276] [bmv2] [D] [thread 2645] [21.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.276] [bmv2] [D] [thread 2645] [21.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.276] [bmv2] [D] [thread 2649] [21.0] [cxt 0] Transmitting packet of size 208 out of port 0
+[19:03:16.283] [bmv2] [D] [thread 2644] [22.0] [cxt 0] Processing packet received on port 5
+[19:03:16.283] [bmv2] [D] [thread 2644] [22.0] [cxt 0] Parser 'parser': start
+[19:03:16.283] [bmv2] [D] [thread 2644] [22.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:16.283] [bmv2] [D] [thread 2644] [22.0] [cxt 0] Extracting header 'ethernet'
+[19:03:16.283] [bmv2] [D] [thread 2644] [22.0] [cxt 0] Parser state 'start': key is 86dd
+[19:03:16.283] [bmv2] [T] [thread 2644] [22.0] [cxt 0] Bytes parsed: 14
+[19:03:16.283] [bmv2] [D] [thread 2644] [22.0] [cxt 0] Parser 'parser': end
+[19:03:16.283] [bmv2] [D] [thread 2644] [22.0] [cxt 0] Pipeline 'ingress': start
+[19:03:16.283] [bmv2] [T] [thread 2644] [22.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is false
+[19:03:16.283] [bmv2] [D] [thread 2644] [22.0] [cxt 0] Pipeline 'ingress': end
+[19:03:16.283] [bmv2] [D] [thread 2644] [22.0] [cxt 0] Egress port is 0
+[19:03:16.285] [bmv2] [D] [thread 2645] [22.0] [cxt 0] Pipeline 'egress': start
+[19:03:16.285] [bmv2] [T] [thread 2645] [22.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:16.285] [bmv2] [D] [thread 2645] [22.0] [cxt 0] Pipeline 'egress': end
+[19:03:16.285] [bmv2] [D] [thread 2645] [22.0] [cxt 0] Deparser 'deparser': start
+[19:03:16.285] [bmv2] [T] [thread 2645] [22.0] [cxt 0] Skipping checksum 'cksum' update because condition not met
+[19:03:16.285] [bmv2] [D] [thread 2645] [22.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:16.285] [bmv2] [D] [thread 2645] [22.0] [cxt 0] Deparser 'deparser': end
+[19:03:16.285] [bmv2] [D] [thread 2649] [22.0] [cxt 0] Transmitting packet of size 208 out of port 0
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'MyIngress.ipv4_lpm': MyIngress.drop - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_get_registers_index': MyIngress.get_registers_index - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main216': main216 - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'MyIngress.check_destination_known': MyIngress.elect_new_destination - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main221': main221 - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_update_table': MyIngress.update_table - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'MyIngress.broadcast_elected_attr': MyIngress.drop - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_read_registers': MyIngress.read_registers_1 - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_read_registers_0': MyIngress.read_registers_2 - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_elect_attribute': MyIngress.elect_attribute_2 - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_elect_attribute_0': MyIngress.elect_attribute_1 - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_update_table_0': MyIngress.update_table - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main245': main245 - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_elect_attribute_1': MyIngress.elect_attribute_2 - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_elect_attribute_2': MyIngress.elect_attribute_1 - 
+[19:03:20.210] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main257': main257 - 
+[19:03:20.211] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_elect_attribute_3': MyIngress.elect_attribute_2 - 
+[19:03:20.211] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_elect_attribute_4': MyIngress.elect_attribute_1 - 
+[19:03:20.211] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main267': main267 - 
+[19:03:20.211] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_elect_promise': MyIngress.elect_promise_2 - 
+[19:03:20.211] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_elect_promise_0': MyIngress.elect_promise_1 - 
+[19:03:20.211] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main276': main276 - 
+[19:03:20.211] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_update_table_1': MyIngress.update_table - 
+[19:03:20.211] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_elect_attribute_5': MyIngress.elect_attribute_2 - 
+[19:03:20.211] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_elect_attribute_6': MyIngress.elect_attribute_1 - 
+[19:03:20.211] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main292': main292 - 
+[19:03:20.211] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_update_table_2': MyIngress.update_table - 
+[19:03:20.211] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_change_promise': MyIngress.change_promise_2 - 
+[19:03:20.211] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_change_promise_0': MyIngress.change_promise_1 - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main303': main303 - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_elect_attribute_7': MyIngress.elect_attribute_2 - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_elect_attribute_8': MyIngress.elect_attribute_1 - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main316': main316 - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_update_table_3': MyIngress.update_table - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_change_promise_1': MyIngress.change_promise_2 - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_change_promise_2': MyIngress.change_promise_1 - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main327': main327 - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_elect_attribute_9': MyIngress.elect_attribute_2 - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_elect_attribute_10': MyIngress.elect_attribute_1 - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main337': main337 - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_update_table_4': MyIngress.update_table - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_change_promise_3': MyIngress.change_promise_2 - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_change_promise_4': MyIngress.change_promise_1 - 
+[19:03:20.212] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main348': main348 - 
+[19:03:20.213] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main371': main371 - 
+[19:03:20.213] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main376': main376 - 
+[19:03:20.213] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main379': main379 - 
+[19:03:20.213] [bmv2] [D] [thread 2961] Set default default entry for table 'tbl_main381': main381 - 
+[19:03:20.231] [bmv2] [D] [thread 2961] simple_switch target has been notified of a config swap
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'MyIngress.ipv4_lpm': MyIngress.drop - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_get_registers_index': MyIngress.get_registers_index - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main216': main216 - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'MyIngress.check_destination_known': MyIngress.elect_new_destination - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main221': main221 - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_update_table': MyIngress.update_table - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'MyIngress.broadcast_elected_attr': MyIngress.drop - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_read_registers': MyIngress.read_registers_1 - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_read_registers_0': MyIngress.read_registers_2 - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_elect_attribute': MyIngress.elect_attribute_2 - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_elect_attribute_0': MyIngress.elect_attribute_1 - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_update_table_0': MyIngress.update_table - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main245': main245 - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_elect_attribute_1': MyIngress.elect_attribute_2 - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_elect_attribute_2': MyIngress.elect_attribute_1 - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main257': main257 - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_elect_attribute_3': MyIngress.elect_attribute_2 - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_elect_attribute_4': MyIngress.elect_attribute_1 - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main267': main267 - 
+[19:03:20.313] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_elect_promise': MyIngress.elect_promise_2 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_elect_promise_0': MyIngress.elect_promise_1 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main276': main276 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_update_table_1': MyIngress.update_table - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_elect_attribute_5': MyIngress.elect_attribute_2 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_elect_attribute_6': MyIngress.elect_attribute_1 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main292': main292 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_update_table_2': MyIngress.update_table - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_change_promise': MyIngress.change_promise_2 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_change_promise_0': MyIngress.change_promise_1 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main303': main303 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_elect_attribute_7': MyIngress.elect_attribute_2 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_elect_attribute_8': MyIngress.elect_attribute_1 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main316': main316 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_update_table_3': MyIngress.update_table - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_change_promise_1': MyIngress.change_promise_2 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_change_promise_2': MyIngress.change_promise_1 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main327': main327 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_elect_attribute_9': MyIngress.elect_attribute_2 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_elect_attribute_10': MyIngress.elect_attribute_1 - 
+[19:03:20.314] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main337': main337 - 
+[19:03:20.315] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_update_table_4': MyIngress.update_table - 
+[19:03:20.315] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_change_promise_3': MyIngress.change_promise_2 - 
+[19:03:20.315] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_change_promise_4': MyIngress.change_promise_1 - 
+[19:03:20.315] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main348': main348 - 
+[19:03:20.317] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main371': main371 - 
+[19:03:20.317] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main376': main376 - 
+[19:03:20.317] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main379': main379 - 
+[19:03:20.317] [bmv2] [D] [thread 2968] Set default default entry for table 'tbl_main381': main381 - 
+[19:03:20.335] [bmv2] [D] [thread 2968] simple_switch target has been notified of a config swap
+[19:03:20.343] [bmv2] [T] [thread 2982] bm_get_config
+[19:03:20.348] [bmv2] [T] [thread 2982] bm_mt_get_entries
+[19:03:20.350] [bmv2] [T] [thread 2982] bm_mt_get_entries
+[19:03:20.351] [bmv2] [T] [thread 2982] bm_mt_get_entries
+[19:03:20.352] [bmv2] [T] [thread 2982] bm_reset_state
+[19:03:20.378] [bmv2] [D] [thread 2982] Resetting simple_switch target-specific state
+[19:03:20.378] [bmv2] [D] [thread 2982] resetting PRE state
+[19:03:20.381] [bmv2] [D] [thread 2968] mgrp node created for mgid 2
+[19:03:20.382] [bmv2] [D] [thread 2968] node created for rid 0
+[19:03:20.382] [bmv2] [D] [thread 2968] node associated with mgid 2
+[19:03:20.386] [bmv2] [D] [thread 2980] Entry 0 added to table 'MyIngress.broadcast_elected_attr'
+[19:03:20.386] [bmv2] [D] [thread 2980] Dumping entry 0
+Match key:
+* meta.E_NH           : EXACT     0002
+Action entry: MyIngress.set_mcast_grp - 2,
+
+[19:03:20.388] [bmv2] [D] [thread 2968] mgrp node created for mgid 3
+[19:03:20.388] [bmv2] [D] [thread 2968] node created for rid 0
+[19:03:20.388] [bmv2] [D] [thread 2968] node associated with mgid 3
+[19:03:20.391] [bmv2] [D] [thread 2980] Entry 1 added to table 'MyIngress.broadcast_elected_attr'
+[19:03:20.392] [bmv2] [D] [thread 2980] Dumping entry 1
+Match key:
+* meta.E_NH           : EXACT     0003
+Action entry: MyIngress.set_mcast_grp - 3,
+
+[19:03:20.393] [bmv2] [D] [thread 2968] mgrp node created for mgid 4
+[19:03:20.394] [bmv2] [D] [thread 2968] node created for rid 0
+[19:03:20.394] [bmv2] [D] [thread 2968] node associated with mgid 4
+[19:03:20.402] [bmv2] [D] [thread 2980] Entry 2 added to table 'MyIngress.broadcast_elected_attr'
+[19:03:20.403] [bmv2] [D] [thread 2980] Dumping entry 2
+Match key:
+* meta.E_NH           : EXACT     0004
+Action entry: MyIngress.set_mcast_grp - 4,
+
+[19:03:20.404] [bmv2] [D] [thread 2968] mgrp node created for mgid 5
+[19:03:20.405] [bmv2] [D] [thread 2968] node created for rid 0
+[19:03:20.405] [bmv2] [D] [thread 2968] node associated with mgid 5
+[19:03:20.407] [bmv2] [D] [thread 2980] Entry 3 added to table 'MyIngress.broadcast_elected_attr'
+[19:03:20.407] [bmv2] [D] [thread 2980] Dumping entry 3
+Match key:
+* meta.E_NH           : EXACT     0005
+Action entry: MyIngress.set_mcast_grp - 5,
+
+[19:03:20.409] [bmv2] [D] [thread 2968] Set default entry for table 'MyIngress.check_destination_known': MyIngress.elect_new_destination - 
+[19:03:20.412] [bmv2] [D] [thread 2980] Entry 0 added to table 'MyIngress.ipv4_lpm'
+[19:03:20.412] [bmv2] [D] [thread 2980] Dumping entry 0
+Match key:
+* hdr.ipv4.dstAddr    : LPM       0a000400/24
+Action entry: MyIngress.ipv4_forward - a000404,1,
+
+[19:03:20.415] [bmv2] [D] [thread 2968] Entry 0 added to table 'MyIngress.check_destination_known'
+[19:03:20.415] [bmv2] [D] [thread 2968] Dumping entry 0
+Match key:
+* hdr.probe.destination: LPM       0a000400/24
+Action entry: MyIngress.get_info - 1,0,
+
+[19:03:20.417] [bmv2] [D] [thread 2980] mgrp node created for mgid 32868
+[19:03:20.417] [bmv2] [D] [thread 2980] node created for rid 0
+[19:03:20.417] [bmv2] [D] [thread 2980] node associated with mgid 32868
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Processing packet received on port 2
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Parser 'parser': start
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Extracting header 'ethernet'
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Parser state 'start': key is 0800
+[19:03:23.574] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Bytes parsed: 14
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Extracting header 'ipv4'
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Parser state 'parse_ipv4': key is fe
+[19:03:23.574] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Bytes parsed: 34
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Parser 'parser' entering state 'parse_probe'
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Extracting header 'probe'
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Parser state 'parse_probe' has no switch, going to default next state
+[19:03:23.574] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Bytes parsed: 44
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Parser 'parser': end
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Pipeline 'ingress': start
+[19:03:23.574] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is true
+[19:03:23.574] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(210) Condition "hdr.ipv4.protocol != PROBE_PROTO" (node_3) is false
+[19:03:23.574] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(214) Condition "hdr.ipv4.protocol == PROBE_PROTO && hdr.probe.isValid()" (node_5) is true
+[19:03:23.574] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Applying table 'tbl_get_registers_index'
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Looking up key:
+
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Table 'tbl_get_registers_index': miss
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Action entry is MyIngress.get_registers_index - 
+[19:03:23.574] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Action MyIngress.get_registers_index
+[19:03:23.574] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(39) Primitive hash(meta.register_index, ...
+[19:03:23.574] [bmv2] [T] [thread 2644] [23.0] [cxt 0] hash(base=0, max=1024) = 146
+[19:03:23.574] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Applying table 'tbl_main216'
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Looking up key:
+
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Table 'tbl_main216': miss
+[19:03:23.574] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Action entry is main216 - 
+[19:03:23.574] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Action main216
+[19:03:23.574] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(216) Primitive meta.is_new = false
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Applying table 'MyIngress.check_destination_known'
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Looking up key:
+* hdr.probe.destination: 0a000101
+
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Table 'MyIngress.check_destination_known': miss
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Action entry is MyIngress.elect_new_destination - 
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Action MyIngress.elect_new_destination
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(163) Primitive elected_distance_1.write(meta.register_index, hdr.probe.distance)
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Wrote register 'MyIngress.elected_distance_1' at index 146 with value 1
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(164) Primitive elected_seq_no_1.write(meta.register_index, hdr.probe.seq_no)
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Wrote register 'MyIngress.elected_seq_no_1' at index 146 with value 1
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(166) Primitive promised_distance_1.write(meta.register_index, 9999)
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Wrote register 'MyIngress.promised_distance_1' at index 146 with value 9999
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(167) Primitive hdr.probe.seq_no + 1
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(167) Primitive promised_seq_no_1.write(meta.register_index, hdr.probe.seq_no + 1)
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Wrote register 'MyIngress.promised_seq_no_1' at index 146 with value 2
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(168) Primitive promised_NH_1.write(meta.register_index, 0)
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Wrote register 'MyIngress.promised_NH_1' at index 146 with value 0
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(170) Primitive meta.destination = hdr.probe.destination
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(171) Primitive meta.E_distance = hdr.probe.distance
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(172) Primitive meta.E_seq_no = hdr.probe.seq_no
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(173) Primitive meta.E_NH = standard_metadata.ingress_port
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(175) Primitive hdr.probe.distance = hdr.probe.distance + 1
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(176) Primitive meta.is_new = true
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Applying table 'tbl_main221'
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Looking up key:
+
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Table 'tbl_main221': miss
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Action entry is main221 - 
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Action main221
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(221) Primitive meta.test = (bit<8>) 1
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Applying table 'tbl_update_table'
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Looking up key:
+
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Table 'tbl_update_table': miss
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Action entry is MyIngress.update_table - 
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Action MyIngress.update_table
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(70) Primitive clone3(CloneType.I2E, 100, meta)
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Applying table 'MyIngress.broadcast_elected_attr'
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Looking up key:
+* meta.E_NH           : 0002
+
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Table 'MyIngress.broadcast_elected_attr': hit with handle 0
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Dumping entry 0
+Match key:
+* meta.E_NH           : EXACT     0002
+Action entry: MyIngress.set_mcast_grp - 2,
+
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Action entry is MyIngress.set_mcast_grp - 2,
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] Action MyIngress.set_mcast_grp
+[19:03:23.575] [bmv2] [T] [thread 2644] [23.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(192) Primitive standard_metadata.mcast_grp = mcast_id
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Pipeline 'ingress': end
+[19:03:23.575] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Cloning packet at ingress
+[19:03:23.576] [bmv2] [D] [thread 2644] [23.1] [cxt 0] Parser 'parser': start
+[19:03:23.576] [bmv2] [D] [thread 2644] [23.1] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:23.576] [bmv2] [D] [thread 2644] [23.1] [cxt 0] Extracting header 'ethernet'
+[19:03:23.576] [bmv2] [D] [thread 2644] [23.1] [cxt 0] Parser state 'start': key is 0800
+[19:03:23.576] [bmv2] [T] [thread 2644] [23.1] [cxt 0] Bytes parsed: 14
+[19:03:23.576] [bmv2] [D] [thread 2644] [23.1] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[19:03:23.576] [bmv2] [D] [thread 2644] [23.1] [cxt 0] Extracting header 'ipv4'
+[19:03:23.576] [bmv2] [D] [thread 2644] [23.1] [cxt 0] Parser state 'parse_ipv4': key is fe
+[19:03:23.576] [bmv2] [T] [thread 2644] [23.1] [cxt 0] Bytes parsed: 34
+[19:03:23.576] [bmv2] [D] [thread 2644] [23.1] [cxt 0] Parser 'parser' entering state 'parse_probe'
+[19:03:23.576] [bmv2] [D] [thread 2644] [23.1] [cxt 0] Extracting header 'probe'
+[19:03:23.576] [bmv2] [D] [thread 2644] [23.1] [cxt 0] Parser state 'parse_probe' has no switch, going to default next state
+[19:03:23.576] [bmv2] [T] [thread 2644] [23.1] [cxt 0] Bytes parsed: 44
+[19:03:23.576] [bmv2] [D] [thread 2644] [23.1] [cxt 0] Parser 'parser': end
+[19:03:23.576] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Cloning packet to MGID 32868
+[19:03:23.576] [bmv2] [D] [thread 2644] number of packets replicated : 1
+[19:03:23.576] [bmv2] [D] [thread 2644] [23.1] [cxt 0] Replicating packet on port 5
+[19:03:23.576] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Multicast requested for packet
+[19:03:23.576] [bmv2] [D] [thread 2644] number of packets replicated : 2
+[19:03:23.577] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Replicating packet on port 3
+[19:03:23.577] [bmv2] [D] [thread 2644] [23.0] [cxt 0] Replicating packet on port 4
+[19:03:23.577] [bmv2] [D] [thread 2648] [23.3] [cxt 0] Pipeline 'egress': start
+[19:03:23.577] [bmv2] [T] [thread 2648] [23.3] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:23.577] [bmv2] [D] [thread 2648] [23.3] [cxt 0] Pipeline 'egress': end
+[19:03:23.577] [bmv2] [D] [thread 2648] [23.3] [cxt 0] Deparser 'deparser': start
+[19:03:23.577] [bmv2] [D] [thread 2648] [23.3] [cxt 0] Updating checksum 'cksum'
+[19:03:23.577] [bmv2] [D] [thread 2648] [23.3] [cxt 0] Deparsing header 'ethernet'
+[19:03:23.577] [bmv2] [D] [thread 2648] [23.3] [cxt 0] Deparsing header 'ipv4'
+[19:03:23.577] [bmv2] [D] [thread 2648] [23.3] [cxt 0] Deparsing header 'probe'
+[19:03:23.577] [bmv2] [D] [thread 2648] [23.3] [cxt 0] Deparser 'deparser': end
+[19:03:23.577] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Pipeline 'egress': start
+[19:03:23.577] [bmv2] [T] [thread 2646] [23.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is true
+[19:03:23.577] [bmv2] [T] [thread 2646] [23.2] [cxt 0] Applying table 'tbl_main371'
+[19:03:23.577] [bmv2] [D] [thread 2645] [23.4] [cxt 0] Pipeline 'egress': start
+[19:03:23.578] [bmv2] [T] [thread 2645] [23.4] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:23.578] [bmv2] [D] [thread 2645] [23.4] [cxt 0] Pipeline 'egress': end
+[19:03:23.578] [bmv2] [D] [thread 2645] [23.4] [cxt 0] Deparser 'deparser': start
+[19:03:23.578] [bmv2] [D] [thread 2645] [23.4] [cxt 0] Updating checksum 'cksum'
+[19:03:23.577] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Looking up key:
+
+[19:03:23.578] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Table 'tbl_main371': miss
+[19:03:23.578] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Action entry is main371 - 
+[19:03:23.578] [bmv2] [T] [thread 2646] [23.2] [cxt 0] Action main371
+[19:03:23.578] [bmv2] [T] [thread 2646] [23.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(371) Primitive hdr.probe.setInvalid()
+[19:03:23.578] [bmv2] [T] [thread 2646] [23.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(372) Primitive hdr.cpu.setValid()
+[19:03:23.578] [bmv2] [D] [thread 2649] [23.3] [cxt 0] Transmitting packet of size 44 out of port 3
+[19:03:23.578] [bmv2] [D] [thread 2645] [23.4] [cxt 0] Deparsing header 'ethernet'
+[19:03:23.578] [bmv2] [T] [thread 2646] [23.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(373) Primitive hdr.cpu.destination = meta.destination
+[19:03:23.579] [bmv2] [T] [thread 2646] [23.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(374) Primitive hdr.cpu.next_hop = (bit<15>) meta.E_NH
+[19:03:23.579] [bmv2] [T] [thread 2646] [23.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(375) Condition "meta.is_new" (node_84) is true
+[19:03:23.579] [bmv2] [T] [thread 2646] [23.2] [cxt 0] Applying table 'tbl_main376'
+[19:03:23.579] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Looking up key:
+
+[19:03:23.579] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Table 'tbl_main376': miss
+[19:03:23.579] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Action entry is main376 - 
+[19:03:23.579] [bmv2] [T] [thread 2646] [23.2] [cxt 0] Action main376
+[19:03:23.579] [bmv2] [T] [thread 2646] [23.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(376) Primitive hdr.cpu.is_new = (bit<1>) 1
+[19:03:23.579] [bmv2] [T] [thread 2646] [23.2] [cxt 0] Applying table 'tbl_main381'
+[19:03:23.579] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Looking up key:
+
+[19:03:23.579] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Table 'tbl_main381': miss
+[19:03:23.579] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Action entry is main381 - 
+[19:03:23.579] [bmv2] [T] [thread 2646] [23.2] [cxt 0] Action main381
+[19:03:23.579] [bmv2] [T] [thread 2646] [23.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(381) Primitive hdr.cpu.index = meta.register_index
+[19:03:23.579] [bmv2] [T] [thread 2646] [23.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(382) Primitive hdr.cpu.test = meta.test
+[19:03:23.579] [bmv2] [T] [thread 2646] [23.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/include/headers.p4(6) Primitive 253; ...
+[19:03:23.579] [bmv2] [T] [thread 2646] [23.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(384) Primitive truncate((bit<32>) 45)
+[19:03:23.579] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Pipeline 'egress': end
+[19:03:23.579] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Deparser 'deparser': start
+[19:03:23.579] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Updating checksum 'cksum'
+[19:03:23.579] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Deparsing header 'ethernet'
+[19:03:23.579] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Deparsing header 'ipv4'
+[19:03:23.579] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Deparsing header 'cpu'
+[19:03:23.579] [bmv2] [D] [thread 2646] [23.2] [cxt 0] Deparser 'deparser': end
+[19:03:23.580] [bmv2] [D] [thread 2649] [23.2] [cxt 0] Transmitting packet of size 45 out of port 5
+[19:03:23.578] [bmv2] [D] [thread 2645] [23.4] [cxt 0] Deparsing header 'ipv4'
+[19:03:23.582] [bmv2] [D] [thread 2645] [23.4] [cxt 0] Deparsing header 'probe'
+[19:03:23.582] [bmv2] [D] [thread 2645] [23.4] [cxt 0] Deparser 'deparser': end
+[19:03:23.584] [bmv2] [D] [thread 2649] [23.4] [cxt 0] Transmitting packet of size 44 out of port 4
+[19:03:23.586] [bmv2] [D] [thread 2968] Entry 1 added to table 'MyIngress.ipv4_lpm'
+[19:03:23.586] [bmv2] [D] [thread 2968] Dumping entry 1
+Match key:
+* hdr.ipv4.dstAddr    : LPM       0a000100/24
+Action entry: MyIngress.ipv4_forward - eee64cd4906,2,
+
+[19:03:23.587] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Processing packet received on port 3
+[19:03:23.587] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Parser 'parser': start
+[19:03:23.587] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:23.587] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Extracting header 'ethernet'
+[19:03:23.587] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Parser state 'start': key is 0800
+[19:03:23.587] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Bytes parsed: 14
+[19:03:23.587] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[19:03:23.587] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Extracting header 'ipv4'
+[19:03:23.587] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Parser state 'parse_ipv4': key is fe
+[19:03:23.587] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Bytes parsed: 34
+[19:03:23.587] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Parser 'parser' entering state 'parse_probe'
+[19:03:23.587] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Extracting header 'probe'
+[19:03:23.587] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Parser state 'parse_probe' has no switch, going to default next state
+[19:03:23.587] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Bytes parsed: 44
+[19:03:23.587] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Parser 'parser': end
+[19:03:23.587] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Pipeline 'ingress': start
+[19:03:23.588] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is true
+[19:03:23.588] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(210) Condition "hdr.ipv4.protocol != PROBE_PROTO" (node_3) is false
+[19:03:23.588] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(214) Condition "hdr.ipv4.protocol == PROBE_PROTO && hdr.probe.isValid()" (node_5) is true
+[19:03:23.588] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Applying table 'tbl_get_registers_index'
+[19:03:23.588] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Looking up key:
+
+[19:03:23.588] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Table 'tbl_get_registers_index': miss
+[19:03:23.588] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Action entry is MyIngress.get_registers_index - 
+[19:03:23.588] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Action MyIngress.get_registers_index
+[19:03:23.588] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(39) Primitive hash(meta.register_index, ...
+[19:03:23.588] [bmv2] [T] [thread 2644] [24.0] [cxt 0] hash(base=0, max=1024) = 146
+[19:03:23.588] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Applying table 'tbl_main216'
+[19:03:23.588] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Looking up key:
+
+[19:03:23.588] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Table 'tbl_main216': miss
+[19:03:23.588] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Action entry is main216 - 
+[19:03:23.588] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Action main216
+[19:03:23.588] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(216) Primitive meta.is_new = false
+[19:03:23.588] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Applying table 'MyIngress.check_destination_known'
+[19:03:23.588] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Looking up key:
+* hdr.probe.destination: 0a000101
+
+[19:03:23.588] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Table 'MyIngress.check_destination_known': miss
+[19:03:23.588] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Action entry is MyIngress.elect_new_destination - 
+[19:03:23.590] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Action MyIngress.elect_new_destination
+[19:03:23.590] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(163) Primitive elected_distance_1.write(meta.register_index, hdr.probe.distance)
+[19:03:23.590] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Wrote register 'MyIngress.elected_distance_1' at index 146 with value 2
+[19:03:23.590] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(164) Primitive elected_seq_no_1.write(meta.register_index, hdr.probe.seq_no)
+[19:03:23.590] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Wrote register 'MyIngress.elected_seq_no_1' at index 146 with value 1
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(166) Primitive promised_distance_1.write(meta.register_index, 9999)
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Wrote register 'MyIngress.promised_distance_1' at index 146 with value 9999
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(167) Primitive hdr.probe.seq_no + 1
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(167) Primitive promised_seq_no_1.write(meta.register_index, hdr.probe.seq_no + 1)
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Wrote register 'MyIngress.promised_seq_no_1' at index 146 with value 2
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(168) Primitive promised_NH_1.write(meta.register_index, 0)
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Wrote register 'MyIngress.promised_NH_1' at index 146 with value 0
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(170) Primitive meta.destination = hdr.probe.destination
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(171) Primitive meta.E_distance = hdr.probe.distance
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(172) Primitive meta.E_seq_no = hdr.probe.seq_no
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(173) Primitive meta.E_NH = standard_metadata.ingress_port
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(175) Primitive hdr.probe.distance = hdr.probe.distance + 1
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(176) Primitive meta.is_new = true
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Applying table 'tbl_main221'
+[19:03:23.591] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Looking up key:
+
+[19:03:23.591] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Table 'tbl_main221': miss
+[19:03:23.591] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Action entry is main221 - 
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Action main221
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(221) Primitive meta.test = (bit<8>) 1
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Applying table 'tbl_update_table'
+[19:03:23.591] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Looking up key:
+
+[19:03:23.591] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Table 'tbl_update_table': miss
+[19:03:23.591] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Action entry is MyIngress.update_table - 
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Action MyIngress.update_table
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(70) Primitive clone3(CloneType.I2E, 100, meta)
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Applying table 'MyIngress.broadcast_elected_attr'
+[19:03:23.591] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Looking up key:
+* meta.E_NH           : 0003
+
+[19:03:23.591] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Table 'MyIngress.broadcast_elected_attr': hit with handle 1
+[19:03:23.591] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Dumping entry 1
+Match key:
+* meta.E_NH           : EXACT     0003
+Action entry: MyIngress.set_mcast_grp - 3,
+
+[19:03:23.591] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Action entry is MyIngress.set_mcast_grp - 3,
+[19:03:23.591] [bmv2] [T] [thread 2644] [24.0] [cxt 0] Action MyIngress.set_mcast_grp
+[19:03:23.592] [bmv2] [T] [thread 2644] [24.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(192) Primitive standard_metadata.mcast_grp = mcast_id
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Pipeline 'ingress': end
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Cloning packet at ingress
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.1] [cxt 0] Parser 'parser': start
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.1] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.1] [cxt 0] Extracting header 'ethernet'
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.1] [cxt 0] Parser state 'start': key is 0800
+[19:03:23.592] [bmv2] [T] [thread 2644] [24.1] [cxt 0] Bytes parsed: 14
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.1] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.1] [cxt 0] Extracting header 'ipv4'
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.1] [cxt 0] Parser state 'parse_ipv4': key is fe
+[19:03:23.592] [bmv2] [T] [thread 2644] [24.1] [cxt 0] Bytes parsed: 34
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.1] [cxt 0] Parser 'parser' entering state 'parse_probe'
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.1] [cxt 0] Extracting header 'probe'
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.1] [cxt 0] Parser state 'parse_probe' has no switch, going to default next state
+[19:03:23.592] [bmv2] [T] [thread 2644] [24.1] [cxt 0] Bytes parsed: 44
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.1] [cxt 0] Parser 'parser': end
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Cloning packet to MGID 32868
+[19:03:23.592] [bmv2] [D] [thread 2644] number of packets replicated : 1
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.1] [cxt 0] Replicating packet on port 5
+[19:03:23.592] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Multicast requested for packet
+[19:03:23.592] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Pipeline 'egress': start
+[19:03:23.592] [bmv2] [T] [thread 2646] [24.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is true
+[19:03:23.592] [bmv2] [T] [thread 2646] [24.2] [cxt 0] Applying table 'tbl_main371'
+[19:03:23.592] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Looking up key:
+
+[19:03:23.592] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Table 'tbl_main371': miss
+[19:03:23.592] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Action entry is main371 - 
+[19:03:23.592] [bmv2] [T] [thread 2646] [24.2] [cxt 0] Action main371
+[19:03:23.592] [bmv2] [T] [thread 2646] [24.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(371) Primitive hdr.probe.setInvalid()
+[19:03:23.592] [bmv2] [T] [thread 2646] [24.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(372) Primitive hdr.cpu.setValid()
+[19:03:23.592] [bmv2] [T] [thread 2646] [24.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(373) Primitive hdr.cpu.destination = meta.destination
+[19:03:23.592] [bmv2] [T] [thread 2646] [24.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(374) Primitive hdr.cpu.next_hop = (bit<15>) meta.E_NH
+[19:03:23.592] [bmv2] [T] [thread 2646] [24.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(375) Condition "meta.is_new" (node_84) is true
+[19:03:23.592] [bmv2] [T] [thread 2646] [24.2] [cxt 0] Applying table 'tbl_main376'
+[19:03:23.592] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Looking up key:
+
+[19:03:23.593] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Table 'tbl_main376': miss
+[19:03:23.593] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Action entry is main376 - 
+[19:03:23.593] [bmv2] [T] [thread 2646] [24.2] [cxt 0] Action main376
+[19:03:23.593] [bmv2] [T] [thread 2646] [24.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(376) Primitive hdr.cpu.is_new = (bit<1>) 1
+[19:03:23.593] [bmv2] [T] [thread 2646] [24.2] [cxt 0] Applying table 'tbl_main381'
+[19:03:23.593] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Looking up key:
+
+[19:03:23.593] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Table 'tbl_main381': miss
+[19:03:23.593] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Action entry is main381 - 
+[19:03:23.593] [bmv2] [T] [thread 2646] [24.2] [cxt 0] Action main381
+[19:03:23.593] [bmv2] [T] [thread 2646] [24.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(381) Primitive hdr.cpu.index = meta.register_index
+[19:03:23.593] [bmv2] [T] [thread 2646] [24.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(382) Primitive hdr.cpu.test = meta.test
+[19:03:23.593] [bmv2] [T] [thread 2646] [24.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/include/headers.p4(6) Primitive 253; ...
+[19:03:23.593] [bmv2] [T] [thread 2646] [24.2] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(384) Primitive truncate((bit<32>) 45)
+[19:03:23.593] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Pipeline 'egress': end
+[19:03:23.593] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Deparser 'deparser': start
+[19:03:23.593] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Updating checksum 'cksum'
+[19:03:23.593] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Deparsing header 'ethernet'
+[19:03:23.593] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Deparsing header 'ipv4'
+[19:03:23.593] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Deparsing header 'cpu'
+[19:03:23.593] [bmv2] [D] [thread 2646] [24.2] [cxt 0] Deparser 'deparser': end
+[19:03:23.593] [bmv2] [D] [thread 2649] [24.2] [cxt 0] Transmitting packet of size 45 out of port 5
+[19:03:23.595] [bmv2] [D] [thread 2644] number of packets replicated : 2
+[19:03:23.595] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Replicating packet on port 2
+[19:03:23.595] [bmv2] [D] [thread 2644] [24.0] [cxt 0] Replicating packet on port 4
+[19:03:23.596] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Processing packet received on port 4
+[19:03:23.596] [bmv2] [D] [thread 2647] [24.3] [cxt 0] Pipeline 'egress': start
+[19:03:23.596] [bmv2] [T] [thread 2647] [24.3] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:23.596] [bmv2] [D] [thread 2647] [24.3] [cxt 0] Pipeline 'egress': end
+[19:03:23.596] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Parser 'parser': start
+[19:03:23.596] [bmv2] [D] [thread 2645] [24.4] [cxt 0] Pipeline 'egress': start
+[19:03:23.596] [bmv2] [T] [thread 2645] [24.4] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:23.596] [bmv2] [D] [thread 2645] [24.4] [cxt 0] Pipeline 'egress': end
+[19:03:23.596] [bmv2] [D] [thread 2645] [24.4] [cxt 0] Deparser 'deparser': start
+[19:03:23.596] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Parser 'parser' entering state 'start'
+[19:03:23.596] [bmv2] [D] [thread 2647] [24.3] [cxt 0] Deparser 'deparser': start
+[19:03:23.596] [bmv2] [D] [thread 2647] [24.3] [cxt 0] Updating checksum 'cksum'
+[19:03:23.596] [bmv2] [D] [thread 2647] [24.3] [cxt 0] Deparsing header 'ethernet'
+[19:03:23.596] [bmv2] [D] [thread 2645] [24.4] [cxt 0] Updating checksum 'cksum'
+[19:03:23.597] [bmv2] [D] [thread 2645] [24.4] [cxt 0] Deparsing header 'ethernet'
+[19:03:23.597] [bmv2] [D] [thread 2645] [24.4] [cxt 0] Deparsing header 'ipv4'
+[19:03:23.597] [bmv2] [D] [thread 2645] [24.4] [cxt 0] Deparsing header 'probe'
+[19:03:23.597] [bmv2] [D] [thread 2647] [24.3] [cxt 0] Deparsing header 'ipv4'
+[19:03:23.597] [bmv2] [D] [thread 2645] [24.4] [cxt 0] Deparser 'deparser': end
+[19:03:23.597] [bmv2] [D] [thread 2647] [24.3] [cxt 0] Deparsing header 'probe'
+[19:03:23.597] [bmv2] [D] [thread 2647] [24.3] [cxt 0] Deparser 'deparser': end
+[19:03:23.597] [bmv2] [D] [thread 2649] [24.4] [cxt 0] Transmitting packet of size 44 out of port 4
+[19:03:23.597] [bmv2] [D] [thread 2649] [24.3] [cxt 0] Transmitting packet of size 44 out of port 2
+[19:03:23.599] [bmv2] [D] [thread 2980] Entry 1 added to table 'MyIngress.check_destination_known'
+[19:03:23.599] [bmv2] [D] [thread 2980] Dumping entry 1
+Match key:
+* hdr.probe.destination: LPM       0a000100/24
+Action entry: MyIngress.get_info - 2,0,
+
+[19:03:23.596] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Extracting header 'ethernet'
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Parser state 'start': key is 0800
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Bytes parsed: 14
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Parser 'parser' entering state 'parse_ipv4'
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Extracting header 'ipv4'
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Parser state 'parse_ipv4': key is fe
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Bytes parsed: 34
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Parser 'parser' entering state 'parse_probe'
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Extracting header 'probe'
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Parser state 'parse_probe' has no switch, going to default next state
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Bytes parsed: 44
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Parser 'parser': end
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Pipeline 'ingress': start
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(209) Condition "hdr.ipv4.isValid() && hdr.ipv4.ttl > 0" (node_2) is true
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(210) Condition "hdr.ipv4.protocol != PROBE_PROTO" (node_3) is false
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(214) Condition "hdr.ipv4.protocol == PROBE_PROTO && hdr.probe.isValid()" (node_5) is true
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Applying table 'tbl_get_registers_index'
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Looking up key:
+
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Table 'tbl_get_registers_index': miss
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Action entry is MyIngress.get_registers_index - 
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Action MyIngress.get_registers_index
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(39) Primitive hash(meta.register_index, ...
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] hash(base=0, max=1024) = 146
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Applying table 'tbl_main216'
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Looking up key:
+
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Table 'tbl_main216': miss
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Action entry is main216 - 
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Action main216
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(216) Primitive meta.is_new = false
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Applying table 'MyIngress.check_destination_known'
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Looking up key:
+* hdr.probe.destination: 0a000101
+
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Table 'MyIngress.check_destination_known': hit with handle 1
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Dumping entry 1
+Match key:
+* hdr.probe.destination: LPM       0a000100/24
+Action entry: MyIngress.get_info - 2,0,
+
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Action entry is MyIngress.get_info - 2,0,
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Action MyIngress.get_info
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(139) Primitive meta.destination = hdr.probe.destination
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(140) Primitive meta.packet_counter = p_counter
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(141) Primitive meta.E_NH = next_hop
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(229) Condition "meta.packet_counter % 2 == 0" (node_12) is true
+[19:03:23.600] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Applying table 'tbl_read_registers'
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Looking up key:
+
+[19:03:23.600] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Table 'tbl_read_registers': miss
+[19:03:23.601] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Action entry is MyIngress.read_registers_1 - 
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Action MyIngress.read_registers_1
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(145) Primitive elected_distance_1.read(meta.E_distance, meta.register_index)
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Read register 'MyIngress.elected_distance_1' at index 146 read value 2
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(146) Primitive elected_seq_no_1.read(meta.E_seq_no, meta.register_index)
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Read register 'MyIngress.elected_seq_no_1' at index 146 read value 1
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(148) Primitive promised_distance_1.read(meta.P_distance, meta.register_index)
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Read register 'MyIngress.promised_distance_1' at index 146 read value 9999
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(149) Primitive promised_seq_no_1.read(meta.P_seq_no, meta.register_index)
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Read register 'MyIngress.promised_seq_no_1' at index 146 read value 2
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(150) Primitive promised_NH_1.read(meta.P_NH, meta.register_index)
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] Read register 'MyIngress.promised_NH_1' at index 146 read value 0
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(236) Condition "hdr.probe.distance == 0" (node_15) is false
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(250) Condition "standard_metadata.ingress_port == meta.E_NH" (node_23) is false
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(285) Condition "standard_metadata.ingress_port == meta.P_NH" (node_43) is false
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(309) Condition "hdr.probe.seq_no > meta.P_seq_no" (node_55) is false
+[19:03:23.601] [bmv2] [T] [thread 2644] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(330) Condition "hdr.probe.seq_no == meta.P_seq_no" (node_67) is false
+[19:03:23.601] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Pipeline 'ingress': end
+[19:03:23.601] [bmv2] [D] [thread 2644] [25.0] [cxt 0] Egress port is 0
+[19:03:23.602] [bmv2] [D] [thread 2645] [25.0] [cxt 0] Pipeline 'egress': start
+[19:03:23.602] [bmv2] [T] [thread 2645] [25.0] [cxt 0] /home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version2/p4src/main.p4(370) Condition "standard_metadata.instance_type == 1" (node_82) is false
+[19:03:23.602] [bmv2] [D] [thread 2645] [25.0] [cxt 0] Pipeline 'egress': end
+[19:03:23.602] [bmv2] [D] [thread 2645] [25.0] [cxt 0] Deparser 'deparser': start
+[19:03:23.602] [bmv2] [D] [thread 2645] [25.0] [cxt 0] Updating checksum 'cksum'
+[19:03:23.602] [bmv2] [D] [thread 2645] [25.0] [cxt 0] Deparsing header 'ethernet'
+[19:03:23.602] [bmv2] [D] [thread 2645] [25.0] [cxt 0] Deparsing header 'ipv4'
+[19:03:23.602] [bmv2] [D] [thread 2645] [25.0] [cxt 0] Deparsing header 'probe'
+[19:03:23.602] [bmv2] [D] [thread 2645] [25.0] [cxt 0] Deparser 'deparser': end
+[19:03:23.604] [bmv2] [D] [thread 2649] [25.0] [cxt 0] Transmitting packet of size 44 out of port 0
+[19:03:23.614] [bmv2] [E] [thread 2968] [P4Runtime] Match entry exists, use MODIFY if you wish to change action
+[19:03:23.625] [bmv2] [E] [thread 2968] [P4Runtime] Match entry exists, use MODIFY if you wish to change action
+open: No such file or directory
+open: No such file or directory
+open: No such file or directory

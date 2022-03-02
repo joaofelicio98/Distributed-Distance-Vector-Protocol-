@@ -49,10 +49,10 @@ header ipv4_t {
 // Header used to clone packets to the cpu
 header cpu_t {
     ip4Addr_t destination;
-    bit<9>   next_hop;
-    bit<1>    new_destination; // 1 => Is a new destination
-    bit<14>   distance;
-    bit<32>   seq_no;
+    bit<15>   next_hop;
+    bit<1>    is_new; // 1 => Is a new destination
+    bit<32>   index;
+    bit<8>    test;
 }
 
 header probe_t {
@@ -85,7 +85,7 @@ header udp_t {
 
 struct metadata {
     bit<32>     register_index;
-    bool        new_destination;
+    bool        is_new;
     ip4Addr_t   destination;
 
     bit<16>     E_distance;
@@ -95,6 +95,8 @@ struct metadata {
     bit<16>     P_distance;
     bit<32>     P_seq_no;
     bit<9>      P_NH;
+
+    bit<32>     packet_counter;
 
     bit<8>      test;
 }

@@ -19,8 +19,8 @@ MY_HEADER_PROTO = 254
 class CPU_header(Packet):
     name = 'CPU'
     fields_desc = [IPField('destination', '127.0.0.1'),
-                    BitField('next_hop',0,15), BitField('new_destination',0,1),
-                    BitField('index',0,32), BitField('test',0,8)]
+                    BitField('next_hop',0,16), BitField('new_destination',0,8),
+                    BitField('test',0,8)]
 
 class Controller():
 
@@ -37,8 +37,6 @@ class Controller():
 
         # To count the number of changing of states
         self.count_states=0
-        # Indexes to get the count values and elected's next hop
-        self.info = {}
         self.init()
 
 
@@ -111,20 +109,17 @@ class Controller():
         print("==========================================")
         print()
         print("Adding the initial ipv4 rules...")
-        self.controller.table_set_default("check_destination_known", "elect_new_destination")
+        self.controller.table_set_default("check_destination_known", "elect_attribute")
         neighbors = self.topo.get_neighbors(self.sw_name)
 
         for node in neighbors:
             if self.topo.isHost(node):
+                dst_ip = self.topo.node_to_node_interface_ip(node, self.sw_name)
                 #dst_ip = self.topo.get_host_ip(node)
                 dst_mac = self.topo.node_to_node_mac(node, self.sw_name)
                 port = self.topo.node_to_node_port_num(self.sw_name, node)
-                subnet = self.topo.subnet(node, self.sw_name)
-                self.controller.table_add("ipv4_lpm", "ipv4_forward", [subnet], [dst_mac, str(port)])
-                self.controller.table_add("check_destination_known", "get_info", [subnet],
-                                            [str(port), str(0)])
-                self.info[subnet] = {}
-                self.info[subnet]["NH"] = port
+                self.controller.table_add("ipv4_lpm", "ipv4_forward", [dst_ip], [dst_mac, str(port)])
+                self.controller.table_add("check_destination_known", "get_registers_info", [dst_ip])
 
     def add_clone_session(self):
         print("==========================================")
@@ -147,50 +142,33 @@ class Controller():
             print(f"Ending controller {self.sw_name}")
             self.reset()
 
-    def get_subnet(self, dst_ip):
-        host = self.topo.get_host_name(dst_ip)
-        node = self.topo.get_neighbors(host)[0]
-
-        subnet = self.topo.subnet(host, node)
-        return subnet
-
     def recv_msg_cpu(self, pkt):
         #print('DEBUG: {} | Received a new packet!'.format(self.sw_name))
         #print(pkt[IP].proto)
         if pkt[IP].proto == CPU_HEADER_PROTO:
+            print(f"DEBUG: {self.sw_name} | Received a new attribute to elect!")
+            self.count_states += 1
+            print(f"DEBUG {self.sw_name} changed its state {self.count_states} times.")
             #print()
             #pkt.show2()
             #print()
             pkt = Ether(raw(pkt))
             cpu_header = CPU_header(bytes(pkt.load))
             dst_ip = cpu_header.destination
-            subnet = self.get_subnet(dst_ip)
+            subnet = self.topo.subnet(self.topo.get_host_name(dst_ip), self.sw_name)
             port = cpu_header.next_hop
             is_new = cpu_header.new_destination
-            index = cpu_header.index
             test = cpu_header.test
             print(f"DEBUG {self.sw_name} | destination = {subnet}")
             print(f"DEBUG {self.sw_name} | next hop = {port}")
             print(f"DEBUG {self.sw_name} | is_new = {is_new}")
-            print(f"DEBUG {self.sw_name} | index = {index}")
             print(f"DEBUG {self.sw_name} | test = {test}")
-            print()
 
-            if not port == self.cpu_port:
-                print(f"DEBUG: {self.sw_name} | Received a new attribute to elect!")
-                self.count_states += 1
-                print(f"DEBUG {self.sw_name} changed its state {self.count_states} times.")
-
-            if port == self.cpu_port:
-                self.info[subnet]["index"] = index
-            elif is_new == 1:
-                self.info[subnet] = {}
-                self.info[subnet]["index"] = index
-                self.info[subnet]["NH"] = port
+            if is_new == 1:
                 self.add_new_entry(subnet, port)
             else:
-                self.info[subnet]["NH"] = port
                 self.modify_entry(subnet, port)
+
 
     def add_new_entry(self, dst_ip, port):
         print("==========================================")
@@ -201,9 +179,8 @@ class Controller():
         dst_mac = self.topo.node_to_node_mac(self.sw_name, neighbor)
         self.controller.table_add("ipv4_lpm", "ipv4_forward",
                                 [str(dst_ip)], [dst_mac, str(port)])
-        count = self.controller.counter_read("packet_counter", self.info[dst_ip]["index"])
-        self.controller.table_add("check_destination_known", "get_info", [str(dst_ip)],
-                                    [str(self.info[dst_ip]["NH"]), str(count[1])])
+        self.controller.table_add("check_destination_known", "get_registers_info", [str(dst_ip)])
+
 
     def modify_entry(self, dst_ip, port):
         print("==========================================")
@@ -214,9 +191,6 @@ class Controller():
         dst_mac = self.topo.node_to_node_mac(self.sw_name, neighbor)
         self.controller.table_modify_match("ipv4_lpm", "ipv4_forward",
                                 [str(dst_ip)], [dst_mac, str(port)])
-        count = self.controller.counter_read("packet_counter", self.info[dst_ip]["index"])
-        self.controller.table_modify_match("check_destination_known", "get_info", [str(dst_ip)],
-                                    [str(self.info[dst_ip]["NH"]), str(count[1])])
 
 if __name__ == "__main__":
     import sys
