@@ -51,7 +51,7 @@ header cpu_t {
     ip4Addr_t destination;
     bit<15>   next_hop;
     bit<1>    is_new; // 1 => Is a new destination
-    bit<32>   index;
+    bit<32>   info;  // can be the index to pass to the CP or the counter to pass to the DP
     bit<8>    test;
 }
 

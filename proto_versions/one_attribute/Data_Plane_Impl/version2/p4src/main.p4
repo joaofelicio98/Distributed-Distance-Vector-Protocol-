@@ -65,6 +65,37 @@ control MyIngress(inout headers hdr,
         default_action = drop;
     }
 
+    action send_to_cpu(bit<9> cpu_port) {
+        standard_metadata.egress_spec = cpu_port;
+
+        hdr.probe.setInvalid();
+        hdr.cpu.setValid();
+        hdr.cpu.destination = meta.destination;
+        hdr.cpu.next_hop = (bit<15>) meta.E_NH;
+        if (meta.is_new == true){
+            hdr.cpu.is_new = (bit<1>) 1;
+        }
+        else{
+            hdr.cpu.is_new = (bit<1>) 0;
+        }
+        hdr.cpu.info = meta.register_index;
+        hdr.cpu.test = meta.test;
+        hdr.ipv4.protocol = CPU_HEADER_PROTO;
+    }
+
+    table cpu_table {
+        key = {
+            hdr.ipv4.protocol: exact;
+        }
+        actions = {
+            send_to_cpu;
+            drop;
+            NoAction;
+        }
+        size = 1024;
+        default_action = drop;
+    }
+
     // Action called to modify the ipv4_lpm table
     action update_table() {
         clone3(CloneType.I2E, 100, meta);
@@ -81,7 +112,7 @@ control MyIngress(inout headers hdr,
         meta.E_seq_no = hdr.probe.seq_no;
         meta.E_NH = standard_metadata.ingress_port;
 
-        hdr.probe.distance = hdr.probe.distance + 1;
+        //hdr.probe.distance = hdr.probe.distance + 1;
     }
 
     action elect_attribute_1() {
@@ -95,7 +126,7 @@ control MyIngress(inout headers hdr,
         meta.E_seq_no = hdr.probe.seq_no;
         meta.E_NH = standard_metadata.ingress_port;
 
-        hdr.probe.distance = hdr.probe.distance + 1;
+        //hdr.probe.distance = hdr.probe.distance + 1;
     }
 
     action elect_promise_2() {
@@ -124,12 +155,16 @@ control MyIngress(inout headers hdr,
     }
 
     action change_promise_2() {
+        elected_distance_2.write(meta.register_index, meta.E_distance);
+        elected_seq_no_2.write(meta.register_index, meta.E_seq_no);
         promised_distance_2.write(meta.register_index, hdr.probe.distance);
         promised_seq_no_2.write(meta.register_index, hdr.probe.seq_no);
         promised_NH_2.write(meta.register_index, standard_metadata.ingress_port);
     }
 
     action change_promise_1() {
+        elected_distance_1.write(meta.register_index, meta.E_distance);
+        elected_seq_no_1.write(meta.register_index, meta.E_seq_no);
         promised_distance_1.write(meta.register_index, hdr.probe.distance);
         promised_seq_no_1.write(meta.register_index, hdr.probe.seq_no);
         promised_NH_1.write(meta.register_index, standard_metadata.ingress_port);
@@ -172,7 +207,7 @@ control MyIngress(inout headers hdr,
         meta.E_seq_no = hdr.probe.seq_no;
         meta.E_NH = standard_metadata.ingress_port;
 
-        hdr.probe.distance = hdr.probe.distance + 1;
+        //hdr.probe.distance = hdr.probe.distance + 1;
         meta.is_new = true;
     }
 
@@ -206,12 +241,34 @@ control MyIngress(inout headers hdr,
 
     apply {
 
-        if (hdr.ipv4.isValid() && hdr.ipv4.ttl > 0){
-            if (hdr.ipv4.protocol != PROBE_PROTO){
-                ipv4_lpm.apply();
-            }
-            @atomic{
-                if(hdr.ipv4.protocol == PROBE_PROTO && hdr.probe.isValid()){
+        @atomic{
+            if (hdr.ipv4.isValid() && hdr.ipv4.ttl > 0){
+                // Data packets
+                if (hdr.ipv4.protocol != PROBE_PROTO && hdr.ipv4.protocol != CPU_HEADER_PROTO){
+                    ipv4_lpm.apply();
+                }
+                // Packets sent by the cpu to broadcast
+                else if (hdr.ipv4.protocol == CPU_HEADER_PROTO && hdr.cpu.isValid()) {
+                    get_registers_index();
+
+                    hdr.cpu.setInvalid();
+                    hdr.probe.setValid();
+
+                    if(hdr.cpu.info % 2 == 0){
+                        read_registers_1();
+                    }else{
+                        read_registers_2();
+                    }
+
+                    hdr.probe.destination = hdr.cpu.destination;
+                    hdr.probe.distance = meta.E_distance + 1;
+                    hdr.probe.seq_no = meta.E_seq_no;
+                    hdr.ipv4.protocol = PROBE_PROTO;
+
+                    broadcast_elected_attr.apply();
+                }
+                // Probe received from a broadcast
+                else if(hdr.ipv4.protocol == PROBE_PROTO && hdr.probe.isValid()){
                     get_registers_index();
                     meta.is_new = false;
 
@@ -219,8 +276,9 @@ control MyIngress(inout headers hdr,
                         // Destination unknown
                         elect_new_destination: {
                             meta.test = (bit<8>) 1;
-                            update_table();
-                            broadcast_elected_attr.apply();
+                            //update_table();
+                            //broadcast_elected_attr.apply();
+                            cpu_table.apply();
                         }
 
                         // Go through the 3 cases
@@ -241,6 +299,7 @@ control MyIngress(inout headers hdr,
                                 }
                                 if (hdr.probe.seq_no == 1){
                                     update_table(); // For the controller to get the counter index
+                                    //cpu_table.apply();
                                 }
                                 packet_counter.count(meta.register_index);
                                 broadcast_elected_attr.apply();
@@ -275,8 +334,9 @@ control MyIngress(inout headers hdr,
                                         }
                                         packet_counter.count(meta.register_index);
                                         meta.test = (bit<8>) 3;
-                                        update_table();
-                                        broadcast_elected_attr.apply();
+                                        //update_table();
+                                        //broadcast_elected_attr.apply();
+                                        cpu_table.apply();
                                     }
                                 }
                             }
@@ -291,8 +351,9 @@ control MyIngress(inout headers hdr,
                                     }
                                     packet_counter.count(meta.register_index);
                                     meta.test = (bit<8>) 4;
-                                    update_table();
-                                    broadcast_elected_attr.apply();
+                                    //update_table();
+                                    //broadcast_elected_attr.apply();
+                                    cpu_table.apply();
                                 }
                                 else {
                                     if(meta.packet_counter % 2 == 0) {
@@ -315,8 +376,9 @@ control MyIngress(inout headers hdr,
                                         }
                                         packet_counter.count(meta.register_index);
                                         meta.test = (bit<8>) 5;
-                                        update_table();
-                                        broadcast_elected_attr.apply();
+                                        //update_table();
+                                        //broadcast_elected_attr.apply();
+                                        cpu_table.apply();
                                     }
                                     else{
                                         if(meta.packet_counter % 2 == 0) {
@@ -336,8 +398,9 @@ control MyIngress(inout headers hdr,
                                         }
                                         packet_counter.count(meta.register_index);
                                         meta.test = (bit<8>) 6;
-                                        update_table();
-                                        broadcast_elected_attr.apply();
+                                        //update_table();
+                                        //broadcast_elected_attr.apply();
+                                        cpu_table.apply();
                                     }
                                     else if (hdr.probe.distance < meta.P_distance){
                                         if(meta.packet_counter % 2 == 0) {
@@ -355,6 +418,7 @@ control MyIngress(inout headers hdr,
             }
         }
     }
+
 }
 
 /*************************************************************************
@@ -372,14 +436,7 @@ control MyEgress(inout headers hdr,
             hdr.cpu.setValid();
             hdr.cpu.destination = meta.destination;
             hdr.cpu.next_hop = (bit<15>) meta.E_NH;
-            if (meta.is_new == true){
-                hdr.cpu.is_new = (bit<1>) 1;
-            }
-            else{
-                hdr.cpu.is_new = (bit<1>) 0;
-            }
-            hdr.cpu.index = meta.register_index;
-            hdr.cpu.test = meta.test;
+            hdr.cpu.info = meta.register_index;
             hdr.ipv4.protocol = CPU_HEADER_PROTO;
             truncate((bit<32>) 45); // ether+ipv4+cpu header
         }

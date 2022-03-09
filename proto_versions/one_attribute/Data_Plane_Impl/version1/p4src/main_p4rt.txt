@@ -26,6 +26,29 @@ tables {
 }
 tables {
   preamble {
+    id: 35683835
+    name: "MyIngress.cpu_table"
+    alias: "cpu_table"
+  }
+  match_fields {
+    id: 1
+    name: "hdr.ipv4.protocol"
+    bitwidth: 8
+    match_type: EXACT
+  }
+  action_refs {
+    id: 22952082
+  }
+  action_refs {
+    id: 25652968
+  }
+  action_refs {
+    id: 21257015
+  }
+  size: 1024
+}
+tables {
+  preamble {
     id: 39311890
     name: "MyIngress.check_destination_known"
     alias: "check_destination_known"
@@ -37,7 +60,7 @@ tables {
     match_type: LPM
   }
   action_refs {
-    id: 24122967
+    id: 23822898
   }
   action_refs {
     id: 21471545
@@ -105,16 +128,26 @@ actions {
 }
 actions {
   preamble {
-    id: 31417104
-    name: "MyIngress.update_table"
-    alias: "update_table"
+    id: 22952082
+    name: "MyIngress.send_to_cpu"
+    alias: "send_to_cpu"
+  }
+  params {
+    id: 1
+    name: "cpu_port"
+    bitwidth: 9
   }
 }
 actions {
   preamble {
-    id: 24122967
-    name: "MyIngress.get_registers_info"
-    alias: "get_registers_info"
+    id: 23822898
+    name: "MyIngress.get_info"
+    alias: "get_info"
+  }
+  params {
+    id: 1
+    name: "next_hop"
+    bitwidth: 9
   }
 }
 actions {
@@ -175,21 +208,6 @@ registers {
     bitstring {
       bit {
         bitwidth: 32
-      }
-    }
-  }
-  size: 1024
-}
-registers {
-  preamble {
-    id: 382129994
-    name: "MyIngress.elected_NH"
-    alias: "elected_NH"
-  }
-  type_spec {
-    bitstring {
-      bit {
-        bitwidth: 9
       }
     }
   }

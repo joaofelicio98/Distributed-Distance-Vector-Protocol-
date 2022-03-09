@@ -11,7 +11,7 @@ topo = load_topo('topology.json')
 controllers = {} # {sw_name: seq_no}
 
 class Probe_header(Packet):
-    name = 'CPU'
+    name = 'Probe'
     fields_desc = [IPField('destination', '127.0.0.1'),
                     BitField('distance',0,16), BitField('seq_no',0,32)]
 
@@ -86,9 +86,6 @@ def main():
                 dst_ip = topo.get_host_ip(host)
                 start_computation(dst_ip, c, controllers[c])
                 controllers[c] = controllers[c] + 1
-
-            elif c == 'lol':
-                print(topo.get_interfaces_to_node('s1'))
             else:
                 raise AssertionError('This command does not exist')
 

@@ -20,7 +20,7 @@ class CPU_header(Packet):
     name = 'CPU'
     fields_desc = [IPField('destination', '127.0.0.1'),
                     BitField('next_hop',0,15), BitField('new_destination',0,1),
-                    BitField('index',0,32), BitField('test',0,8)]
+                    BitField('info',0,32), BitField('test',0,8)]
 
 class Controller():
 
@@ -65,6 +65,7 @@ class Controller():
         self.add_broadcast_groups()
         self.add_initial_ipv4_rules()
         self.add_clone_session()
+        self.add_cpu_rule()
 
 
     def add_broadcast_groups(self):
@@ -134,6 +135,13 @@ class Controller():
             self.controller.cs_create(100, [self.cpu_port])
 
 
+    def add_cpu_rule(self):
+        print("==========================================")
+        print()
+        print("Adding CPU rule...")
+        if self.cpu_port:
+            self.controller.table_add("cpu_table", "send_to_cpu", [str(MY_HEADER_PROTO)], [str(self.cpu_port)])
+
     # Main loop
     def run(self):
         try:
@@ -167,8 +175,9 @@ class Controller():
             subnet = self.get_subnet(dst_ip)
             port = cpu_header.next_hop
             is_new = cpu_header.new_destination
-            index = cpu_header.index
+            index = cpu_header.info
             test = cpu_header.test
+
             print(f"DEBUG {self.sw_name} | destination = {subnet}")
             print(f"DEBUG {self.sw_name} | next hop = {port}")
             print(f"DEBUG {self.sw_name} | is_new = {is_new}")
@@ -187,36 +196,68 @@ class Controller():
                 self.info[subnet] = {}
                 self.info[subnet]["index"] = index
                 self.info[subnet]["NH"] = port
-                self.add_new_entry(subnet, port)
+                count = self.controller.counter_read("packet_counter", self.info[subnet]["index"])
+                self.add_new_entry(subnet, port, count)
+                self.send_back_to_switch(pkt, dst_ip, count)
             else:
                 self.info[subnet]["NH"] = port
-                self.modify_entry(subnet, port)
+                count = self.controller.counter_read("packet_counter", self.info[subnet]["index"])
+                self.modify_entry(subnet, port, count)
+                self.send_back_to_switch(pkt, dst_ip, count)
+            print()
+            print("==========================================")
+            print()
 
-    def add_new_entry(self, dst_ip, port):
+    def add_new_entry(self, dst_ip, port, count):
         print("==========================================")
         print()
         print("Adding a new entry to the ipv4_lpm table...")
+        print()
+        print(f"COUNTER = {count[1]}")
+        print()
 
         neighbor = self.topo.port_to_node(self.sw_name, port)
         dst_mac = self.topo.node_to_node_mac(self.sw_name, neighbor)
         self.controller.table_add("ipv4_lpm", "ipv4_forward",
                                 [str(dst_ip)], [dst_mac, str(port)])
-        count = self.controller.counter_read("packet_counter", self.info[dst_ip]["index"])
         self.controller.table_add("check_destination_known", "get_info", [str(dst_ip)],
                                     [str(self.info[dst_ip]["NH"]), str(count[1])])
 
-    def modify_entry(self, dst_ip, port):
+    def modify_entry(self, dst_ip, port, count):
         print("==========================================")
         print()
         print("Modifying an entry in the ipv4_lpm table...")
+        print()
+        print(f"COUNTER = {count[1]}")
+        print()
 
         neighbor = self.topo.port_to_node(self.sw_name, port)
         dst_mac = self.topo.node_to_node_mac(self.sw_name, neighbor)
         self.controller.table_modify_match("ipv4_lpm", "ipv4_forward",
                                 [str(dst_ip)], [dst_mac, str(port)])
-        count = self.controller.counter_read("packet_counter", self.info[dst_ip]["index"])
         self.controller.table_modify_match("check_destination_known", "get_info", [str(dst_ip)],
                                     [str(self.info[dst_ip]["NH"]), str(count[1])])
+
+    def get_if(self, sw):
+        hosts = self.topo.get_hosts_connected_to(sw)
+        interfaces = self.topo.get_node_intfs(fields=['port'])[sw].copy()
+        iface = ""
+        for intf, port in interfaces.items():
+            if hosts[0] in intf:
+                iface = intf
+                break
+
+        return iface
+
+
+    def send_back_to_switch(self, pkt, dst_ip, count):
+        cpu_header = CPU_header(destination = dst_ip, info = count)
+        pkt[IP].remove_payload()
+        pkt = pkt / cpu_header
+
+#        pkt.show2()
+        iface = self.get_if(self.sw_name)
+        sendp(pkt, iface=iface, verbose=False)
 
 if __name__ == "__main__":
     import sys

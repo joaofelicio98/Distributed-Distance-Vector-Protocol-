@@ -86,9 +86,6 @@ def main():
                 dst_ip = topo.get_host_ip(host)
                 start_computation(dst_ip, c, controllers[c])
                 controllers[c] = controllers[c] + 1
-
-            elif c == 'lol':
-                print(topo.get_interfaces_to_node('s1'))
             else:
                 raise AssertionError('This command does not exist')
 
