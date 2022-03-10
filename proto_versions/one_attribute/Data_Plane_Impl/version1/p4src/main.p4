@@ -131,6 +131,20 @@ control MyIngress(inout headers hdr,
         //hdr.probe.distance = meta.E_distance + 1;
     }
 
+    action elect_new_destination(){
+        //Because of timings need to verify again
+        elected_seq_num.read(meta.E_seq_no, meta.register_index);
+        elected_distance.read(meta.E_distance, meta.register_index);
+
+        if(meta.E_seq_no == 0){
+            meta.is_new = true;
+        }else{
+            if(hdr.probe.distance < meta.E_distance){
+                meta.is_new = true;
+            }
+        }
+    }
+
     action elect_promise() {
         elected_distance.write(meta.register_index, meta.P_distance);
         elected_seq_num.write(meta.register_index, meta.P_seq_no);
@@ -162,6 +176,7 @@ control MyIngress(inout headers hdr,
         }
         actions = {
             get_info;
+            elect_new_destination;
             elect_attribute;
         }
         size = 1024;
@@ -218,10 +233,12 @@ control MyIngress(inout headers hdr,
 
                 switch (check_destination_known.apply().action_run){
                     // Destination unknown
-                    elect_attribute: {
+                    elect_new_destination: {
                 //if (!check_destination_known.apply().hit){
-                        meta.is_new = true;
-                        cpu_table.apply();
+                        if(meta.is_new == true){
+                            elect_attribute();
+                            cpu_table.apply();
+                        }
                     }
 
                     // Go through the 3 cases

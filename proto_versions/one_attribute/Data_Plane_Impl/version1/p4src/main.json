@@ -12,6 +12,7 @@
         ["tmp_4", 32, false],
         ["tmp_5", 32, false],
         ["tmp_6", 32, false],
+        ["tmp_7", 32, false],
         ["userMetadata.register_index", 32, false],
         ["userMetadata.is_new", 1, false],
         ["userMetadata.destination", 32, false],
@@ -2739,8 +2740,360 @@
       ]
     },
     {
-      "name" : "MyIngress.elect_promise",
+      "name" : "MyIngress.elect_attribute",
       "id" : 17,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.elected_distance"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            },
+            {
+              "type" : "field",
+              "value" : ["probe", "distance"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 117,
+            "column" : 8,
+            "source_fragment" : "elected_distance.write(meta.register_index, hdr.probe.distance)"
+          }
+        },
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.elected_seq_num"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            },
+            {
+              "type" : "field",
+              "value" : ["probe", "seq_no"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 118,
+            "column" : 8,
+            "source_fragment" : "elected_seq_num.write(meta.register_index, hdr.probe.seq_no)"
+          }
+        },
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.promised_distance"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x270f"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 121,
+            "column" : 8,
+            "source_fragment" : "promised_distance.write(meta.register_index, (bit<16>) 9999)"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_6"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "&",
+                  "left" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "+",
+                      "left" : {
+                        "type" : "field",
+                        "value" : ["probe", "seq_no"]
+                      },
+                      "right" : {
+                        "type" : "hexstr",
+                        "value" : "0x00000001"
+                      }
+                    }
+                  },
+                  "right" : {
+                    "type" : "hexstr",
+                    "value" : "0xffffffff"
+                  }
+                }
+              }
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 122,
+            "column" : 52,
+            "source_fragment" : "hdr.probe.seq_no + 1"
+          }
+        },
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.promised_seq_num"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "tmp_6"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 122,
+            "column" : 8,
+            "source_fragment" : "promised_seq_num.write(meta.register_index, hdr.probe.seq_no + 1)"
+          }
+        },
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.promised_NH"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x0000"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 123,
+            "column" : 8,
+            "source_fragment" : "promised_NH.write(meta.register_index, (bit<9>) 0)"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.E_distance"]
+            },
+            {
+              "type" : "field",
+              "value" : ["probe", "distance"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 126,
+            "column" : 8,
+            "source_fragment" : "meta.E_distance = hdr.probe.distance"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.E_seq_no"]
+            },
+            {
+              "type" : "field",
+              "value" : ["probe", "seq_no"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 127,
+            "column" : 8,
+            "source_fragment" : "meta.E_seq_no = hdr.probe.seq_no"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.E_NH"]
+            },
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "ingress_port"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 128,
+            "column" : 8,
+            "source_fragment" : "meta.E_NH = standard_metadata.ingress_port"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.elect_new_destination",
+      "id" : 18,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "register_read",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.E_seq_no"]
+            },
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.elected_seq_num"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 136,
+            "column" : 8,
+            "source_fragment" : "elected_seq_num.read(meta.E_seq_no, meta.register_index)"
+          }
+        },
+        {
+          "op" : "register_read",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.E_distance"]
+            },
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.elected_distance"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 137,
+            "column" : 8,
+            "source_fragment" : "elected_distance.read(meta.E_distance, meta.register_index)"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.is_new"]
+            },
+            {
+              "type" : "expression",
+              "value" : {
+                "type" : "expression",
+                "value" : {
+                  "op" : "b2d",
+                  "left" : null,
+                  "right" : {
+                    "type" : "expression",
+                    "value" : {
+                      "op" : "?",
+                      "left" : {
+                        "type" : "bool",
+                        "value" : true
+                      },
+                      "right" : {
+                        "type" : "expression",
+                        "value" : {
+                          "op" : "?",
+                          "left" : {
+                            "type" : "bool",
+                            "value" : true
+                          },
+                          "right" : {
+                            "type" : "expression",
+                            "value" : {
+                              "op" : "d2b",
+                              "left" : null,
+                              "right" : {
+                                "type" : "field",
+                                "value" : ["scalars", "userMetadata.is_new"]
+                              }
+                            }
+                          },
+                          "cond" : {
+                            "type" : "expression",
+                            "value" : {
+                              "op" : "<",
+                              "left" : {
+                                "type" : "field",
+                                "value" : ["probe", "distance"]
+                              },
+                              "right" : {
+                                "type" : "field",
+                                "value" : ["scalars", "userMetadata.E_distance"]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "cond" : {
+                        "type" : "expression",
+                        "value" : {
+                          "op" : "==",
+                          "left" : {
+                            "type" : "field",
+                            "value" : ["scalars", "userMetadata.E_seq_no"]
+                          },
+                          "right" : {
+                            "type" : "hexstr",
+                            "value" : "0x00000000"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.elect_promise",
+      "id" : 19,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -2761,7 +3114,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 135,
+            "line" : 149,
             "column" : 8,
             "source_fragment" : "elected_distance.write(meta.register_index, meta.P_distance)"
           }
@@ -2784,7 +3137,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 136,
+            "line" : 150,
             "column" : 8,
             "source_fragment" : "elected_seq_num.write(meta.register_index, meta.P_seq_no)"
           }
@@ -2807,7 +3160,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 143,
+            "line" : 157,
             "column" : 8,
             "source_fragment" : "promised_distance.write(meta.register_index, (bit<16>) 9999)"
           }
@@ -2817,7 +3170,7 @@
           "parameters" : [
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_6"]
+              "value" : ["scalars", "tmp_7"]
             },
             {
               "type" : "expression",
@@ -2849,7 +3202,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 144,
+            "line" : 158,
             "column" : 52,
             "source_fragment" : "meta.P_seq_no + 1"
           }
@@ -2867,12 +3220,12 @@
             },
             {
               "type" : "field",
-              "value" : ["scalars", "tmp_6"]
+              "value" : ["scalars", "tmp_7"]
             }
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 144,
+            "line" : 158,
             "column" : 8,
             "source_fragment" : "promised_seq_num.write(meta.register_index, meta.P_seq_no + 1)"
           }
@@ -2895,7 +3248,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 145,
+            "line" : 159,
             "column" : 8,
             "source_fragment" : "promised_NH.write(meta.register_index, (bit<9>) 0)"
           }
@@ -2914,7 +3267,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 148,
+            "line" : 162,
             "column" : 8,
             "source_fragment" : "meta.E_distance = meta.P_distance"
           }
@@ -2933,7 +3286,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 149,
+            "line" : 163,
             "column" : 8,
             "source_fragment" : "meta.E_seq_no = meta.P_seq_no"
           }
@@ -2952,161 +3305,9 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 150,
+            "line" : 164,
             "column" : 8,
             "source_fragment" : "meta.E_NH = meta.P_NH"
-          }
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.change_promise",
-      "id" : 18,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "register_write",
-          "parameters" : [
-            {
-              "type" : "register_array",
-              "value" : "MyIngress.promised_distance"
-            },
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.register_index"]
-            },
-            {
-              "type" : "field",
-              "value" : ["probe", "distance"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 154,
-            "column" : 8,
-            "source_fragment" : "promised_distance.write(meta.register_index, hdr.probe.distance)"
-          }
-        },
-        {
-          "op" : "register_write",
-          "parameters" : [
-            {
-              "type" : "register_array",
-              "value" : "MyIngress.promised_seq_num"
-            },
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.register_index"]
-            },
-            {
-              "type" : "field",
-              "value" : ["probe", "seq_no"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 155,
-            "column" : 8,
-            "source_fragment" : "promised_seq_num.write(meta.register_index, hdr.probe.seq_no)"
-          }
-        },
-        {
-          "op" : "register_write",
-          "parameters" : [
-            {
-              "type" : "register_array",
-              "value" : "MyIngress.promised_NH"
-            },
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.register_index"]
-            },
-            {
-              "type" : "field",
-              "value" : ["standard_metadata", "ingress_port"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 156,
-            "column" : 8,
-            "source_fragment" : "promised_NH.write(meta.register_index, standard_metadata.ingress_port)"
-          }
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.change_promise",
-      "id" : 19,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "register_write",
-          "parameters" : [
-            {
-              "type" : "register_array",
-              "value" : "MyIngress.promised_distance"
-            },
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.register_index"]
-            },
-            {
-              "type" : "field",
-              "value" : ["probe", "distance"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 154,
-            "column" : 8,
-            "source_fragment" : "promised_distance.write(meta.register_index, hdr.probe.distance)"
-          }
-        },
-        {
-          "op" : "register_write",
-          "parameters" : [
-            {
-              "type" : "register_array",
-              "value" : "MyIngress.promised_seq_num"
-            },
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.register_index"]
-            },
-            {
-              "type" : "field",
-              "value" : ["probe", "seq_no"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 155,
-            "column" : 8,
-            "source_fragment" : "promised_seq_num.write(meta.register_index, hdr.probe.seq_no)"
-          }
-        },
-        {
-          "op" : "register_write",
-          "parameters" : [
-            {
-              "type" : "register_array",
-              "value" : "MyIngress.promised_NH"
-            },
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.register_index"]
-            },
-            {
-              "type" : "field",
-              "value" : ["standard_metadata", "ingress_port"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 156,
-            "column" : 8,
-            "source_fragment" : "promised_NH.write(meta.register_index, standard_metadata.ingress_port)"
           }
         }
       ]
@@ -3134,7 +3335,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 154,
+            "line" : 168,
             "column" : 8,
             "source_fragment" : "promised_distance.write(meta.register_index, hdr.probe.distance)"
           }
@@ -3157,7 +3358,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 155,
+            "line" : 169,
             "column" : 8,
             "source_fragment" : "promised_seq_num.write(meta.register_index, hdr.probe.seq_no)"
           }
@@ -3180,7 +3381,159 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 156,
+            "line" : 170,
+            "column" : 8,
+            "source_fragment" : "promised_NH.write(meta.register_index, standard_metadata.ingress_port)"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.change_promise",
+      "id" : 21,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.promised_distance"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            },
+            {
+              "type" : "field",
+              "value" : ["probe", "distance"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 168,
+            "column" : 8,
+            "source_fragment" : "promised_distance.write(meta.register_index, hdr.probe.distance)"
+          }
+        },
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.promised_seq_num"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            },
+            {
+              "type" : "field",
+              "value" : ["probe", "seq_no"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 169,
+            "column" : 8,
+            "source_fragment" : "promised_seq_num.write(meta.register_index, hdr.probe.seq_no)"
+          }
+        },
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.promised_NH"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            },
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "ingress_port"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 170,
+            "column" : 8,
+            "source_fragment" : "promised_NH.write(meta.register_index, standard_metadata.ingress_port)"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.change_promise",
+      "id" : 22,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.promised_distance"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            },
+            {
+              "type" : "field",
+              "value" : ["probe", "distance"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 168,
+            "column" : 8,
+            "source_fragment" : "promised_distance.write(meta.register_index, hdr.probe.distance)"
+          }
+        },
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.promised_seq_num"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            },
+            {
+              "type" : "field",
+              "value" : ["probe", "seq_no"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 169,
+            "column" : 8,
+            "source_fragment" : "promised_seq_num.write(meta.register_index, hdr.probe.seq_no)"
+          }
+        },
+        {
+          "op" : "register_write",
+          "parameters" : [
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.promised_NH"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            },
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "ingress_port"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 170,
             "column" : 8,
             "source_fragment" : "promised_NH.write(meta.register_index, standard_metadata.ingress_port)"
           }
@@ -3189,7 +3542,7 @@
     },
     {
       "name" : "MyIngress.set_mcast_grp",
-      "id" : 21,
+      "id" : 23,
       "runtime_data" : [
         {
           "name" : "mcast_id",
@@ -3211,7 +3564,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 172,
+            "line" : 187,
             "column" : 8,
             "source_fragment" : "standard_metadata.mcast_grp = mcast_id"
           }
@@ -3219,8 +3572,8 @@
       ]
     },
     {
-      "name" : "main198",
-      "id" : 22,
+      "name" : "main213",
+      "id" : 24,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3241,7 +3594,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 198,
+            "line" : 213,
             "column" : 16,
             "source_fragment" : "elected_distance.read(meta.E_distance, meta.register_index)"
           }
@@ -3264,7 +3617,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 199,
+            "line" : 214,
             "column" : 16,
             "source_fragment" : "elected_seq_num.read(meta.E_seq_no, meta.register_index)"
           }
@@ -3283,7 +3636,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 200,
+            "line" : 215,
             "column" : 16,
             "source_fragment" : "meta.E_NH = hdr.cpu.next_hop"
           }
@@ -3298,7 +3651,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 202,
+            "line" : 217,
             "column" : 16,
             "source_fragment" : "hdr.cpu.setInvalid()"
           }
@@ -3313,7 +3666,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 203,
+            "line" : 218,
             "column" : 16,
             "source_fragment" : "hdr.probe.setValid()"
           }
@@ -3332,7 +3685,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 205,
+            "line" : 220,
             "column" : 16,
             "source_fragment" : "hdr.probe.destination = hdr.cpu.destination"
           }
@@ -3374,7 +3727,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 206,
+            "line" : 221,
             "column" : 16,
             "source_fragment" : "hdr.probe.distance = meta.E_distance + 1"
           }
@@ -3393,7 +3746,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 207,
+            "line" : 222,
             "column" : 16,
             "source_fragment" : "hdr.probe.seq_no = meta.E_seq_no"
           }
@@ -3420,44 +3773,8 @@
       ]
     },
     {
-      "name" : "main223",
-      "id" : 23,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.is_new"]
-            },
-            {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "b2d",
-                  "left" : null,
-                  "right" : {
-                    "type" : "bool",
-                    "value" : true
-                  }
-                }
-              }
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 223,
-            "column" : 24,
-            "source_fragment" : "meta.is_new = true"
-          }
-        }
-      ]
-    },
-    {
-      "name" : "main259",
-      "id" : 24,
+      "name" : "main276",
+      "id" : 25,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3474,7 +3791,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 259,
+            "line" : 276,
             "column" : 32,
             "source_fragment" : "meta.test = 1"
           }
@@ -3482,8 +3799,8 @@
       ]
     },
     {
-      "name" : "main272",
-      "id" : 25,
+      "name" : "main289",
+      "id" : 26,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3500,7 +3817,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 272,
+            "line" : 289,
             "column" : 36,
             "source_fragment" : "meta.test = 2"
           }
@@ -3508,8 +3825,8 @@
       ]
     },
     {
-      "name" : "main282",
-      "id" : 26,
+      "name" : "main299",
+      "id" : 27,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3526,7 +3843,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 282,
+            "line" : 299,
             "column" : 36,
             "source_fragment" : "meta.test = 3"
           }
@@ -3534,8 +3851,8 @@
       ]
     },
     {
-      "name" : "main216",
-      "id" : 27,
+      "name" : "main231",
+      "id" : 28,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -3552,7 +3869,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 216,
+            "line" : 231,
             "column" : 16,
             "source_fragment" : "meta.destination = hdr.probe.destination"
           }
@@ -3581,7 +3898,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 217,
+            "line" : 232,
             "column" : 16,
             "source_fragment" : "meta.is_new = false"
           }
@@ -3644,7 +3961,7 @@
           "id" : 1,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 196,
+            "line" : 211,
             "column" : 16,
             "source_fragment" : "get_registers_index()"
           },
@@ -3657,9 +3974,9 @@
           "direct_meters" : null,
           "action_ids" : [5],
           "actions" : ["MyIngress.get_registers_index"],
-          "base_default_next" : "tbl_main198",
+          "base_default_next" : "tbl_main213",
           "next_tables" : {
-            "MyIngress.get_registers_index" : "tbl_main198"
+            "MyIngress.get_registers_index" : "tbl_main213"
           },
           "default_entry" : {
             "action_id" : 5,
@@ -3669,11 +3986,11 @@
           }
         },
         {
-          "name" : "tbl_main198",
+          "name" : "tbl_main213",
           "id" : 2,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 198,
+            "line" : 213,
             "column" : 16,
             "source_fragment" : "elected_distance.read(meta.E_distance, meta.register_index); ..."
           },
@@ -3684,14 +4001,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [22],
-          "actions" : ["main198"],
+          "action_ids" : [24],
+          "actions" : ["main213"],
           "base_default_next" : "MyIngress.broadcast_elected_attr",
           "next_tables" : {
-            "main198" : "MyIngress.broadcast_elected_attr"
+            "main213" : "MyIngress.broadcast_elected_attr"
           },
           "default_entry" : {
-            "action_id" : 22,
+            "action_id" : 24,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -3702,7 +4019,7 @@
           "id" : 3,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 175,
+            "line" : 190,
             "column" : 10,
             "source_fragment" : "broadcast_elected_attr"
           },
@@ -3720,7 +4037,7 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [21, 4],
+          "action_ids" : [23, 4],
           "actions" : ["MyIngress.set_mcast_grp", "MyIngress.drop"],
           "base_default_next" : null,
           "next_tables" : {
@@ -3739,7 +4056,7 @@
           "id" : 4,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 215,
+            "line" : 230,
             "column" : 16,
             "source_fragment" : "get_registers_index()"
           },
@@ -3752,9 +4069,9 @@
           "direct_meters" : null,
           "action_ids" : [6],
           "actions" : ["MyIngress.get_registers_index"],
-          "base_default_next" : "tbl_main216",
+          "base_default_next" : "tbl_main231",
           "next_tables" : {
-            "MyIngress.get_registers_index" : "tbl_main216"
+            "MyIngress.get_registers_index" : "tbl_main231"
           },
           "default_entry" : {
             "action_id" : 6,
@@ -3764,11 +4081,11 @@
           }
         },
         {
-          "name" : "tbl_main216",
+          "name" : "tbl_main231",
           "id" : 5,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 216,
+            "line" : 231,
             "column" : 33,
             "source_fragment" : "= hdr.probe.destination; ..."
           },
@@ -3779,14 +4096,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [27],
-          "actions" : ["main216"],
+          "action_ids" : [28],
+          "actions" : ["main231"],
           "base_default_next" : "MyIngress.check_destination_known",
           "next_tables" : {
-            "main216" : "MyIngress.check_destination_known"
+            "main231" : "MyIngress.check_destination_known"
           },
           "default_entry" : {
-            "action_id" : 27,
+            "action_id" : 28,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -3797,7 +4114,7 @@
           "id" : 6,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 159,
+            "line" : 173,
             "column" : 10,
             "source_fragment" : "check_destination_known"
           },
@@ -3815,12 +4132,13 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [9, 10],
-          "actions" : ["MyIngress.get_info", "MyIngress.elect_attribute"],
+          "action_ids" : [9, 18, 10],
+          "actions" : ["MyIngress.get_info", "MyIngress.elect_new_destination", "MyIngress.elect_attribute"],
           "base_default_next" : null,
           "next_tables" : {
-            "MyIngress.elect_attribute" : "tbl_main223",
-            "MyIngress.get_info" : "node_15"
+            "MyIngress.elect_new_destination" : "node_13",
+            "MyIngress.get_info" : "node_16",
+            "MyIngress.elect_attribute" : null
           },
           "default_entry" : {
             "action_id" : 10,
@@ -3830,13 +4148,13 @@
           }
         },
         {
-          "name" : "tbl_main223",
+          "name" : "tbl_elect_attribute",
           "id" : 7,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 223,
-            "column" : 36,
-            "source_fragment" : "="
+            "line" : 239,
+            "column" : 28,
+            "source_fragment" : "elect_attribute()"
           },
           "key" : [],
           "match_type" : "exact",
@@ -3845,14 +4163,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [23],
-          "actions" : ["main223"],
+          "action_ids" : [11],
+          "actions" : ["MyIngress.elect_attribute"],
           "base_default_next" : "MyIngress.cpu_table",
           "next_tables" : {
-            "main223" : "MyIngress.cpu_table"
+            "MyIngress.elect_attribute" : "MyIngress.cpu_table"
           },
           "default_entry" : {
-            "action_id" : 23,
+            "action_id" : 11,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -3897,41 +4215,12 @@
           }
         },
         {
-          "name" : "tbl_elect_attribute",
+          "name" : "tbl_elect_attribute_0",
           "id" : 9,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 233,
+            "line" : 250,
             "column" : 28,
-            "source_fragment" : "elect_attribute()"
-          },
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [11],
-          "actions" : ["MyIngress.elect_attribute"],
-          "base_default_next" : "MyIngress.broadcast_elected_attr",
-          "next_tables" : {
-            "MyIngress.elect_attribute" : "MyIngress.broadcast_elected_attr"
-          },
-          "default_entry" : {
-            "action_id" : 11,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_elect_attribute_0",
-          "id" : 10,
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 240,
-            "column" : 32,
             "source_fragment" : "elect_attribute()"
           },
           "key" : [],
@@ -3956,11 +4245,11 @@
         },
         {
           "name" : "tbl_elect_attribute_1",
-          "id" : 11,
+          "id" : 10,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 245,
-            "column" : 36,
+            "line" : 257,
+            "column" : 32,
             "source_fragment" : "elect_attribute()"
           },
           "key" : [],
@@ -3984,41 +4273,12 @@
           }
         },
         {
-          "name" : "tbl_elect_promise",
-          "id" : 12,
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 249,
-            "column" : 36,
-            "source_fragment" : "elect_promise()"
-          },
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [17],
-          "actions" : ["MyIngress.elect_promise"],
-          "base_default_next" : "MyIngress.broadcast_elected_attr",
-          "next_tables" : {
-            "MyIngress.elect_promise" : "MyIngress.broadcast_elected_attr"
-          },
-          "default_entry" : {
-            "action_id" : 17,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
           "name" : "tbl_elect_attribute_2",
-          "id" : 13,
+          "id" : 11,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 258,
-            "column" : 32,
+            "line" : 262,
+            "column" : 36,
             "source_fragment" : "elect_attribute()"
           },
           "key" : [],
@@ -4030,9 +4290,9 @@
           "direct_meters" : null,
           "action_ids" : [14],
           "actions" : ["MyIngress.elect_attribute"],
-          "base_default_next" : "tbl_main259",
+          "base_default_next" : "MyIngress.broadcast_elected_attr",
           "next_tables" : {
-            "MyIngress.elect_attribute" : "tbl_main259"
+            "MyIngress.elect_attribute" : "MyIngress.broadcast_elected_attr"
           },
           "default_entry" : {
             "action_id" : 14,
@@ -4042,13 +4302,13 @@
           }
         },
         {
-          "name" : "tbl_main259",
-          "id" : 14,
+          "name" : "tbl_elect_promise",
+          "id" : 12,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 259,
-            "column" : 42,
-            "source_fragment" : "="
+            "line" : 266,
+            "column" : 36,
+            "source_fragment" : "elect_promise()"
           },
           "key" : [],
           "match_type" : "exact",
@@ -4057,43 +4317,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [24],
-          "actions" : ["main259"],
-          "base_default_next" : "MyIngress.cpu_table",
+          "action_ids" : [19],
+          "actions" : ["MyIngress.elect_promise"],
+          "base_default_next" : "MyIngress.broadcast_elected_attr",
           "next_tables" : {
-            "main259" : "MyIngress.cpu_table"
+            "MyIngress.elect_promise" : "MyIngress.broadcast_elected_attr"
           },
           "default_entry" : {
-            "action_id" : 24,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_change_promise",
-          "id" : 15,
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 263,
-            "column" : 32,
-            "source_fragment" : "change_promise()"
-          },
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [18],
-          "actions" : ["MyIngress.change_promise"],
-          "base_default_next" : null,
-          "next_tables" : {
-            "MyIngress.change_promise" : null
-          },
-          "default_entry" : {
-            "action_id" : 18,
+            "action_id" : 19,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -4101,11 +4332,11 @@
         },
         {
           "name" : "tbl_elect_attribute_3",
-          "id" : 16,
+          "id" : 13,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 271,
-            "column" : 36,
+            "line" : 275,
+            "column" : 32,
             "source_fragment" : "elect_attribute()"
           },
           "key" : [],
@@ -4117,9 +4348,9 @@
           "direct_meters" : null,
           "action_ids" : [15],
           "actions" : ["MyIngress.elect_attribute"],
-          "base_default_next" : "tbl_main272",
+          "base_default_next" : "tbl_main276",
           "next_tables" : {
-            "MyIngress.elect_attribute" : "tbl_main272"
+            "MyIngress.elect_attribute" : "tbl_main276"
           },
           "default_entry" : {
             "action_id" : 15,
@@ -4129,12 +4360,12 @@
           }
         },
         {
-          "name" : "tbl_main272",
-          "id" : 17,
+          "name" : "tbl_main276",
+          "id" : 14,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 272,
-            "column" : 46,
+            "line" : 276,
+            "column" : 42,
             "source_fragment" : "="
           },
           "key" : [],
@@ -4145,10 +4376,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [25],
-          "actions" : ["main272"],
+          "actions" : ["main276"],
           "base_default_next" : "MyIngress.cpu_table",
           "next_tables" : {
-            "main272" : "MyIngress.cpu_table"
+            "main276" : "MyIngress.cpu_table"
           },
           "default_entry" : {
             "action_id" : 25,
@@ -4158,99 +4389,12 @@
           }
         },
         {
-          "name" : "tbl_change_promise_0",
-          "id" : 18,
+          "name" : "tbl_change_promise",
+          "id" : 15,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 276,
-            "column" : 36,
-            "source_fragment" : "change_promise()"
-          },
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [19],
-          "actions" : ["MyIngress.change_promise"],
-          "base_default_next" : null,
-          "next_tables" : {
-            "MyIngress.change_promise" : null
-          },
-          "default_entry" : {
-            "action_id" : 19,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_elect_attribute_4",
-          "id" : 19,
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 281,
-            "column" : 36,
-            "source_fragment" : "elect_attribute()"
-          },
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [16],
-          "actions" : ["MyIngress.elect_attribute"],
-          "base_default_next" : "tbl_main282",
-          "next_tables" : {
-            "MyIngress.elect_attribute" : "tbl_main282"
-          },
-          "default_entry" : {
-            "action_id" : 16,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_main282",
-          "id" : 20,
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 282,
-            "column" : 46,
-            "source_fragment" : "="
-          },
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [26],
-          "actions" : ["main282"],
-          "base_default_next" : "MyIngress.cpu_table",
-          "next_tables" : {
-            "main282" : "MyIngress.cpu_table"
-          },
-          "default_entry" : {
-            "action_id" : 26,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_change_promise_1",
-          "id" : 21,
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 286,
-            "column" : 36,
+            "line" : 280,
+            "column" : 32,
             "source_fragment" : "change_promise()"
           },
           "key" : [],
@@ -4272,6 +4416,180 @@
             "action_data" : [],
             "action_entry_const" : true
           }
+        },
+        {
+          "name" : "tbl_elect_attribute_4",
+          "id" : 16,
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 288,
+            "column" : 36,
+            "source_fragment" : "elect_attribute()"
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [16],
+          "actions" : ["MyIngress.elect_attribute"],
+          "base_default_next" : "tbl_main289",
+          "next_tables" : {
+            "MyIngress.elect_attribute" : "tbl_main289"
+          },
+          "default_entry" : {
+            "action_id" : 16,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_main289",
+          "id" : 17,
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 289,
+            "column" : 46,
+            "source_fragment" : "="
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [26],
+          "actions" : ["main289"],
+          "base_default_next" : "MyIngress.cpu_table",
+          "next_tables" : {
+            "main289" : "MyIngress.cpu_table"
+          },
+          "default_entry" : {
+            "action_id" : 26,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_change_promise_0",
+          "id" : 18,
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 293,
+            "column" : 36,
+            "source_fragment" : "change_promise()"
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [21],
+          "actions" : ["MyIngress.change_promise"],
+          "base_default_next" : null,
+          "next_tables" : {
+            "MyIngress.change_promise" : null
+          },
+          "default_entry" : {
+            "action_id" : 21,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_elect_attribute_5",
+          "id" : 19,
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 298,
+            "column" : 36,
+            "source_fragment" : "elect_attribute()"
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [17],
+          "actions" : ["MyIngress.elect_attribute"],
+          "base_default_next" : "tbl_main299",
+          "next_tables" : {
+            "MyIngress.elect_attribute" : "tbl_main299"
+          },
+          "default_entry" : {
+            "action_id" : 17,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_main299",
+          "id" : 20,
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 299,
+            "column" : 46,
+            "source_fragment" : "="
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [27],
+          "actions" : ["main299"],
+          "base_default_next" : "MyIngress.cpu_table",
+          "next_tables" : {
+            "main299" : "MyIngress.cpu_table"
+          },
+          "default_entry" : {
+            "action_id" : 27,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_change_promise_1",
+          "id" : 21,
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 303,
+            "column" : 36,
+            "source_fragment" : "change_promise()"
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [22],
+          "actions" : ["MyIngress.change_promise"],
+          "base_default_next" : null,
+          "next_tables" : {
+            "MyIngress.change_promise" : null
+          },
+          "default_entry" : {
+            "action_id" : 22,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
         }
       ],
       "action_profiles" : [],
@@ -4281,7 +4599,7 @@
           "id" : 0,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 189,
+            "line" : 204,
             "column" : 12,
             "source_fragment" : "hdr.ipv4.isValid()"
           },
@@ -4304,7 +4622,7 @@
           "id" : 1,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 191,
+            "line" : 206,
             "column" : 16,
             "source_fragment" : "hdr.ipv4.protocol != PROBE_PROTO && hdr.ipv4.protocol != CPU_HEADER_PROTO"
           },
@@ -4350,7 +4668,7 @@
           "id" : 2,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 195,
+            "line" : 210,
             "column" : 21,
             "source_fragment" : "hdr.ipv4.protocol == CPU_HEADER_PROTO && hdr.cpu.isValid()"
           },
@@ -4393,7 +4711,7 @@
           "id" : 3,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 214,
+            "line" : 229,
             "column" : 20,
             "source_fragment" : "hdr.ipv4.protocol == PROBE_PROTO && hdr.probe.isValid()"
           },
@@ -4432,11 +4750,34 @@
           "true_next" : "tbl_get_registers_index_0"
         },
         {
-          "name" : "node_15",
+          "name" : "node_13",
           "id" : 4,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 232,
+            "line" : 238,
+            "column" : 27,
+            "source_fragment" : "meta.is_new"
+          },
+          "expression" : {
+            "type" : "expression",
+            "value" : {
+              "op" : "d2b",
+              "left" : null,
+              "right" : {
+                "type" : "field",
+                "value" : ["scalars", "userMetadata.is_new"]
+              }
+            }
+          },
+          "false_next" : null,
+          "true_next" : "tbl_elect_attribute"
+        },
+        {
+          "name" : "node_16",
+          "id" : 5,
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 249,
             "column" : 28,
             "source_fragment" : "hdr.probe.distance == 0"
           },
@@ -4454,15 +4795,15 @@
               }
             }
           },
-          "true_next" : "tbl_elect_attribute",
-          "false_next" : "node_18"
+          "true_next" : "tbl_elect_attribute_0",
+          "false_next" : "node_19"
         },
         {
-          "name" : "node_18",
-          "id" : 5,
+          "name" : "node_19",
+          "id" : 6,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 238,
+            "line" : 255,
             "column" : 33,
             "source_fragment" : "standard_metadata.ingress_port == meta.E_NH"
           },
@@ -4480,15 +4821,15 @@
               }
             }
           },
-          "true_next" : "node_19",
-          "false_next" : "node_28"
+          "true_next" : "node_20",
+          "false_next" : "node_29"
         },
         {
-          "name" : "node_19",
-          "id" : 6,
+          "name" : "node_20",
+          "id" : 7,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 239,
+            "line" : 256,
             "column" : 32,
             "source_fragment" : "hdr.probe.seq_no > meta.P_seq_no"
           },
@@ -4506,15 +4847,15 @@
               }
             }
           },
-          "true_next" : "tbl_elect_attribute_0",
-          "false_next" : "node_22"
+          "true_next" : "tbl_elect_attribute_1",
+          "false_next" : "node_23"
         },
         {
-          "name" : "node_22",
-          "id" : 7,
+          "name" : "node_23",
+          "id" : 8,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 243,
+            "line" : 260,
             "column" : 37,
             "source_fragment" : "hdr.probe.seq_no == meta.P_seq_no"
           },
@@ -4533,14 +4874,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "node_23"
+          "true_next" : "node_24"
         },
         {
-          "name" : "node_23",
-          "id" : 8,
+          "name" : "node_24",
+          "id" : 9,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 244,
+            "line" : 261,
             "column" : 36,
             "source_fragment" : "hdr.probe.distance <= meta.P_distance"
           },
@@ -4558,15 +4899,15 @@
               }
             }
           },
-          "true_next" : "tbl_elect_attribute_1",
+          "true_next" : "tbl_elect_attribute_2",
           "false_next" : "tbl_elect_promise"
         },
         {
-          "name" : "node_28",
-          "id" : 9,
+          "name" : "node_29",
+          "id" : 10,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 256,
+            "line" : 273,
             "column" : 32,
             "source_fragment" : "standard_metadata.ingress_port == meta.P_NH"
           },
@@ -4584,68 +4925,16 @@
               }
             }
           },
-          "true_next" : "node_29",
-          "false_next" : "node_34"
+          "true_next" : "node_30",
+          "false_next" : "node_35"
         },
         {
-          "name" : "node_29",
-          "id" : 10,
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 257,
-            "column" : 32,
-            "source_fragment" : "hdr.probe.distance < meta.E_distance"
-          },
-          "expression" : {
-            "type" : "expression",
-            "value" : {
-              "op" : "<",
-              "left" : {
-                "type" : "field",
-                "value" : ["probe", "distance"]
-              },
-              "right" : {
-                "type" : "field",
-                "value" : ["scalars", "userMetadata.E_distance"]
-              }
-            }
-          },
-          "true_next" : "tbl_elect_attribute_2",
-          "false_next" : "tbl_change_promise"
-        },
-        {
-          "name" : "node_34",
+          "name" : "node_30",
           "id" : 11,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 269,
+            "line" : 274,
             "column" : 32,
-            "source_fragment" : "hdr.probe.seq_no > meta.P_seq_no"
-          },
-          "expression" : {
-            "type" : "expression",
-            "value" : {
-              "op" : ">",
-              "left" : {
-                "type" : "field",
-                "value" : ["probe", "seq_no"]
-              },
-              "right" : {
-                "type" : "field",
-                "value" : ["scalars", "userMetadata.P_seq_no"]
-              }
-            }
-          },
-          "true_next" : "node_35",
-          "false_next" : "node_40"
-        },
-        {
-          "name" : "node_35",
-          "id" : 12,
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 270,
-            "column" : 36,
             "source_fragment" : "hdr.probe.distance < meta.E_distance"
           },
           "expression" : {
@@ -4663,21 +4952,21 @@
             }
           },
           "true_next" : "tbl_elect_attribute_3",
-          "false_next" : "tbl_change_promise_0"
+          "false_next" : "tbl_change_promise"
         },
         {
-          "name" : "node_40",
-          "id" : 13,
+          "name" : "node_35",
+          "id" : 12,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 279,
-            "column" : 37,
-            "source_fragment" : "hdr.probe.seq_no == meta.P_seq_no"
+            "line" : 286,
+            "column" : 32,
+            "source_fragment" : "hdr.probe.seq_no > meta.P_seq_no"
           },
           "expression" : {
             "type" : "expression",
             "value" : {
-              "op" : "==",
+              "op" : ">",
               "left" : {
                 "type" : "field",
                 "value" : ["probe", "seq_no"]
@@ -4688,15 +4977,15 @@
               }
             }
           },
-          "false_next" : null,
-          "true_next" : "node_41"
+          "true_next" : "node_36",
+          "false_next" : "node_41"
         },
         {
-          "name" : "node_41",
-          "id" : 14,
+          "name" : "node_36",
+          "id" : 13,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 280,
+            "line" : 287,
             "column" : 36,
             "source_fragment" : "hdr.probe.distance < meta.E_distance"
           },
@@ -4715,14 +5004,66 @@
             }
           },
           "true_next" : "tbl_elect_attribute_4",
-          "false_next" : "node_45"
+          "false_next" : "tbl_change_promise_0"
         },
         {
-          "name" : "node_45",
+          "name" : "node_41",
+          "id" : 14,
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 296,
+            "column" : 37,
+            "source_fragment" : "hdr.probe.seq_no == meta.P_seq_no"
+          },
+          "expression" : {
+            "type" : "expression",
+            "value" : {
+              "op" : "==",
+              "left" : {
+                "type" : "field",
+                "value" : ["probe", "seq_no"]
+              },
+              "right" : {
+                "type" : "field",
+                "value" : ["scalars", "userMetadata.P_seq_no"]
+              }
+            }
+          },
+          "false_next" : null,
+          "true_next" : "node_42"
+        },
+        {
+          "name" : "node_42",
           "id" : 15,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-            "line" : 285,
+            "line" : 297,
+            "column" : 36,
+            "source_fragment" : "hdr.probe.distance < meta.E_distance"
+          },
+          "expression" : {
+            "type" : "expression",
+            "value" : {
+              "op" : "<",
+              "left" : {
+                "type" : "field",
+                "value" : ["probe", "distance"]
+              },
+              "right" : {
+                "type" : "field",
+                "value" : ["scalars", "userMetadata.E_distance"]
+              }
+            }
+          },
+          "true_next" : "tbl_elect_attribute_5",
+          "false_next" : "node_46"
+        },
+        {
+          "name" : "node_46",
+          "id" : 16,
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
+            "line" : 302,
             "column" : 41,
             "source_fragment" : "hdr.probe.distance < meta.P_distance"
           },
@@ -4750,7 +5091,7 @@
       "id" : 1,
       "source_info" : {
         "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/version1/p4src/main.p4",
-        "line" : 302,
+        "line" : 319,
         "column" : 8,
         "source_fragment" : "MyEgress"
       },

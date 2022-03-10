@@ -67,6 +67,7 @@ class Controller():
         self.add_initial_ipv4_rules()
         #self.add_clone_session()
         self.add_cpu_rule()
+#        self.test_rules()
 
 
     def add_broadcast_groups(self):
@@ -140,6 +141,30 @@ class Controller():
         if self.cpu_port:
             self.controller.table_add("cpu_table", "send_to_cpu", [str(MY_HEADER_PROTO)], [str(self.cpu_port)])
 
+    def test_rules(self):
+        print("==========================================")
+        print()
+        print("Testing...")
+        if self.sw_name == "s1":
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.1.0/24"], [str(5)])
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.2.0/24"], [str(2)])
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.3.0/24"], [str(3)])
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.4.0/24"], [str(4)])
+        elif self.sw_name == "s2":
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.1.0/24"], [str(2)])
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.2.0/24"], [str(4)])
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.3.0/24"], [str(2)])
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.4.0/24"], [str(3)])
+        elif self.sw_name == "s3":
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.1.0/24"], [str(2)])
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.2.0/24"], [str(2)])
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.3.0/24"], [str(4)])
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.4.0/24"], [str(3)])
+        else:
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.1.0/24"], [str(2)])
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.2.0/24"], [str(3)])
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.3.0/24"], [str(4)])
+            self.controller.table_add("check_destination_known", "get_info", ["10.0.4.0/24"], [str(5)])
 
     # Main loop
     def run(self):

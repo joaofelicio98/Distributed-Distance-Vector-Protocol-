@@ -63,6 +63,9 @@ tables {
     id: 23822898
   }
   action_refs {
+    id: 31605643
+  }
+  action_refs {
     id: 21471545
   }
   size: 1024
@@ -155,6 +158,13 @@ actions {
     id: 21471545
     name: "MyIngress.elect_attribute"
     alias: "elect_attribute"
+  }
+}
+actions {
+  preamble {
+    id: 31605643
+    name: "MyIngress.elect_new_destination"
+    alias: "elect_new_destination"
   }
 }
 actions {
