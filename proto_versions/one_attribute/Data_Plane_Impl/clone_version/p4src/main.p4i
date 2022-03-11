@@ -1240,6 +1240,7 @@ control MyIngress(inout headers hdr,
                 // Read elected sequence number
                 elected_seq_num.read(meta.E_seq_no, meta.register_index);
 
+                // If True means that there is no information on the registers yet
                 if(meta.E_seq_no == 0){
                     // Starting a new computation
                     if (hdr.probe.distance == 0){

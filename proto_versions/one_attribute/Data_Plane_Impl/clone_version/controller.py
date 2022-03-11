@@ -109,7 +109,6 @@ class Controller():
         print("==========================================")
         print()
         print("Adding the initial ipv4 rules...")
-        self.controller.table_set_default("check_destination_known", "elect_attribute")
         neighbors = self.topo.get_neighbors(self.sw_name)
 
         for node in neighbors:
@@ -172,7 +171,6 @@ class Controller():
             if is_new == 1:
                 self.add_new_entry(subnet, port)
             else:
-                self.info[subnet]["NH"] = port
                 self.modify_entry(subnet, port)
             print()
             print("==========================================")
