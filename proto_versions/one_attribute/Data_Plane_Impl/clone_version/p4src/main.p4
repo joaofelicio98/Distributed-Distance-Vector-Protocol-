@@ -254,6 +254,7 @@ control MyEgress(inout headers hdr,
             hdr.probe.setInvalid();
             hdr.cpu.setValid();
             hdr.cpu.destination = meta.destination;
+            hdr.cpu.seq_no = meta.E_seq_no;
             hdr.cpu.next_hop = meta.E_NH;
             hdr.cpu.test = meta.test;
             if (meta.is_new == true){
@@ -263,7 +264,7 @@ control MyEgress(inout headers hdr,
                 hdr.cpu.is_new = 0;
             }
             hdr.ipv4.protocol = CPU_HEADER_PROTO;
-            truncate((bit<32>) 40); // ether+ipv4+cpu_header
+            truncate((bit<32>) 44); // ether+ipv4+cpu_header
         }
      }
 }

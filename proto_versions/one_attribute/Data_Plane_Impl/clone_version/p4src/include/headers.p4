@@ -50,7 +50,7 @@ header ipv4_t {
 header cpu_t {
     ip4Addr_t destination;
     //bit<16>   distance;
-    //bit<32>   seq_no;
+    bit<32>   seq_no;
     bit<9>    next_hop;
     bit<1>    is_new; // 1 => Is a new destination
     bit<6>    test;

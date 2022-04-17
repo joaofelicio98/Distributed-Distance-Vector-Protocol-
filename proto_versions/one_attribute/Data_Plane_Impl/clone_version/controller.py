@@ -2,16 +2,21 @@
 import argparse
 import grpc
 import os
+import os.path as path
 import sys
 import ctypes
 from time import sleep
 from scapy.all import *
 import threading
 import nnpy
+from datetime import datetime
 
 from p4utils.utils.helper import load_topo
 from p4utils.utils.sswitch_p4runtime_API import SimpleSwitchP4RuntimeAPI
 from p4utils.utils.sswitch_thrift_API import SimpleSwitchThriftAPI
+
+sys.path.append('../../DB_API')
+from DB_API import DB_API
 
 CPU_HEADER_PROTO = 253
 MY_HEADER_PROTO = 254
@@ -20,8 +25,8 @@ class CPU_header(Packet):
     name = 'CPU'
     fields_desc = [IPField('destination', '127.0.0.1'),
                     #BitField('distance',0,16), BitField('seq_no',0,32),
-                    BitField('next_hop',0,9), BitField('is_new',0,1),
-                    BitField('test',0,6)]
+                    BitField('seq_no',0,32), BitField('next_hop',0,9), 
+                    BitField('is_new',0,1), BitField('test',0,6)]
 
 class Controller():
 
@@ -38,6 +43,7 @@ class Controller():
 
         # To count the number of changing of states
         self.count_states=0
+        self.db_api = DB_API()
         self.init()
 
 
@@ -135,9 +141,10 @@ class Controller():
                 print()
                 print(f"DEBUG: {self.sw_name} | sniffing at port: {cpu_port_intf}")
                 sniff(iface=cpu_port_intf, prn=self.recv_msg_cpu)
-        except KeyboardInterrupt:
+        finally:
             print(f"Ending controller {self.sw_name}")
             self.reset()
+            self.db.close_connection()
 
     def get_subnet(self, dst_ip):
         host = self.topo.get_host_name(dst_ip)
@@ -161,6 +168,8 @@ class Controller():
             dst_ip = cpu_header.destination
             subnet = self.get_subnet(dst_ip)
             print(f"DEBUG {self.sw_name} | destination = {subnet}")
+            seq_no = cpu_header.seq_no
+            print(f"DEBUG {self.sw_name} | sequence number = {seq_no}")
             port = cpu_header.next_hop
             print(f"DEBUG {self.sw_name} | next hop = {port}")
             is_new = cpu_header.is_new

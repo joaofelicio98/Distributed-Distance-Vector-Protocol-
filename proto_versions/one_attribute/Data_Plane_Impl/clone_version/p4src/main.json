@@ -96,6 +96,7 @@
       "id" : 5,
       "fields" : [
         ["destination", 32, false],
+        ["seq_no", 32, false],
         ["next_hop", 9, false],
         ["is_new", 1, false],
         ["test", 6, false]
@@ -4344,7 +4345,7 @@
       ]
     },
     {
-      "name" : "main260",
+      "name" : "main261",
       "id" : 28,
       "runtime_data" : [],
       "primitives" : [
@@ -4362,7 +4363,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/clone_version/p4src/main.p4",
-            "line" : 260,
+            "line" : 261,
             "column" : 16,
             "source_fragment" : "hdr.cpu.is_new = 1"
           }
@@ -4370,7 +4371,7 @@
       ]
     },
     {
-      "name" : "main263",
+      "name" : "main264",
       "id" : 29,
       "runtime_data" : [],
       "primitives" : [
@@ -4388,7 +4389,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/clone_version/p4src/main.p4",
-            "line" : 263,
+            "line" : 264,
             "column" : 16,
             "source_fragment" : "hdr.cpu.is_new = 0"
           }
@@ -4454,6 +4455,25 @@
           "parameters" : [
             {
               "type" : "field",
+              "value" : ["cpu", "seq_no"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.E_seq_no"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/clone_version/p4src/main.p4",
+            "line" : 257,
+            "column" : 12,
+            "source_fragment" : "hdr.cpu.seq_no = meta.E_seq_no"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
               "value" : ["cpu", "next_hop"]
             },
             {
@@ -4463,7 +4483,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/clone_version/p4src/main.p4",
-            "line" : 257,
+            "line" : 258,
             "column" : 12,
             "source_fragment" : "hdr.cpu.next_hop = meta.E_NH"
           }
@@ -4482,7 +4502,7 @@
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/clone_version/p4src/main.p4",
-            "line" : 258,
+            "line" : 259,
             "column" : 12,
             "source_fragment" : "hdr.cpu.test = meta.test"
           }
@@ -4490,7 +4510,7 @@
       ]
     },
     {
-      "name" : "main265",
+      "name" : "main266",
       "id" : 31,
       "runtime_data" : [],
       "primitives" : [
@@ -4518,14 +4538,14 @@
           "parameters" : [
             {
               "type" : "hexstr",
-              "value" : "0x00000028"
+              "value" : "0x0000002c"
             }
           ],
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/clone_version/p4src/main.p4",
-            "line" : 266,
+            "line" : 267,
             "column" : 12,
-            "source_fragment" : "truncate((bit<32>) 40)"
+            "source_fragment" : "truncate((bit<32>) 44)"
           }
         }
       ]
@@ -5787,11 +5807,11 @@
           }
         },
         {
-          "name" : "tbl_main260",
+          "name" : "tbl_main261",
           "id" : 26,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/clone_version/p4src/main.p4",
-            "line" : 260,
+            "line" : 261,
             "column" : 31,
             "source_fragment" : "="
           },
@@ -5803,10 +5823,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [28],
-          "actions" : ["main260"],
-          "base_default_next" : "tbl_main265",
+          "actions" : ["main261"],
+          "base_default_next" : "tbl_main266",
           "next_tables" : {
-            "main260" : "tbl_main265"
+            "main261" : "tbl_main266"
           },
           "default_entry" : {
             "action_id" : 28,
@@ -5816,11 +5836,11 @@
           }
         },
         {
-          "name" : "tbl_main263",
+          "name" : "tbl_main264",
           "id" : 27,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/clone_version/p4src/main.p4",
-            "line" : 263,
+            "line" : 264,
             "column" : 31,
             "source_fragment" : "="
           },
@@ -5832,10 +5852,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [29],
-          "actions" : ["main263"],
-          "base_default_next" : "tbl_main265",
+          "actions" : ["main264"],
+          "base_default_next" : "tbl_main266",
           "next_tables" : {
-            "main263" : "tbl_main265"
+            "main264" : "tbl_main266"
           },
           "default_entry" : {
             "action_id" : 29,
@@ -5845,11 +5865,11 @@
           }
         },
         {
-          "name" : "tbl_main265",
+          "name" : "tbl_main266",
           "id" : 28,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/clone_version/p4src/main.p4",
-            "line" : 265,
+            "line" : 266,
             "column" : 30,
             "source_fragment" : "= CPU_HEADER_PROTO; ..."
           },
@@ -5861,10 +5881,10 @@
           "support_timeout" : false,
           "direct_meters" : null,
           "action_ids" : [31],
-          "actions" : ["main265"],
+          "actions" : ["main266"],
           "base_default_next" : null,
           "next_tables" : {
-            "main265" : null
+            "main266" : null
           },
           "default_entry" : {
             "action_id" : 31,
@@ -5907,7 +5927,7 @@
           "id" : 18,
           "source_info" : {
             "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Data_Plane_Impl/clone_version/p4src/main.p4",
-            "line" : 259,
+            "line" : 260,
             "column" : 16,
             "source_fragment" : "meta.is_new"
           },
@@ -5922,8 +5942,8 @@
               }
             }
           },
-          "true_next" : "tbl_main260",
-          "false_next" : "tbl_main263"
+          "true_next" : "tbl_main261",
+          "false_next" : "tbl_main264"
         }
       ]
     }
