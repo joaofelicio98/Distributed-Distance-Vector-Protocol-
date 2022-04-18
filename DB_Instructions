@@ -1,5 +1,5 @@
 Run docker image:
-	
+	docker run --name=statistics_DB --env="MYSQL_ROOT_PASSWORD=root_password" -p 3306:3306 -d mysql:latest
 
 Access mysql from terminal:
 	sudo docker exec -it statistics_DB mysql -uroot -ppassword
