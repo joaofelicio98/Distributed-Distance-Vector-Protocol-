@@ -1,0 +1,27 @@
+Create docker network:
+	sudo docker network create --subnet 192.168.100.0/24 --ip-range 192.168.100.251/30 sql_network
+
+Run docker image:
+	sudo docker run --name=statistics_DB --env="MYSQL_ROOT_PASSWORD=password" --network=sql_network -p 3306:3306 -d mysql:latest
+
+Access mysql from terminal:
+	sudo docker exec -it statistics_DB mysql -uroot -ppassword
+
+Create DB:
+	CREATE DATABASE my_DB;
+
+Switch to the database:
+	use my_DB;
+
+Create my table:
+	CREATE TABLE stats_table (topo VARCHAR(50), try INT NOT NULL, seq_no INT NOT NULL, node VARCHAR(10), converge_time TIME, count INT NOT NULL, valid BOOLEAN, ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY);
+
+Create new user to interact with the created database:
+	CREATE USER 'joao'@'%' IDENTIFIED BY 'password';
+
+Grant admin access to new user to manage the DB:
+	GRANT ALL PRIVILEGES ON my_DB.* to 'joao'@'%';
+
+
+
+
