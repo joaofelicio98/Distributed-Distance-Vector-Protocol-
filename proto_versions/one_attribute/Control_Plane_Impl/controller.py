@@ -8,10 +8,15 @@ from time import sleep
 from scapy.all import *
 import threading
 import nnpy
+#from datetime import datetime
+import time
 
 from p4utils.utils.helper import load_topo
 from p4utils.utils.sswitch_p4runtime_API import SimpleSwitchP4RuntimeAPI
 from p4utils.utils.sswitch_thrift_API import SimpleSwitchThriftAPI
+
+sys.path.append('../Get_stats_API')
+from statistics_API import stats_API
 
 CPU_HEADER_PROTO = 253
 MY_HEADER_PROTO = 254
@@ -43,7 +48,10 @@ class Controller():
         self.promised_attr = {}
 
         #probes counter
-        self.count=0
+        self.count_states=0 # To count the number of changing of states
+        self.topology = "Test" # Topology I am currently using
+        self.Try = 1 # Number of try
+        self.stats_api = stats_API(self.Try, self.topology)
         self.init()
 
 
@@ -90,13 +98,6 @@ class Controller():
             port_list = list(interfaces_to_port.values())
             del(port_list[port_list.index(ingress_port)])
 
-            # Add multicast group and ports
-            for port in port_list:
-                intf_name = self.sw_name + '-eth' + str(port)
-                node = self.topo.interface_to_node(self.sw_name, intf_name)
-                if self.topo.isHost(node):
-                    del(port_list[port_list.index(port)])
-
             self.controller.mc_mgrp_create(ingress_port, port_list)
 
             # Fill broadcast table
@@ -104,22 +105,22 @@ class Controller():
             self.controller.table_add("broadcast_elected_attr", "set_mcast_grp", [str(ingress_port)], [str(ingress_port)])
 
         self.controller.mc_mgrp_create(self.cpu_port, list(interfaces_to_port.values()))
-        print(f"BROADCAST: {interfaces_to_port.values()}")
         self.controller.table_add("broadcast_elected_attr", "set_mcast_grp", [str(self.cpu_port)], [str(self.cpu_port)])
 
     #IPv4 rules for every host connected to the switch
     def add_initial_ipv4_rules(self):
+        print("==========================================")
+        print()
+        print("Adding the initial ipv4 rules...")
         neighbors = self.topo.get_neighbors(self.sw_name)
 
         for node in neighbors:
             if self.topo.isHost(node):
-                dst_ip = self.topo.node_to_node_interface_ip(node, self.sw_name)
-                dst_ip = dst_ip.rsplit('/')[0]
+                #dst_ip = self.topo.get_host_ip(node)
                 dst_mac = self.topo.node_to_node_mac(node, self.sw_name)
                 port = self.topo.node_to_node_port_num(self.sw_name, node)
-                self.controller.table_add("ipv4_lpm", "ipv4_forward", [dst_ip], [dst_mac, str(port)])
-                #self.elected_attr[dst_ip] = [0, 1, port]
-                #self.promised_attr[dst_ip] = [float('inf'), 2, 0]
+                subnet = self.topo.subnet(node, self.sw_name)
+                self.controller.table_add("ipv4_lpm", "ipv4_forward", [subnet], [dst_mac, str(port)])
 
     def add_CPU_rules(self):
         self.controller.table_add("cpu_table", "send_to_cpu", [str(MY_HEADER_PROTO)], [str(self.cpu_port)])
@@ -134,37 +135,58 @@ class Controller():
         try:
             while True:
                 cpu_port_intf = str(self.topo.get_cpu_port_intf(self.sw_name))
+                print("==========================================")
+                print()
                 print(f"DEBUG: {self.sw_name} | sniffing at port: {cpu_port_intf}")
                 sniff(iface=cpu_port_intf, prn=self.recv_msg_cpu)
-        except KeyboardInterrupt:
+        finally:
             print(f"Ending controller {self.sw_name}")
             self.reset()
+
+    def get_subnet(self, dst_ip):
+        host = self.topo.get_host_name(dst_ip)
+        node = self.topo.get_neighbors(host)[0]
+
+        subnet = self.topo.subnet(host, node)
+        return subnet
 
     def recv_msg_cpu(self, pkt):
         #print('DEBUG: {} | Received a new packet!'.format(self.sw_name))
         #print(pkt[IP].proto)
         if pkt[IP].proto == CPU_HEADER_PROTO:
+            print("==========================================")
+            print()
             print(f"DEBUG: {self.sw_name} | Received a new attribute!")
-            self.count += 1
-            print(f"DEBUG {self.sw_name} | Number of probes received = {self.count}")
             #print()
             #pkt.show2()
             #print()
             pkt = Ether(raw(pkt))
+            # Extract ingress port from header
             cpu_header = CPU_header(bytes(pkt.load))
             port = cpu_header.ingress_port
             #port = pkt[CPU_header].ingress_port
+
+            # Extract fields from payload
             data = str(pkt[Padding].load)
             dst = data.rsplit(" | ")[0].rsplit("=")[1]
+            subnet = self.get_subnet(dst)
             distance = int(data.rsplit(" | ")[1].rsplit("=")[1])
             seq_no = int(data.rsplit(" | ")[2].rsplit("=")[1][:-1])
-            print(f"DEBUG: {self.sw_name} | destination = {dst} | distance = {distance}| seq_no = {seq_no} | port = {port}")
-            params = [dst, distance, seq_no, port]
+            print(f"DEBUG: {self.sw_name} | destination = {subnet} | distance = {distance}| seq_no = {seq_no} | port = {port}")
+            params = [subnet, distance, seq_no, port]
             elected = self.make_decision(self.sw_name, params)
             if elected != None:
-                self.announce_attribute(pkt, elected)
+                self.count_states += 1
+                #now = datetime.now()
+                #current_time = now.strftime("%H:%M:%S")
+                #print("Adding new entry... time = ",current_time)
 
-    def announce_attribute(self, packet, elected):
+                current_time = round(time.time()*1000) # get current time in miliseconds
+                # Insert new entry to json file
+                self.stats_api.insert_new_value(self.sw_name, seq_no, self.count_states, current_time)
+                self.announce_attribute(pkt, elected, dst)
+
+    def announce_attribute(self, packet, elected, dst):
         #print(f"DEBUG: {self.sw_name} | announcing an elected attribute for subnet {params[0]}")
         print(f"DEBUG {self.sw_name} | elected = {self.elected_attr}")
         print(f"DEBUG {self.sw_name} | promised = {self.promised_attr}")
@@ -174,17 +196,13 @@ class Controller():
         packet[IP].proto = CPU_HEADER_PROTO
 
         # Update packets payload info
-        data = "destination=" + elected[0]
+        data = "destination=" + dst
         data = data + " | distance=" + str(elected[1] + 1)
         data = data + " | seq_no=" + str(elected[2])
         pad = Padding()
         pad.load = data
-
         packet = packet / cpu_header / pad
-        #packet.show2()
-        #for testing
         iface = self.topo.get_interfaces(self.sw_name)[0]
-        sleep(10)
         sendp(packet, iface=iface, verbose=False)
 
     #Returns an elected or promised attribute that corresponds to a given Destination

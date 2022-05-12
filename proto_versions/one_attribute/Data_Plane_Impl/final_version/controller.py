@@ -10,6 +10,7 @@ from scapy.all import *
 import threading
 import nnpy
 from datetime import datetime
+import time
 
 from p4utils.utils.helper import load_topo
 from p4utils.utils.sswitch_p4runtime_API import SimpleSwitchP4RuntimeAPI
@@ -162,7 +163,6 @@ class Controller():
         finally:
             print(f"Ending controller {self.sw_name}")
             self.reset()
-            self.db.close_connection()
 
     def get_subnet(self, dst_ip):
         host = self.topo.get_host_name(dst_ip)
@@ -203,9 +203,11 @@ class Controller():
             test = cpu_header.test
             print(f"DEBUG {self.sw_name} | test = {test}")
 
-            now = datetime.now()
-            current_time = now.strftime("%H:%M:%S")
-            print("Adding new entry... time = ",current_time)
+            #now = datetime.now()
+            #current_time = now.strftime("%H:%M:%S")
+            #print("Adding new entry... time = ",current_time)
+
+            current_time = round(time.time()*1000) # get current time in miliseconds
             # Insert new entry to json file
             self.stats_api.insert_new_value(self.sw_name, seq_no, self.count_states, current_time)
             #self.register_data(self.topology, self.Try, seq_no, self.sw_name, self.count_states, self.is_Valid)

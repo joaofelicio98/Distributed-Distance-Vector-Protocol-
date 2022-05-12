@@ -7,9 +7,9 @@ net.setLogLevel('info')
 net.setCompiler(p4rt=True)
 net.disableArpTables()
 #net.execScript('python controller.py s1 &', reboot=True)
-#net.execScript('python controller.py s2 &', reboot=True)
-#net.execScript('python controller.py s3 &', reboot=True)
-#net.execScript('python controller.py s4 &', reboot=True)
+net.execScript('python controller.py s2 &', reboot=True)
+net.execScript('python controller.py s3 &', reboot=True)
+net.execScript('python controller.py s4 &', reboot=True)
 
 # Network definition
 net.addP4RuntimeSwitch('s1')
