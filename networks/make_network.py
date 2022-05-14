@@ -5,7 +5,7 @@ name = ""
 nodes = []
 links = []
 index = 0
-with open("GtsCe.json","r") as f:
+with open("GtsCe","r") as f:
 
     for line in f:
         stripped = line.strip()
