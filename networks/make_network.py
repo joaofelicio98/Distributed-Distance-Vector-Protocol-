@@ -5,7 +5,7 @@ name = ""
 nodes = []
 links = []
 index = 0
-with open("Chinanet","r") as f:
+with open("GtsCe","r") as f:
 
     for line in f:
         stripped = line.strip()
@@ -33,6 +33,7 @@ with open(f"{name}.py","w") as f:
         f.write(f'net.execScript("python controller.py s{node} &", reboot=True)\n')
         f.write(f'net.addP4RuntimeSwitch("s{node}")\n')
         f.write(f'net.addHost("h{node}")\n')
+    f.write('net.setP4SourceAll("./p4src/main.p4")')
 
     f.write('\n')
     for node in nodes:
