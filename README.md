@@ -11,6 +11,7 @@ To run the code you must install all dependencies first. You can find it in http
 Testing:
   
   run:  python network.py                         -> starts the network and the controllers in background
+  
   run:  python sendComputations.py                -> sends probes to the SWs to start the convergement process of the network
 
 You can also delete the lines in network.py script that execute the controllers in background and run them on a terminal for debugging running the command:
