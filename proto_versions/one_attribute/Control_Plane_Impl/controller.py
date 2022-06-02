@@ -49,9 +49,9 @@ class Controller():
 
         #probes counter
         self.count_states=0 # To count the number of changing of states
-        self.topology = "Test" # Topology I am currently using
+        self.topology = "Abilene" # Topology I am currently using
         self.Try = 1 # Number of try
-        self.stats_api = stats_API(self.Try, self.topology)
+        self.stats_api = stats_API(self.sw_name, self.Try, self.topology)
         self.init()
 
 
@@ -121,6 +121,7 @@ class Controller():
                 port = self.topo.node_to_node_port_num(self.sw_name, node)
                 subnet = self.topo.subnet(node, self.sw_name)
                 self.controller.table_add("ipv4_lpm", "ipv4_forward", [subnet], [dst_mac, str(port)])
+                self.count_states += 1
 
     def add_CPU_rules(self):
         self.controller.table_add("cpu_table", "send_to_cpu", [str(MY_HEADER_PROTO)], [str(self.cpu_port)])
@@ -172,25 +173,25 @@ class Controller():
             subnet = self.get_subnet(dst)
             distance = int(data.rsplit(" | ")[1].rsplit("=")[1])
             seq_no = int(data.rsplit(" | ")[2].rsplit("=")[1][:-1])
-            print(f"DEBUG: {self.sw_name} | destination = {subnet} | distance = {distance}| seq_no = {seq_no} | port = {port}")
+            #print(f"DEBUG: {self.sw_name} | destination = {subnet} | distance = {distance}| seq_no = {seq_no} | port = {port}")
             params = [subnet, distance, seq_no, port]
             elected = self.make_decision(self.sw_name, params)
             if elected != None:
-                self.count_states += 1
+                print(f"DEBUG: {self.sw_name} | Changed its state {self.count_states} times")
                 #now = datetime.now()
                 #current_time = now.strftime("%H:%M:%S")
                 #print("Adding new entry... time = ",current_time)
 
                 current_time = round(time.time()*1000) # get current time in miliseconds
                 # Insert new entry to json file
-                self.stats_api.insert_new_value(self.sw_name, seq_no, self.count_states, current_time)
+                self.stats_api.insert_new_value(seq_no, self.count_states, current_time)
                 self.announce_attribute(pkt, elected, dst)
 
     def announce_attribute(self, packet, elected, dst):
         #print(f"DEBUG: {self.sw_name} | announcing an elected attribute for subnet {params[0]}")
-        print(f"DEBUG {self.sw_name} | elected = {self.elected_attr}")
-        print(f"DEBUG {self.sw_name} | promised = {self.promised_attr}")
-        print()
+        #print(f"DEBUG {self.sw_name} | elected = {self.elected_attr}")
+        #print(f"DEBUG {self.sw_name} | promised = {self.promised_attr}")
+        #print()
         cpu_header = CPU_header(ingress_port = elected[3])
         packet[IP].remove_payload()
         packet[IP].proto = CPU_HEADER_PROTO
@@ -286,7 +287,6 @@ class Controller():
             self.save_attribute(dst_addr, promised, "promised")
             print(f"DEBUG: {self.sw_name} | Starting a new computation for destination {dst_addr}")
             return packetIn_params
-
         #destination unknown
         elif elected is None:
             neighbor = self.topo.port_to_node(self.sw_name, ingress_port)
@@ -294,11 +294,21 @@ class Controller():
             self.save_attribute(dst_addr, attr, "elected")
             self.controller.table_add("ipv4_lpm", "ipv4_forward",
                                     [dst_addr], [dst_mac, str(ingress_port)])
-            distance_pro = float('inf')
-            attr_pro = (distance_pro, seq_no+1, 0)
-            # add an infinite promised for the new destination
-            self.save_attribute(dst_addr, attr_pro, "promised")
+            self.count_states += 1
+            self.delete_promised(dst_addr)
             print (f"DEBUG: {self.sw_name} | Elected attribute for a new destination")
+            return packetIn_params
+
+        # Detect link failure
+        elif seq_no-elected[1] > 2:
+            neighbor = self.topo.port_to_node(self.sw_name, ingress_port)
+            dst_mac = self.topo.node_to_node_mac(self.sw_name, neighbor)
+            self.save_attribute(dst_addr, attr, "elected")
+            self.controller.table_modify_match("ipv4_lpm", "ipv4_forward",
+                                    [dst_addr], [dst_mac, str(ingress_port)])
+            self.count_states += 1
+            self.delete_promised(dst_addr)
+            print(f"DEBUG: {self.sw_name} | Detected a link failure, electing new attribute")
             return packetIn_params
 
         # same next hop as the elected
@@ -336,6 +346,7 @@ class Controller():
             if seq_no > promised[1]:
                 if self.compare_metric(distance, elected[0], "distance"):
                     self.elect_attribute(dst_addr, attr)
+                    self.count_states += 1
                     print(f"DEBUG: {self.sw_name} | new attribute elected more recent than promised")
                     return packetIn_params
                 else:
@@ -345,6 +356,7 @@ class Controller():
             elif seq_no == promised[1]:
                 if self.compare_metric(distance, elected[0], "distance"):
                     self.elect_attribute(dst_addr, attr)
+                    self.count_states += 1
                     self.delete_promised(dst_addr)
                     print(f"DEBUG: {self.sw_name} | new attribute elected with same seq_no as promised")
                     return packetIn_params

@@ -1,16 +1,18 @@
 import json
 from datetime import datetime
+import os
 
 class stats_API():
 
-    def __init__(self, ntry, topology):
+    def __init__(self, sw_name, ntry, topology):
+        self.sw_name = sw_name
         self.ntry = str(ntry)
         self.topo = topology
 
         # All data to store
         self.data = {self.topo:{self.ntry:{}}}
 
-    def insert_new_value(self, node, seq_no, count, timestamp):
+    def insert_new_value(self, seq_no, count, timestamp):
         #self.data
         temp ={
                 "seq_no":seq_no,
@@ -18,27 +20,32 @@ class stats_API():
                 "count":count
                 }
 
+        if not (os.path.isdir(os.path.join(os.getcwd(), 'stats'))):
+            os.mkdir(os.path.join(os.getcwd(), 'stats'))
+
         try:
-            with open("stats.json","r") as f:
+            with open(f"stats/{self.sw_name}_stats.json","r") as f:
                 # Read json file
                 self.data = json.load(f)
+
+            if self.topo not in self.data:
+                self.data[self.topo] = {}
+            if self.ntry not in self.data[self.topo]:
+                self.data[self.topo][self.ntry] = []
             # Adding new stat and converting data to json format
-            if node in self.data[self.topo][self.ntry]:
-                self.data[self.topo][self.ntry][node].append(temp)
-            else:
-                self.data[self.topo][self.ntry][node] = [temp,]
+            self.data[self.topo][self.ntry].append(temp)
             json_object = json.dumps(self.data, indent=4, default=str)
 
-            with open("stats.json","w") as f:
+            with open(f"stats/{self.sw_name}_stats.json","w") as f:
                 # Writing updated stats
                 f.write(json_object)
             return self.data
 
         # File doesn't exist => create one
         except FileNotFoundError:
-            with open("stats.json","w") as f:
+            with open(f"stats/{self.sw_name}_stats.json","w") as f:
                 # Adding new stat and converting data to json format
-                self.data[self.topo][self.ntry][node] = [temp,]
+                self.data[self.topo][self.ntry] = [temp,]
                 json_object = json.dumps(self.data, indent=4, default=str)
 
                 f.write(json_object)
@@ -48,13 +55,10 @@ class stats_API():
         return self.data
 
 if __name__ == "__main__":
-    obj = stats_API(1, "test_topo")
+    obj = stats_API('s3', 1, "Abilene")
 
     now = datetime.now()
-    obj.insert_new_value("s1", 1, 34, now)
-    obj.insert_new_value("s2", 2, 54, now)
-    obj.insert_new_value("s1", 3, 36, now)
+    obj.insert_new_value(1, 4, now)
+    obj.insert_new_value(2, 5, now)
+    obj.insert_new_value(3, 6, now)
     print(obj.get_current_stats())
-    obj.insert_new_value("s1", 34, 3, now)
-    obj.insert_new_value("s2", 4, 54, now)
-    obj.insert_new_value("s1", 6, 36, now)

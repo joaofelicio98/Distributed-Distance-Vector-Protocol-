@@ -159,6 +159,8 @@ control MyIngress(inout headers hdr,
                     // Starting a new computation
                     if (hdr.probe.distance == 0){
                         elect_attribute();
+                        meta.flag = 20;
+                        update_table();
                         broadcast_elected_attr.apply();
                     }else{
                         // Destination unknown
@@ -172,8 +174,16 @@ control MyIngress(inout headers hdr,
                 // Go through the 3 cases
                 else{
                     get_info();
+
+                    // Check for link failure cases
+                    if (hdr.probe.seq_no - meta.E_seq_no > 2){
+                        elect_attribute();
+                        update_table();
+                        broadcast_elected_attr.apply();
+                    }
+
                     // Starting a new computation
-                    if (hdr.probe.distance == 0){
+                    else if (hdr.probe.distance == 0){
                         elect_attribute();
                         broadcast_elected_attr.apply();
                     }
@@ -200,7 +210,7 @@ control MyIngress(inout headers hdr,
                     else if(standard_metadata.ingress_port == meta.P_NH){
                         if (hdr.probe.distance < meta.E_distance) {
                             elect_attribute();
-                            meta.test = 1;
+                            meta.flag = 1;
                             update_table();
                             broadcast_elected_attr.apply();
                         }
@@ -214,7 +224,7 @@ control MyIngress(inout headers hdr,
                         if (hdr.probe.seq_no > meta.P_seq_no) {
                             if (hdr.probe.distance < meta.E_distance){
                                 elect_attribute();
-                                meta.test = 2;
+                                meta.flag = 2;
                                 update_table();
                                 broadcast_elected_attr.apply();
                             }
@@ -225,7 +235,7 @@ control MyIngress(inout headers hdr,
                         else if (hdr.probe.seq_no == meta.P_seq_no) {
                             if (hdr.probe.distance < meta.E_distance) {
                                 elect_attribute();
-                                meta.test = 3;
+                                meta.flag = 3;
                                 update_table();
                                 broadcast_elected_attr.apply();
                             }
@@ -256,7 +266,7 @@ control MyEgress(inout headers hdr,
             hdr.cpu.destination = meta.destination;
             hdr.cpu.seq_no = meta.E_seq_no;
             hdr.cpu.next_hop = meta.E_NH;
-            hdr.cpu.test = meta.test;
+            hdr.cpu.flag = meta.flag;
             if (meta.is_new == true){
                 hdr.cpu.is_new = 1;
             }

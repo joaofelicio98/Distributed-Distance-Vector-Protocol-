@@ -29,7 +29,7 @@ class CPU_header(Packet):
     fields_desc = [IPField('destination', '127.0.0.1'),
                     #BitField('distance',0,16), BitField('seq_no',0,32),
                     BitField('seq_no',0,32), BitField('next_hop',0,9),
-                    BitField('is_new',0,1), BitField('test',0,6)]
+                    BitField('is_new',0,1), BitField('flag',0,6)]
 
 class Controller():
 
@@ -45,9 +45,9 @@ class Controller():
                                                    json_path=sw_data['json_path'])
 
         self.count_states=0 # To count the number of changing of states
-        self.topology = "Test" # Topology I am currently using
-        self.Try = 1 # Number of try
-        self.stats_api = stats_API(self.Try, self.topology)
+        self.topology = "Abilene" # Topology I am currently using
+        self.Try = 2 # Number of try
+        self.stats_api = stats_API(self.sw_name, self.Try, self.topology)
 
         self.init()
         """
@@ -139,6 +139,7 @@ class Controller():
         for node in neighbors:
             if self.topo.isHost(node):
                 #dst_ip = self.topo.get_host_ip(node)
+                self.count_states += 1
                 dst_mac = self.topo.node_to_node_mac(node, self.sw_name)
                 port = self.topo.node_to_node_port_num(self.sw_name, node)
                 subnet = self.topo.subnet(node, self.sw_name)
@@ -183,9 +184,7 @@ class Controller():
         #print('DEBUG: {} | Received a new packet!'.format(self.sw_name))
         #print(pkt[IP].proto)
         if pkt[IP].proto == CPU_HEADER_PROTO:
-            print(f"DEBUG: {self.sw_name} | Received a new attribute to elect!")
-            self.count_states += 1
-            print(f"DEBUG {self.sw_name} | changed its state {self.count_states} times.")
+            print(f"DEBUG: {self.sw_name} | Received a new attribute!")
             #print()
             #pkt.show2()
             #print()
@@ -200,22 +199,29 @@ class Controller():
             print(f"DEBUG {self.sw_name} | next hop = {port}")
             is_new = cpu_header.is_new
             print(f"DEBUG {self.sw_name} | is_new = {is_new}")
-            test = cpu_header.test
-            print(f"DEBUG {self.sw_name} | test = {test}")
+            flag = cpu_header.flag
+            print(f"DEBUG {self.sw_name} | flag = {flag}")
 
-            #now = datetime.now()
-            #current_time = now.strftime("%H:%M:%S")
-            #print("Adding new entry... time = ",current_time)
-
-            current_time = round(time.time()*1000) # get current time in miliseconds
-            # Insert new entry to json file
-            self.stats_api.insert_new_value(self.sw_name, seq_no, self.count_states, current_time)
-            #self.register_data(self.topology, self.Try, seq_no, self.sw_name, self.count_states, self.is_Valid)
-
-            if is_new == 1:
-                self.add_new_entry(subnet, port)
+            # To register the timestamp of when the convergence process started
+            if flag == 20:
+                current_time = round(time.time()*1000)
+                self.stats_api.insert_new_value(seq_no, self.count_states, current_time)
             else:
-                self.modify_entry(subnet, port)
+                #now = datetime.now()
+                #current_time = now.strftime("%H:%M:%S")
+                #print("Adding new entry... time = ",current_time)
+                self.count_states += 1
+                print(f"DEBUG {self.sw_name} | changed its state {self.count_states} times.")
+
+                current_time = round(time.time()*1000) # get current time in miliseconds
+                # Insert new entry to json file
+                self.stats_api.insert_new_value(seq_no, self.count_states, current_time)
+                #self.register_data(self.topology, self.Try, seq_no, self.sw_name, self.count_states, self.is_Valid)
+
+                if is_new == 1:
+                    self.add_new_entry(subnet, port)
+                else:
+                    self.modify_entry(subnet, port)
             print()
             print("==========================================")
             print()

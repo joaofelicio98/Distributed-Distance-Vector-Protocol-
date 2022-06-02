@@ -53,7 +53,7 @@ header cpu_t {
     bit<32>   seq_no;
     bit<9>    next_hop;
     bit<1>    is_new; // 1 => Is a new destination
-    bit<6>    test;
+    bit<6>    flag; // Indicate if it is informative or a probe to elect
 }
 
 header probe_t {
@@ -97,7 +97,7 @@ struct metadata {
     bit<32>     P_seq_no;
     bit<9>      P_NH;
 
-    bit<6>      test;
+    bit<6>      flag;
 }
 
 struct headers {
