@@ -4,7 +4,7 @@
 #include "include/headers.p4"
 #include "include/parsers.p4"
 
-#define REGISTER_SIZE 1024
+#define REGISTER_SIZE 4096 
 
 
 /*************************************************************************
@@ -54,7 +54,7 @@ control MyIngress(inout headers hdr,
             drop;
             NoAction;
         }
-        size = 1024;
+        size = 2048;
         default_action = drop;
     }
 
@@ -136,7 +136,7 @@ control MyIngress(inout headers hdr,
             set_mcast_grp;
             drop;
         }
-        size = 1024;
+        size = 2048;
         default_action = drop;
     }
 
@@ -178,7 +178,8 @@ control MyIngress(inout headers hdr,
                     // Check for link failure cases
                     if (hdr.probe.seq_no - meta.E_seq_no > 2){
                         elect_attribute();
-                        update_table();
+                        meta.flag = 10;
+			update_table();
                         broadcast_elected_attr.apply();
                     }
 

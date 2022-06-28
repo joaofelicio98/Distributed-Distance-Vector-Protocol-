@@ -5,18 +5,18 @@ name = ""
 nodes = []
 links = []
 index = 0
-with open("Chinanet","r") as f:
+with open("BellSouth","r") as f:
 
     for line in f:
         stripped = line.strip()
         if "Network " in stripped and "NetworkDate" not in stripped:
-            name = stripped.removeprefix("Network ").replace('"', '')
-        elif "id " in stripped and "_id" not in stripped:
-            nodes.append(int(stripped.removeprefix("id "))+1)
+            name = stripped.replace("Network ","").replace('"', '').replace(" ","")
+        elif "id " in stripped and "_id" not in stripped and "e" not in stripped:
+            nodes.append(int(stripped.replace("id ",""))+1)
         elif "source" in stripped:
-            links.append([int(stripped.removeprefix("source "))+1])
+            links.append([int(stripped.replace("source ",""))+1])
         elif "target" in stripped:
-            links[index].append(int(stripped.removeprefix("target "))+1)
+            links[index].append(int(stripped.replace("target ",""))+1)
             index+=1
 
 with open(f"{name}.py","w") as f:

@@ -22,7 +22,7 @@ tables {
   action_refs {
     id: 21257015
   }
-  size: 1024
+  size: 2048
 }
 tables {
   preamble {
@@ -42,7 +42,7 @@ tables {
   action_refs {
     id: 25652968
   }
-  size: 1024
+  size: 2048
 }
 actions {
   preamble {
@@ -143,7 +143,7 @@ registers {
       }
     }
   }
-  size: 1024
+  size: 4096
 }
 registers {
   preamble {
@@ -158,7 +158,7 @@ registers {
       }
     }
   }
-  size: 1024
+  size: 4096
 }
 registers {
   preamble {
@@ -173,7 +173,7 @@ registers {
       }
     }
   }
-  size: 1024
+  size: 4096
 }
 registers {
   preamble {
@@ -188,7 +188,7 @@ registers {
       }
     }
   }
-  size: 1024
+  size: 4096
 }
 registers {
   preamble {
@@ -203,7 +203,7 @@ registers {
       }
     }
   }
-  size: 1024
+  size: 4096
 }
 registers {
   preamble {
@@ -218,7 +218,7 @@ registers {
       }
     }
   }
-  size: 1024
+  size: 4096
 }
 type_info {
 }

@@ -73,7 +73,7 @@ def main():
                     dst_ip = topo.get_host_ip(host)
                     start_computation(dst_ip, sw, controllers[sw])
                     controllers[sw] = controllers[sw] + 1
-                    #sleep(0.7)
+                    sleep(0.7)
 
             elif c in controllers:
                 """
