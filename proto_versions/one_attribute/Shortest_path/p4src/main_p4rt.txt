@@ -68,6 +68,13 @@ actions {
 }
 actions {
   preamble {
+    id: 23822898
+    name: "MyIngress.get_info"
+    alias: "get_info"
+  }
+}
+actions {
+  preamble {
     id: 28792405
     name: "MyIngress.ipv4_forward"
     alias: "ipv4_forward"
@@ -88,13 +95,6 @@ actions {
     id: 31417104
     name: "MyIngress.update_table"
     alias: "update_table"
-  }
-}
-actions {
-  preamble {
-    id: 23822898
-    name: "MyIngress.get_info"
-    alias: "get_info"
   }
 }
 actions {
@@ -129,7 +129,7 @@ registers {
       }
     }
   }
-  size: 1024
+  size: 4096
 }
 registers {
   preamble {
@@ -144,7 +144,22 @@ registers {
       }
     }
   }
-  size: 1024
+  size: 4096
+}
+registers {
+  preamble {
+    id: 382129994
+    name: "MyIngress.elected_NH"
+    alias: "elected_NH"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 9
+      }
+    }
+  }
+  size: 4096
 }
 type_info {
 }

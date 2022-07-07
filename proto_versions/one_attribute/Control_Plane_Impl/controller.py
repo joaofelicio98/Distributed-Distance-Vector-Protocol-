@@ -49,8 +49,8 @@ class Controller():
 
         #probes counter
         self.count_states=0 # To count the number of changing of states
-        self.topology = "Abilene" # Topology I am currently using
-        self.Try = 1 # Number of try
+        self.topology = "IRIS Networks" # Topology I am currently using
+        self.Try = 23 # Number of try
         self.stats_api = stats_API(self.sw_name, self.Try, self.topology)
         self.init()
 
@@ -178,13 +178,7 @@ class Controller():
             elected = self.make_decision(self.sw_name, params)
             if elected != None:
                 print(f"DEBUG: {self.sw_name} | Changed its state {self.count_states} times")
-                #now = datetime.now()
-                #current_time = now.strftime("%H:%M:%S")
-                #print("Adding new entry... time = ",current_time)
-
-                current_time = round(time.time()*1000) # get current time in miliseconds
-                # Insert new entry to json file
-                self.stats_api.insert_new_value(seq_no, self.count_states, current_time)
+                
                 self.announce_attribute(pkt, elected, dst)
 
     def announce_attribute(self, packet, elected, dst):
@@ -267,6 +261,14 @@ class Controller():
         self.delete_promised(dst)
         return success
 
+    def save_data(self, seq_no):
+        #now = datetime.now()
+        #current_time = now.strftime("%H:%M:%S")
+        #print("Adding new entry... time = ",current_time)
+
+        current_time = round(time.time()*1000) # get current time in miliseconds
+        # Insert new entry to json file
+        self.stats_api.insert_new_value(seq_no, self.count_states, current_time)
 
     #This function will decide if the new attribute is to be elected, promised or discarded
     # Returns True if the attribute is elected
@@ -296,6 +298,7 @@ class Controller():
                                     [dst_addr], [dst_mac, str(ingress_port)])
             self.count_states += 1
             self.delete_promised(dst_addr)
+            self.save_data(seq_no)
             print (f"DEBUG: {self.sw_name} | Elected attribute for a new destination")
             return packetIn_params
 
@@ -308,6 +311,7 @@ class Controller():
                                     [dst_addr], [dst_mac, str(ingress_port)])
             self.count_states += 1
             self.delete_promised(dst_addr)
+            self.save_data(seq_no)
             print(f"DEBUG: {self.sw_name} | Detected a link failure, electing new attribute")
             return packetIn_params
 
@@ -319,13 +323,15 @@ class Controller():
                 print(f"DEBUG: {self.sw_name} | Same attribute as the elected, more recent than promised")
                 return packetIn_params
             elif seq_no == promised[1]:
-                if self.compare_metric(distance, promised[0], "distance"):
+                if distance <= promised[0]:
                     self.save_attribute(dst_addr, attr, "elected")
                     self.delete_promised(dst_addr)
                     print(f"DEBUG: {self.sw_name} | Same attribute as the elected, same computation as promised")
                     return packetIn_params
                 else:
                     self.elect_attribute(dst_addr, promised)
+                    self.count_states += 1
+                    self.save_data(seq_no)
                     print(f"DEBUG: {self.sw_name} | elected got worse, promised elected")
                     promised.insert(0,dst_addr)
                     return promised
@@ -334,6 +340,8 @@ class Controller():
         elif ingress_port == promised[2]:
             if self.compare_metric(distance, elected[0], "distance"):
                 self.elect_attribute(dst_addr, attr)
+                self.count_states += 1
+                self.save_data(seq_no)
                 print(f"DEBUG: {self.sw_name} | promised got better, is now the elected")
                 return packetIn_params
             else:
@@ -343,10 +351,18 @@ class Controller():
 
         # Different next hop
         else:
-            if seq_no > promised[1]:
+            if seq_no == elected[1]:
                 if self.compare_metric(distance, elected[0], "distance"):
                     self.elect_attribute(dst_addr, attr)
                     self.count_states += 1
+                    self.save_data(seq_no)
+                    print(f"DEBUG: {self.sw_name} | new attribute elected with same computation as elected")
+                    return packetIn_params
+            elif seq_no > promised[1]:
+                if self.compare_metric(distance, elected[0], "distance"):
+                    self.elect_attribute(dst_addr, attr)
+                    self.count_states += 1
+                    self.save_data(seq_no)
                     print(f"DEBUG: {self.sw_name} | new attribute elected more recent than promised")
                     return packetIn_params
                 else:
@@ -357,6 +373,7 @@ class Controller():
                 if self.compare_metric(distance, elected[0], "distance"):
                     self.elect_attribute(dst_addr, attr)
                     self.count_states += 1
+                    self.save_data(seq_no)
                     self.delete_promised(dst_addr)
                     print(f"DEBUG: {self.sw_name} | new attribute elected with same seq_no as promised")
                     return packetIn_params

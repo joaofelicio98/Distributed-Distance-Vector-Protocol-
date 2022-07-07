@@ -222,7 +222,15 @@ control MyIngress(inout headers hdr,
 
                     // Different Next Hop
                     else {
-                        if (hdr.probe.seq_no > meta.P_seq_no) {
+			if (hdr.probe.seq_no == meta.E_seq_no) {
+			    if (hdr.probe.distance < meta.E_distance){
+				elect_attribute();
+				meta.flag = 4;
+				update_table();
+				broadcast_elected_attr.apply();
+			    }
+			}
+                        else if (hdr.probe.seq_no > meta.P_seq_no) {
                             if (hdr.probe.distance < meta.E_distance){
                                 elect_attribute();
                                 meta.flag = 2;

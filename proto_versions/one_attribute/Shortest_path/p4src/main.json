@@ -10,7 +10,7 @@
         ["userMetadata.E_distance", 16, false],
         ["userMetadata.E_seq_no", 32, false],
         ["userMetadata.E_NH", 9, false],
-        ["_padding_0", 6, false]
+        ["userMetadata.flag", 6, false]
       ]
     },
     {
@@ -84,8 +84,9 @@
       "fields" : [
         ["destination", 32, false],
         ["seq_no", 32, false],
-        ["port", 15, false],
-        ["is_new", 1, false]
+        ["port", 9, false],
+        ["is_new", 1, false],
+        ["flag", 6, false]
       ]
     },
     {
@@ -199,8 +200,8 @@
       "id" : 1,
       "name" : "fl",
       "source_info" : {
-        "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-        "line" : 60,
+        "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+        "line" : 69,
         "column" : 35,
         "source_fragment" : "meta"
       },
@@ -228,6 +229,10 @@
         {
           "type" : "field",
           "value" : ["scalars", "userMetadata.E_NH"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "userMetadata.flag"]
         }
       ]
     },
@@ -235,8 +240,8 @@
       "id" : 2,
       "name" : "fl_0",
       "source_info" : {
-        "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-        "line" : 60,
+        "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+        "line" : 69,
         "column" : 35,
         "source_fragment" : "meta"
       },
@@ -264,6 +269,10 @@
         {
           "type" : "field",
           "value" : ["scalars", "userMetadata.E_NH"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "userMetadata.flag"]
         }
       ]
     },
@@ -271,8 +280,8 @@
       "id" : 3,
       "name" : "fl_1",
       "source_info" : {
-        "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-        "line" : 60,
+        "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+        "line" : 69,
         "column" : 35,
         "source_fragment" : "meta"
       },
@@ -300,6 +309,10 @@
         {
           "type" : "field",
           "value" : ["scalars", "userMetadata.E_NH"]
+        },
+        {
+          "type" : "field",
+          "value" : ["scalars", "userMetadata.flag"]
         }
       ]
     }
@@ -543,7 +556,7 @@
       "name" : "deparser",
       "id" : 0,
       "source_info" : {
-        "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/include/parsers.p4",
+        "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/include/parsers.p4",
         "line" : 98,
         "column" : 8,
         "source_fragment" : "MyDeparser"
@@ -559,25 +572,37 @@
       "name" : "MyIngress.elected_distance",
       "id" : 0,
       "source_info" : {
-        "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+        "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
         "line" : 18,
         "column" : 28,
         "source_fragment" : "elected_distance"
       },
-      "size" : 1024,
+      "size" : 4096,
       "bitwidth" : 16
     },
     {
       "name" : "MyIngress.elected_seq_num",
       "id" : 1,
       "source_info" : {
-        "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+        "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
         "line" : 19,
         "column" : 28,
         "source_fragment" : "elected_seq_num"
       },
-      "size" : 1024,
+      "size" : 4096,
       "bitwidth" : 32
+    },
+    {
+      "name" : "MyIngress.elected_NH",
+      "id" : 2,
+      "source_info" : {
+        "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+        "line" : 20,
+        "column" : 27,
+        "source_fragment" : "elected_NH"
+      },
+      "size" : 4096,
+      "bitwidth" : 9
     }
   ],
   "calculations" : [
@@ -600,7 +625,7 @@
       "name" : "calc_0",
       "id" : 1,
       "source_info" : {
-        "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/include/parsers.p4",
+        "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/include/parsers.p4",
         "line" : 76,
         "column" : 1,
         "source_fragment" : "update_checksum( ..."
@@ -676,8 +701,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 22,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 23,
             "column" : 8,
             "source_fragment" : "mark_to_drop(standard_metadata)"
           }
@@ -698,8 +723,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 22,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 23,
             "column" : 8,
             "source_fragment" : "mark_to_drop(standard_metadata)"
           }
@@ -732,8 +757,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 27,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 28,
             "column" : 8,
             "source_fragment" : "hash(meta.register_index, ..."
           }
@@ -741,8 +766,61 @@
       ]
     },
     {
-      "name" : "MyIngress.ipv4_forward",
+      "name" : "MyIngress.get_info",
       "id" : 4,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "register_read",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.E_distance"]
+            },
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.elected_distance"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 38,
+            "column" : 8,
+            "source_fragment" : "elected_distance.read(meta.E_distance, meta.register_index)"
+          }
+        },
+        {
+          "op" : "register_read",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.E_NH"]
+            },
+            {
+              "type" : "register_array",
+              "value" : "MyIngress.elected_NH"
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.register_index"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 40,
+            "column" : 8,
+            "source_fragment" : "elected_NH.read(meta.E_NH, meta.register_index)"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.ipv4_forward",
+      "id" : 5,
       "runtime_data" : [
         {
           "name" : "dstAddr",
@@ -767,8 +845,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 36,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 45,
             "column" : 8,
             "source_fragment" : "standard_metadata.egress_spec = port"
           }
@@ -786,8 +864,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 37,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 46,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.srcAddr = hdr.ethernet.dstAddr"
           }
@@ -805,8 +883,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 38,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 47,
             "column" : 8,
             "source_fragment" : "hdr.ethernet.dstAddr = dstAddr"
           }
@@ -847,74 +925,10 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 39,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 48,
             "column" : 8,
             "source_fragment" : "hdr.ipv4.ttl = hdr.ipv4.ttl - 1"
-          }
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.update_table",
-      "id" : 5,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.destination"]
-            },
-            {
-              "type" : "field",
-              "value" : ["probe", "destination"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 58,
-            "column" : 8,
-            "source_fragment" : "meta.destination = hdr.probe.destination"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.E_NH"]
-            },
-            {
-              "type" : "field",
-              "value" : ["standard_metadata", "ingress_port"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 59,
-            "column" : 8,
-            "source_fragment" : "meta.E_NH = standard_metadata.ingress_port"
-          }
-        },
-        {
-          "op" : "clone_ingress_pkt_to_egress",
-          "parameters" : [
-            {
-              "type" : "hexstr",
-              "value" : "0x00000064"
-            },
-            {
-              "type" : "hexstr",
-              "value" : "0x1"
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 60,
-            "column" : 8,
-            "source_fragment" : "clone3(CloneType.I2E, 100, meta)"
           }
         }
       ]
@@ -937,8 +951,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 58,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 67,
             "column" : 8,
             "source_fragment" : "meta.destination = hdr.probe.destination"
           }
@@ -956,8 +970,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 59,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 68,
             "column" : 8,
             "source_fragment" : "meta.E_NH = standard_metadata.ingress_port"
           }
@@ -971,12 +985,12 @@
             },
             {
               "type" : "hexstr",
-              "value" : "0x2"
+              "value" : "0x1"
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 60,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 69,
             "column" : 8,
             "source_fragment" : "clone3(CloneType.I2E, 100, meta)"
           }
@@ -1001,8 +1015,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 58,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 67,
             "column" : 8,
             "source_fragment" : "meta.destination = hdr.probe.destination"
           }
@@ -1020,8 +1034,72 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 59,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 68,
+            "column" : 8,
+            "source_fragment" : "meta.E_NH = standard_metadata.ingress_port"
+          }
+        },
+        {
+          "op" : "clone_ingress_pkt_to_egress",
+          "parameters" : [
+            {
+              "type" : "hexstr",
+              "value" : "0x00000064"
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x2"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 69,
+            "column" : 8,
+            "source_fragment" : "clone3(CloneType.I2E, 100, meta)"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "MyIngress.update_table",
+      "id" : 8,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.destination"]
+            },
+            {
+              "type" : "field",
+              "value" : ["probe", "destination"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 67,
+            "column" : 8,
+            "source_fragment" : "meta.destination = hdr.probe.destination"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.E_NH"]
+            },
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "ingress_port"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 68,
             "column" : 8,
             "source_fragment" : "meta.E_NH = standard_metadata.ingress_port"
           }
@@ -1039,40 +1117,10 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 60,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 69,
             "column" : 8,
             "source_fragment" : "clone3(CloneType.I2E, 100, meta)"
-          }
-        }
-      ]
-    },
-    {
-      "name" : "MyIngress.get_info",
-      "id" : 8,
-      "runtime_data" : [],
-      "primitives" : [
-        {
-          "op" : "register_read",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.E_distance"]
-            },
-            {
-              "type" : "register_array",
-              "value" : "MyIngress.elected_distance"
-            },
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.register_index"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 66,
-            "column" : 8,
-            "source_fragment" : "elected_distance.read(meta.E_distance, meta.register_index)"
           }
         }
       ]
@@ -1099,8 +1147,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 71,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 74,
             "column" : 8,
             "source_fragment" : "elected_distance.write(meta.register_index, hdr.probe.distance)"
           }
@@ -1122,8 +1170,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 72,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 75,
             "column" : 8,
             "source_fragment" : "elected_seq_num.write(meta.register_index, hdr.probe.seq_no)"
           }
@@ -1141,8 +1189,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 75,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 78,
             "column" : 8,
             "source_fragment" : "meta.E_distance = hdr.probe.distance"
           }
@@ -1160,29 +1208,10 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 76,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 79,
             "column" : 8,
             "source_fragment" : "meta.E_seq_no = hdr.probe.seq_no"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.E_NH"]
-            },
-            {
-              "type" : "field",
-              "value" : ["standard_metadata", "ingress_port"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 77,
-            "column" : 8,
-            "source_fragment" : "meta.E_NH = standard_metadata.ingress_port"
           }
         },
         {
@@ -1221,8 +1250,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 80,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 82,
             "column" : 8,
             "source_fragment" : "hdr.probe.distance = meta.E_distance + 1"
           }
@@ -1251,8 +1280,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 71,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 74,
             "column" : 8,
             "source_fragment" : "elected_distance.write(meta.register_index, hdr.probe.distance)"
           }
@@ -1274,8 +1303,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 72,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 75,
             "column" : 8,
             "source_fragment" : "elected_seq_num.write(meta.register_index, hdr.probe.seq_no)"
           }
@@ -1293,8 +1322,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 75,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 78,
             "column" : 8,
             "source_fragment" : "meta.E_distance = hdr.probe.distance"
           }
@@ -1312,29 +1341,10 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 76,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 79,
             "column" : 8,
             "source_fragment" : "meta.E_seq_no = hdr.probe.seq_no"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.E_NH"]
-            },
-            {
-              "type" : "field",
-              "value" : ["standard_metadata", "ingress_port"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 77,
-            "column" : 8,
-            "source_fragment" : "meta.E_NH = standard_metadata.ingress_port"
           }
         },
         {
@@ -1373,8 +1383,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 80,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 82,
             "column" : 8,
             "source_fragment" : "hdr.probe.distance = meta.E_distance + 1"
           }
@@ -1403,8 +1413,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 71,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 74,
             "column" : 8,
             "source_fragment" : "elected_distance.write(meta.register_index, hdr.probe.distance)"
           }
@@ -1426,8 +1436,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 72,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 75,
             "column" : 8,
             "source_fragment" : "elected_seq_num.write(meta.register_index, hdr.probe.seq_no)"
           }
@@ -1445,8 +1455,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 75,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 78,
             "column" : 8,
             "source_fragment" : "meta.E_distance = hdr.probe.distance"
           }
@@ -1464,29 +1474,10 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 76,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 79,
             "column" : 8,
             "source_fragment" : "meta.E_seq_no = hdr.probe.seq_no"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.E_NH"]
-            },
-            {
-              "type" : "field",
-              "value" : ["standard_metadata", "ingress_port"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 77,
-            "column" : 8,
-            "source_fragment" : "meta.E_NH = standard_metadata.ingress_port"
           }
         },
         {
@@ -1525,8 +1516,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 80,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 82,
             "column" : 8,
             "source_fragment" : "hdr.probe.distance = meta.E_distance + 1"
           }
@@ -1555,8 +1546,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 71,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 74,
             "column" : 8,
             "source_fragment" : "elected_distance.write(meta.register_index, hdr.probe.distance)"
           }
@@ -1578,8 +1569,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 72,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 75,
             "column" : 8,
             "source_fragment" : "elected_seq_num.write(meta.register_index, hdr.probe.seq_no)"
           }
@@ -1597,8 +1588,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 75,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 78,
             "column" : 8,
             "source_fragment" : "meta.E_distance = hdr.probe.distance"
           }
@@ -1616,29 +1607,10 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 76,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 79,
             "column" : 8,
             "source_fragment" : "meta.E_seq_no = hdr.probe.seq_no"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.E_NH"]
-            },
-            {
-              "type" : "field",
-              "value" : ["standard_metadata", "ingress_port"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 77,
-            "column" : 8,
-            "source_fragment" : "meta.E_NH = standard_metadata.ingress_port"
           }
         },
         {
@@ -1677,8 +1649,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 80,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 82,
             "column" : 8,
             "source_fragment" : "hdr.probe.distance = meta.E_distance + 1"
           }
@@ -1707,8 +1679,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 71,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 74,
             "column" : 8,
             "source_fragment" : "elected_distance.write(meta.register_index, hdr.probe.distance)"
           }
@@ -1730,8 +1702,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 72,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 75,
             "column" : 8,
             "source_fragment" : "elected_seq_num.write(meta.register_index, hdr.probe.seq_no)"
           }
@@ -1749,8 +1721,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 75,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 78,
             "column" : 8,
             "source_fragment" : "meta.E_distance = hdr.probe.distance"
           }
@@ -1768,29 +1740,10 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 76,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 79,
             "column" : 8,
             "source_fragment" : "meta.E_seq_no = hdr.probe.seq_no"
-          }
-        },
-        {
-          "op" : "assign",
-          "parameters" : [
-            {
-              "type" : "field",
-              "value" : ["scalars", "userMetadata.E_NH"]
-            },
-            {
-              "type" : "field",
-              "value" : ["standard_metadata", "ingress_port"]
-            }
-          ],
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 77,
-            "column" : 8,
-            "source_fragment" : "meta.E_NH = standard_metadata.ingress_port"
           }
         },
         {
@@ -1829,8 +1782,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 80,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 82,
             "column" : 8,
             "source_fragment" : "hdr.probe.distance = meta.E_distance + 1"
           }
@@ -1860,8 +1813,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 84,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 86,
             "column" : 8,
             "source_fragment" : "standard_metadata.mcast_grp = mcast_id"
           }
@@ -1869,8 +1822,53 @@
       ]
     },
     {
-      "name" : "main121",
+      "name" : "main120",
       "id" : 15,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.flag"]
+            },
+            {
+              "type" : "hexstr",
+              "value" : "0x14"
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 120,
+            "column" : 24,
+            "source_fragment" : "meta.flag = 20"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.E_NH"]
+            },
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "ingress_port"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 121,
+            "column" : 3,
+            "source_fragment" : "meta.E_NH = standard_metadata.ingress_port"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "main125",
+      "id" : 16,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -1896,8 +1894,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 121,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 125,
             "column" : 24,
             "source_fragment" : "meta.is_new = true"
           }
@@ -1905,8 +1903,86 @@
       ]
     },
     {
-      "name" : "main108",
-      "id" : 16,
+      "name" : "main138",
+      "id" : 17,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.E_NH"]
+            },
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "ingress_port"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 138,
+            "column" : 3,
+            "source_fragment" : "meta.E_NH = standard_metadata.ingress_port"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "main147",
+      "id" : 18,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.E_NH"]
+            },
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "ingress_port"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 147,
+            "column" : 3,
+            "source_fragment" : "meta.E_NH = standard_metadata.ingress_port"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "main156",
+      "id" : 19,
+      "runtime_data" : [],
+      "primitives" : [
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.E_NH"]
+            },
+            {
+              "type" : "field",
+              "value" : ["standard_metadata", "ingress_port"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 156,
+            "column" : 3,
+            "source_fragment" : "meta.E_NH = standard_metadata.ingress_port"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "main110",
+      "id" : 20,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -1922,8 +1998,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 108,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 110,
             "column" : 16,
             "source_fragment" : "meta.destination = hdr.probe.destination"
           }
@@ -1951,8 +2027,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 109,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 111,
             "column" : 16,
             "source_fragment" : "meta.is_new = false"
           }
@@ -1974,8 +2050,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 111,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 113,
             "column" : 16,
             "source_fragment" : "elected_seq_num.read(meta.E_seq_no, meta.register_index)"
           }
@@ -1983,8 +2059,8 @@
       ]
     },
     {
-      "name" : "main170",
-      "id" : 17,
+      "name" : "main183",
+      "id" : 21,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -2000,8 +2076,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 170,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 183,
             "column" : 16,
             "source_fragment" : "hdr.cpu.is_new = 1"
           }
@@ -2009,8 +2085,8 @@
       ]
     },
     {
-      "name" : "main173",
-      "id" : 18,
+      "name" : "main186",
+      "id" : 22,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -2026,8 +2102,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 173,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 186,
             "column" : 16,
             "source_fragment" : "hdr.cpu.is_new = 0"
           }
@@ -2035,8 +2111,8 @@
       ]
     },
     {
-      "name" : "main164",
-      "id" : 19,
+      "name" : "main176",
+      "id" : 23,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -2048,8 +2124,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 164,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 176,
             "column" : 12,
             "source_fragment" : "hdr.probe.setInvalid()"
           }
@@ -2063,8 +2139,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 165,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 177,
             "column" : 12,
             "source_fragment" : "hdr.cpu.setValid()"
           }
@@ -2082,8 +2158,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 166,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 178,
             "column" : 12,
             "source_fragment" : "hdr.cpu.destination = meta.destination"
           }
@@ -2101,8 +2177,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 167,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 179,
             "column" : 12,
             "source_fragment" : "hdr.cpu.seq_no = meta.E_seq_no"
           }
@@ -2115,35 +2191,41 @@
               "value" : ["cpu", "port"]
             },
             {
-              "type" : "expression",
-              "value" : {
-                "type" : "expression",
-                "value" : {
-                  "op" : "&",
-                  "left" : {
-                    "type" : "field",
-                    "value" : ["scalars", "userMetadata.E_NH"]
-                  },
-                  "right" : {
-                    "type" : "hexstr",
-                    "value" : "0x7fff"
-                  }
-                }
-              }
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.E_NH"]
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 168,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 180,
             "column" : 12,
-            "source_fragment" : "hdr.cpu.port= (bit<15>) meta.E_NH"
+            "source_fragment" : "hdr.cpu.port = meta.E_NH"
+          }
+        },
+        {
+          "op" : "assign",
+          "parameters" : [
+            {
+              "type" : "field",
+              "value" : ["cpu", "flag"]
+            },
+            {
+              "type" : "field",
+              "value" : ["scalars", "userMetadata.flag"]
+            }
+          ],
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 181,
+            "column" : 12,
+            "source_fragment" : "hdr.cpu.flag = meta.flag"
           }
         }
       ]
     },
     {
-      "name" : "main175",
-      "id" : 20,
+      "name" : "main188",
+      "id" : 24,
       "runtime_data" : [],
       "primitives" : [
         {
@@ -2159,7 +2241,7 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/include/headers.p4",
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/include/headers.p4",
             "line" : 6,
             "column" : 32,
             "source_fragment" : "253; ..."
@@ -2174,8 +2256,8 @@
             }
           ],
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 176,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 189,
             "column" : 12,
             "source_fragment" : "truncate((bit<32>) 44)"
           }
@@ -2188,7 +2270,7 @@
       "name" : "ingress",
       "id" : 0,
       "source_info" : {
-        "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+        "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
         "line" : 14,
         "column" : 8,
         "source_fragment" : "MyIngress"
@@ -2199,8 +2281,8 @@
           "name" : "MyIngress.ipv4_lpm",
           "id" : 0,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 42,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 51,
             "column" : 10,
             "source_fragment" : "ipv4_lpm"
           },
@@ -2218,7 +2300,7 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [4, 1, 0],
+          "action_ids" : [5, 1, 0],
           "actions" : ["MyIngress.ipv4_forward", "MyIngress.drop", "NoAction"],
           "base_default_next" : null,
           "next_tables" : {
@@ -2237,8 +2319,8 @@
           "name" : "tbl_get_registers_index",
           "id" : 1,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 107,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 109,
             "column" : 16,
             "source_fragment" : "get_registers_index()"
           },
@@ -2251,9 +2333,9 @@
           "direct_meters" : null,
           "action_ids" : [3],
           "actions" : ["MyIngress.get_registers_index"],
-          "base_default_next" : "tbl_main108",
+          "base_default_next" : "tbl_main110",
           "next_tables" : {
-            "MyIngress.get_registers_index" : "tbl_main108"
+            "MyIngress.get_registers_index" : "tbl_main110"
           },
           "default_entry" : {
             "action_id" : 3,
@@ -2263,11 +2345,11 @@
           }
         },
         {
-          "name" : "tbl_main108",
+          "name" : "tbl_main110",
           "id" : 2,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 108,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 110,
             "column" : 33,
             "source_fragment" : "= hdr.probe.destination; ..."
           },
@@ -2278,14 +2360,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [16],
-          "actions" : ["main108"],
+          "action_ids" : [20],
+          "actions" : ["main110"],
           "base_default_next" : "node_8",
           "next_tables" : {
-            "main108" : "node_8"
+            "main110" : "node_8"
           },
           "default_entry" : {
-            "action_id" : 16,
+            "action_id" : 20,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -2295,8 +2377,8 @@
           "name" : "tbl_elect_attribute",
           "id" : 3,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 117,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 119,
             "column" : 24,
             "source_fragment" : "elect_attribute()"
           },
@@ -2309,9 +2391,9 @@
           "direct_meters" : null,
           "action_ids" : [9],
           "actions" : ["MyIngress.elect_attribute"],
-          "base_default_next" : "MyIngress.broadcast_elected_attr",
+          "base_default_next" : "tbl_main120",
           "next_tables" : {
-            "MyIngress.elect_attribute" : "MyIngress.broadcast_elected_attr"
+            "MyIngress.elect_attribute" : "tbl_main120"
           },
           "default_entry" : {
             "action_id" : 9,
@@ -2321,11 +2403,40 @@
           }
         },
         {
-          "name" : "MyIngress.broadcast_elected_attr",
+          "name" : "tbl_main120",
           "id" : 4,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 87,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 120,
+            "column" : 34,
+            "source_fragment" : "= 20; ..."
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [15],
+          "actions" : ["main120"],
+          "base_default_next" : "MyIngress.broadcast_elected_attr",
+          "next_tables" : {
+            "main120" : "MyIngress.broadcast_elected_attr"
+          },
+          "default_entry" : {
+            "action_id" : 15,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "MyIngress.broadcast_elected_attr",
+          "id" : 5,
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 89,
             "column" : 10,
             "source_fragment" : "broadcast_elected_attr"
           },
@@ -2333,7 +2444,7 @@
             {
               "match_type" : "exact",
               "name" : "meta.E_NH",
-              "target" : ["scalars", "userMetadata.E_NH"],
+              "target" : ["standard_metadata", "ingress_port"],
               "mask" : null
             }
           ],
@@ -2358,11 +2469,11 @@
           }
         },
         {
-          "name" : "tbl_main121",
-          "id" : 5,
+          "name" : "tbl_main125",
+          "id" : 6,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 121,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 125,
             "column" : 36,
             "source_fragment" : "="
           },
@@ -2373,14 +2484,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [15],
-          "actions" : ["main121"],
+          "action_ids" : [16],
+          "actions" : ["main125"],
           "base_default_next" : "tbl_elect_attribute_0",
           "next_tables" : {
-            "main121" : "tbl_elect_attribute_0"
+            "main125" : "tbl_elect_attribute_0"
           },
           "default_entry" : {
-            "action_id" : 15,
+            "action_id" : 16,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -2388,10 +2499,10 @@
         },
         {
           "name" : "tbl_elect_attribute_0",
-          "id" : 6,
+          "id" : 7,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 122,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 126,
             "column" : 24,
             "source_fragment" : "elect_attribute()"
           },
@@ -2417,126 +2528,10 @@
         },
         {
           "name" : "tbl_update_table",
-          "id" : 7,
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 123,
-            "column" : 24,
-            "source_fragment" : "update_table()"
-          },
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [5],
-          "actions" : ["MyIngress.update_table"],
-          "base_default_next" : "MyIngress.broadcast_elected_attr",
-          "next_tables" : {
-            "MyIngress.update_table" : "MyIngress.broadcast_elected_attr"
-          },
-          "default_entry" : {
-            "action_id" : 5,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_get_info",
           "id" : 8,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 129,
-            "column" : 20,
-            "source_fragment" : "get_info()"
-          },
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [8],
-          "actions" : ["MyIngress.get_info"],
-          "base_default_next" : "node_17",
-          "next_tables" : {
-            "MyIngress.get_info" : "node_17"
-          },
-          "default_entry" : {
-            "action_id" : 8,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_elect_attribute_1",
-          "id" : 9,
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 132,
-            "column" : 24,
-            "source_fragment" : "elect_attribute()"
-          },
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [11],
-          "actions" : ["MyIngress.elect_attribute"],
-          "base_default_next" : "MyIngress.broadcast_elected_attr",
-          "next_tables" : {
-            "MyIngress.elect_attribute" : "MyIngress.broadcast_elected_attr"
-          },
-          "default_entry" : {
-            "action_id" : 11,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_elect_attribute_2",
-          "id" : 10,
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 137,
-            "column" : 24,
-            "source_fragment" : "elect_attribute()"
-          },
-          "key" : [],
-          "match_type" : "exact",
-          "type" : "simple",
-          "max_size" : 1024,
-          "with_counters" : false,
-          "support_timeout" : false,
-          "direct_meters" : null,
-          "action_ids" : [12],
-          "actions" : ["MyIngress.elect_attribute"],
-          "base_default_next" : "tbl_update_table_0",
-          "next_tables" : {
-            "MyIngress.elect_attribute" : "tbl_update_table_0"
-          },
-          "default_entry" : {
-            "action_id" : 12,
-            "action_const" : true,
-            "action_data" : [],
-            "action_entry_const" : true
-          }
-        },
-        {
-          "name" : "tbl_update_table_0",
-          "id" : 11,
-          "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 138,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 128,
             "column" : 24,
             "source_fragment" : "update_table()"
           },
@@ -2561,11 +2556,185 @@
           }
         },
         {
-          "name" : "tbl_elect_attribute_3",
+          "name" : "tbl_get_info",
+          "id" : 9,
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 134,
+            "column" : 20,
+            "source_fragment" : "get_info()"
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [4],
+          "actions" : ["MyIngress.get_info"],
+          "base_default_next" : "node_18",
+          "next_tables" : {
+            "MyIngress.get_info" : "node_18"
+          },
+          "default_entry" : {
+            "action_id" : 4,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_elect_attribute_1",
+          "id" : 10,
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 137,
+            "column" : 24,
+            "source_fragment" : "elect_attribute()"
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [11],
+          "actions" : ["MyIngress.elect_attribute"],
+          "base_default_next" : "tbl_main138",
+          "next_tables" : {
+            "MyIngress.elect_attribute" : "tbl_main138"
+          },
+          "default_entry" : {
+            "action_id" : 11,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_main138",
+          "id" : 11,
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 138,
+            "column" : 13,
+            "source_fragment" : "="
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [17],
+          "actions" : ["main138"],
+          "base_default_next" : "MyIngress.broadcast_elected_attr",
+          "next_tables" : {
+            "main138" : "MyIngress.broadcast_elected_attr"
+          },
+          "default_entry" : {
+            "action_id" : 17,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_elect_attribute_2",
           "id" : 12,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
             "line" : 143,
+            "column" : 24,
+            "source_fragment" : "elect_attribute()"
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [12],
+          "actions" : ["MyIngress.elect_attribute"],
+          "base_default_next" : "node_24",
+          "next_tables" : {
+            "MyIngress.elect_attribute" : "node_24"
+          },
+          "default_entry" : {
+            "action_id" : 12,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_update_table_0",
+          "id" : 13,
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 145,
+            "column" : 7,
+            "source_fragment" : "update_table()"
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [7],
+          "actions" : ["MyIngress.update_table"],
+          "base_default_next" : "tbl_main147",
+          "next_tables" : {
+            "MyIngress.update_table" : "tbl_main147"
+          },
+          "default_entry" : {
+            "action_id" : 7,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_main147",
+          "id" : 14,
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 147,
+            "column" : 13,
+            "source_fragment" : "="
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [18],
+          "actions" : ["main147"],
+          "base_default_next" : "MyIngress.broadcast_elected_attr",
+          "next_tables" : {
+            "main147" : "MyIngress.broadcast_elected_attr"
+          },
+          "default_entry" : {
+            "action_id" : 18,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_elect_attribute_3",
+          "id" : 15,
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 152,
             "column" : 24,
             "source_fragment" : "elect_attribute()"
           },
@@ -2578,9 +2747,9 @@
           "direct_meters" : null,
           "action_ids" : [13],
           "actions" : ["MyIngress.elect_attribute"],
-          "base_default_next" : "tbl_update_table_1",
+          "base_default_next" : "node_30",
           "next_tables" : {
-            "MyIngress.elect_attribute" : "tbl_update_table_1"
+            "MyIngress.elect_attribute" : "node_30"
           },
           "default_entry" : {
             "action_id" : 13,
@@ -2591,11 +2760,11 @@
         },
         {
           "name" : "tbl_update_table_1",
-          "id" : 13,
+          "id" : 16,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 144,
-            "column" : 24,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 154,
+            "column" : 28,
             "source_fragment" : "update_table()"
           },
           "key" : [],
@@ -2605,14 +2774,43 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [7],
+          "action_ids" : [8],
           "actions" : ["MyIngress.update_table"],
-          "base_default_next" : "MyIngress.broadcast_elected_attr",
+          "base_default_next" : "tbl_main156",
           "next_tables" : {
-            "MyIngress.update_table" : "MyIngress.broadcast_elected_attr"
+            "MyIngress.update_table" : "tbl_main156"
           },
           "default_entry" : {
-            "action_id" : 7,
+            "action_id" : 8,
+            "action_const" : true,
+            "action_data" : [],
+            "action_entry_const" : true
+          }
+        },
+        {
+          "name" : "tbl_main156",
+          "id" : 17,
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 156,
+            "column" : 13,
+            "source_fragment" : "="
+          },
+          "key" : [],
+          "match_type" : "exact",
+          "type" : "simple",
+          "max_size" : 1024,
+          "with_counters" : false,
+          "support_timeout" : false,
+          "direct_meters" : null,
+          "action_ids" : [19],
+          "actions" : ["main156"],
+          "base_default_next" : "MyIngress.broadcast_elected_attr",
+          "next_tables" : {
+            "main156" : "MyIngress.broadcast_elected_attr"
+          },
+          "default_entry" : {
+            "action_id" : 19,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -2625,8 +2823,8 @@
           "name" : "node_2",
           "id" : 0,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 101,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 103,
             "column" : 12,
             "source_fragment" : "hdr.ipv4.isValid()"
           },
@@ -2648,8 +2846,8 @@
           "name" : "node_3",
           "id" : 1,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 103,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 105,
             "column" : 16,
             "source_fragment" : "hdr.ipv4.protocol != PROBE_PROTO"
           },
@@ -2674,8 +2872,8 @@
           "name" : "node_5",
           "id" : 2,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 106,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 108,
             "column" : 20,
             "source_fragment" : "hdr.ipv4.protocol == PROBE_PROTO && hdr.probe.isValid()"
           },
@@ -2717,8 +2915,8 @@
           "name" : "node_8",
           "id" : 3,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 114,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 116,
             "column" : 19,
             "source_fragment" : "meta.E_seq_no == 0"
           },
@@ -2743,8 +2941,8 @@
           "name" : "node_9",
           "id" : 4,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 116,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 118,
             "column" : 24,
             "source_fragment" : "hdr.probe.distance == 0"
           },
@@ -2763,14 +2961,14 @@
             }
           },
           "true_next" : "tbl_elect_attribute",
-          "false_next" : "tbl_main121"
+          "false_next" : "tbl_main125"
         },
         {
-          "name" : "node_17",
+          "name" : "node_18",
           "id" : 5,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 131,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 136,
             "column" : 24,
             "source_fragment" : "hdr.probe.distance == 0"
           },
@@ -2789,14 +2987,14 @@
             }
           },
           "true_next" : "tbl_elect_attribute_1",
-          "false_next" : "node_20"
+          "false_next" : "node_22"
         },
         {
-          "name" : "node_20",
+          "name" : "node_22",
           "id" : 6,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 136,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 142,
             "column" : 28,
             "source_fragment" : "hdr.probe.seq_no > meta.E_seq_no"
           },
@@ -2815,14 +3013,40 @@
             }
           },
           "true_next" : "tbl_elect_attribute_2",
-          "false_next" : "node_24"
+          "false_next" : "node_28"
         },
         {
           "name" : "node_24",
           "id" : 7,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 142,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 144,
+            "column" : 28,
+            "source_fragment" : "meta.E_NH != standard_metadata.ingress_port"
+          },
+          "expression" : {
+            "type" : "expression",
+            "value" : {
+              "op" : "!=",
+              "left" : {
+                "type" : "field",
+                "value" : ["scalars", "userMetadata.E_NH"]
+              },
+              "right" : {
+                "type" : "field",
+                "value" : ["standard_metadata", "ingress_port"]
+              }
+            }
+          },
+          "true_next" : "tbl_update_table_0",
+          "false_next" : "tbl_main147"
+        },
+        {
+          "name" : "node_28",
+          "id" : 8,
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 151,
             "column" : 28,
             "source_fragment" : "hdr.probe.seq_no == meta.E_seq_no && hdr.probe.distance < meta.E_distance"
           },
@@ -2862,6 +3086,32 @@
           },
           "false_next" : null,
           "true_next" : "tbl_elect_attribute_3"
+        },
+        {
+          "name" : "node_30",
+          "id" : 9,
+          "source_info" : {
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 153,
+            "column" : 28,
+            "source_fragment" : "meta.E_NH != standard_metadata.ingress_port"
+          },
+          "expression" : {
+            "type" : "expression",
+            "value" : {
+              "op" : "!=",
+              "left" : {
+                "type" : "field",
+                "value" : ["scalars", "userMetadata.E_NH"]
+              },
+              "right" : {
+                "type" : "field",
+                "value" : ["standard_metadata", "ingress_port"]
+              }
+            }
+          },
+          "true_next" : "tbl_update_table_1",
+          "false_next" : "tbl_main156"
         }
       ]
     },
@@ -2869,19 +3119,19 @@
       "name" : "egress",
       "id" : 1,
       "source_info" : {
-        "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-        "line" : 157,
+        "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+        "line" : 169,
         "column" : 8,
         "source_fragment" : "MyEgress"
       },
-      "init_table" : "node_30",
+      "init_table" : "node_36",
       "tables" : [
         {
-          "name" : "tbl_main164",
-          "id" : 14,
+          "name" : "tbl_main176",
+          "id" : 18,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 164,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 176,
             "column" : 12,
             "source_fragment" : "hdr.probe.setInvalid(); ..."
           },
@@ -2892,25 +3142,25 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [19],
-          "actions" : ["main164"],
-          "base_default_next" : "node_32",
+          "action_ids" : [23],
+          "actions" : ["main176"],
+          "base_default_next" : "node_38",
           "next_tables" : {
-            "main164" : "node_32"
+            "main176" : "node_38"
           },
           "default_entry" : {
-            "action_id" : 19,
+            "action_id" : 23,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_main170",
-          "id" : 15,
+          "name" : "tbl_main183",
+          "id" : 19,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 170,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 183,
             "column" : 31,
             "source_fragment" : "="
           },
@@ -2921,25 +3171,25 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [17],
-          "actions" : ["main170"],
-          "base_default_next" : "tbl_main175",
+          "action_ids" : [21],
+          "actions" : ["main183"],
+          "base_default_next" : "tbl_main188",
           "next_tables" : {
-            "main170" : "tbl_main175"
+            "main183" : "tbl_main188"
           },
           "default_entry" : {
-            "action_id" : 17,
+            "action_id" : 21,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_main173",
-          "id" : 16,
+          "name" : "tbl_main186",
+          "id" : 20,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 173,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 186,
             "column" : 31,
             "source_fragment" : "="
           },
@@ -2950,25 +3200,25 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [18],
-          "actions" : ["main173"],
-          "base_default_next" : "tbl_main175",
+          "action_ids" : [22],
+          "actions" : ["main186"],
+          "base_default_next" : "tbl_main188",
           "next_tables" : {
-            "main173" : "tbl_main175"
+            "main186" : "tbl_main188"
           },
           "default_entry" : {
-            "action_id" : 18,
+            "action_id" : 22,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
           }
         },
         {
-          "name" : "tbl_main175",
-          "id" : 17,
+          "name" : "tbl_main188",
+          "id" : 21,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 175,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 188,
             "column" : 30,
             "source_fragment" : "= CPU_HEADER_PROTO; ..."
           },
@@ -2979,14 +3229,14 @@
           "with_counters" : false,
           "support_timeout" : false,
           "direct_meters" : null,
-          "action_ids" : [20],
-          "actions" : ["main175"],
+          "action_ids" : [24],
+          "actions" : ["main188"],
           "base_default_next" : null,
           "next_tables" : {
-            "main175" : null
+            "main188" : null
           },
           "default_entry" : {
-            "action_id" : 20,
+            "action_id" : 24,
             "action_const" : true,
             "action_data" : [],
             "action_entry_const" : true
@@ -2996,11 +3246,11 @@
       "action_profiles" : [],
       "conditionals" : [
         {
-          "name" : "node_30",
-          "id" : 8,
+          "name" : "node_36",
+          "id" : 10,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 163,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 175,
             "column" : 11,
             "source_fragment" : "standard_metadata.instance_type == 1"
           },
@@ -3019,14 +3269,14 @@
             }
           },
           "false_next" : null,
-          "true_next" : "tbl_main164"
+          "true_next" : "tbl_main176"
         },
         {
-          "name" : "node_32",
-          "id" : 9,
+          "name" : "node_38",
+          "id" : 11,
           "source_info" : {
-            "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
-            "line" : 169,
+            "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4",
+            "line" : 182,
             "column" : 16,
             "source_fragment" : "meta.is_new"
           },
@@ -3041,8 +3291,8 @@
               }
             }
           },
-          "true_next" : "tbl_main170",
-          "false_next" : "tbl_main173"
+          "true_next" : "tbl_main183",
+          "false_next" : "tbl_main186"
         }
       ]
     }
@@ -3052,7 +3302,7 @@
       "name" : "cksum",
       "id" : 0,
       "source_info" : {
-        "filename" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/include/parsers.p4",
+        "filename" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/include/parsers.p4",
         "line" : 76,
         "column" : 1,
         "source_fragment" : "update_checksum( ..."
@@ -3115,7 +3365,7 @@
       ["standard_metadata", "priority"]
     ]
   ],
-  "program" : "/home/p4/Desktop/DDV_protocol/proto_versions/one_attribute/Shortest_path/p4src/main.p4i",
+  "program" : "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/p4src/main.p4i",
   "__meta__" : {
     "version" : [2, 23],
     "compiler" : "https://github.com/p4lang/p4c"

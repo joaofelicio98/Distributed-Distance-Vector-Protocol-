@@ -44,8 +44,8 @@ class Controller():
                                                    json_path=sw_data['json_path'])
 
         self.count_states=0 # To count the number of changing of states
-        self.topology = "Abilene" # Topology I am currently using
-        self.Try = 1 # Number of try
+        self.topology = "IRIS Networks"
+        self.Try = 23 # Number of try
         self.stats_api = stats_API(self.sw_name, self.Try, self.topology)
 
         self.init()
@@ -213,6 +213,8 @@ class Controller():
             if flag != 20:
                 self.count_states += 1
 
+            print(f"DEBUG {self.sw_name} changed its state {self.count_states} times.")
+            
             if is_new == 1:
                 self.add_new_entry(subnet, port)
             else:

@@ -73,7 +73,7 @@ def main():
                     dst_ip = topo.get_host_ip(host)
                     start_computation(dst_ip, sw, controllers[sw])
                     controllers[sw] = controllers[sw] + 1
-                    sleep(0.7)
+                    #sleep(0.7)
 
             elif c in controllers:
                 """
@@ -88,7 +88,7 @@ def main():
                 start_computation(dst_ip, c, controllers[c])
                 controllers[c] = controllers[c] + 1
             else:
-                raise AssertionError('This command does not exist')
+                print("Invalid command")
 
 
 
