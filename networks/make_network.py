@@ -42,7 +42,7 @@ with open(f"{name}.py","w") as f:
     f.write('\n')
     for link in links:
         f.write(f'net.addLink("s{link[0]}", "s{link[1]}")\n')
-        delay = random.randint(25,75)
+        delay = random.randint(25,300)
         f.write(f'net.setDelay("s{link[0]}", "s{link[1]}", {delay})\n')
         f.write(f'net.setBw("s{link[0]}", "s{link[1]}", 1)\n')
 
