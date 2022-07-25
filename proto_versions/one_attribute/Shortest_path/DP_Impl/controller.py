@@ -27,7 +27,6 @@ MY_HEADER_PROTO = 254
 class CPU_header(Packet):
     name = 'CPU'
     fields_desc = [IPField('destination', '127.0.0.1'),
-                    #BitField('distance',0,16), BitField('seq_no',0,32),
                     BitField('seq_no',0,32), BitField('next_hop',0,9),
                     BitField('is_new',0,1), BitField('flag',0,6)]
 
@@ -45,7 +44,7 @@ class Controller():
                                                    json_path=sw_data['json_path'])
 
         self.count_states=0 # To count the number of changing of states
-        self.topology = "IRIS Networks" # Topology I am currently using
+        self.topology = "IRIS Networks"
         self.Try = 23 # Number of try
         self.stats_api = stats_API(self.sw_name, self.Try, self.topology)
 
@@ -110,6 +109,12 @@ class Controller():
         for intf in intf_to_pop:
             interfaces_to_port.pop(intf, None)
 
+        #for port in hosts_ports:
+            # Add multicast group and ports
+        #    self.controller.mc_mgrp_create(port, list(interfaces_to_port.values()))
+            # Fill broadcast table
+        #    self.controller.table_add("broadcast_elected_attr", "set_mcast_grp", [str(port)], [str(port)])
+
         for ingress_port in interfaces_to_port.values():
             port_list = list(interfaces_to_port.values())
             del(port_list[port_list.index(ingress_port)])
@@ -132,8 +137,8 @@ class Controller():
 
         for node in neighbors:
             if self.topo.isHost(node):
-                #dst_ip = self.topo.get_host_ip(node)
                 self.count_states += 1
+                #dst_ip = self.topo.get_host_ip(node)
                 dst_mac = self.topo.node_to_node_mac(node, self.sw_name)
                 port = self.topo.node_to_node_port_num(self.sw_name, node)
                 subnet = self.topo.subnet(node, self.sw_name)
@@ -178,7 +183,7 @@ class Controller():
         #print('DEBUG: {} | Received a new packet!'.format(self.sw_name))
         #print(pkt[IP].proto)
         if pkt[IP].proto == CPU_HEADER_PROTO:
-            print(f"DEBUG: {self.sw_name} | Received a new attribute!")
+            print(f"DEBUG: {self.sw_name} | Received a new attribute to elect!")
             #print()
             #pkt.show2()
             #print()
@@ -194,23 +199,22 @@ class Controller():
             is_new = cpu_header.is_new
             print(f"DEBUG {self.sw_name} | is_new = {is_new}")
             flag = cpu_header.flag
-            print(f"DEBUG {self.sw_name} | flag = {flag}")
 
-            # To register the timestamp of when the convergence process started
-            if flag == 20:
-                current_time = round(time.time()*1000)
-                self.stats_api.insert_new_value(seq_no, self.count_states, current_time)
-            else:
+            # Count every elected attribute that changes the state of the table
+            if flag != 20:
                 self.count_states += 1
-                print(f"DEBUG {self.sw_name} | changed its state {self.count_states} times.")
 
-                current_time = round(time.time()*1000) # get current time in miliseconds
-                # Insert new entry to json file
-                self.stats_api.insert_new_value(seq_no, self.count_states, current_time)
-                if is_new == 1:
-                    self.add_new_entry(subnet, port)
-                else:
-                    self.modify_entry(subnet, port)
+            current_time = round(time.time()*1000) # get current time in miliseconds
+            # Insert new entry to json file
+            self.stats_api.insert_new_value(seq_no, self.count_states, current_time)
+            #self.register_data(self.topology, self.Try, seq_no, self.sw_name, self.count_states, self.is_Valid)
+
+            print(f"DEBUG {self.sw_name} changed its state {self.count_states} times.")
+            
+            if is_new == 1:
+                self.add_new_entry(subnet, port)
+            else:
+                self.modify_entry(subnet, port)
             print()
             print("==========================================")
             print()

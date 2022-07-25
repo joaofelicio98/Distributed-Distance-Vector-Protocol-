@@ -15,7 +15,7 @@ from p4utils.utils.helper import load_topo
 from p4utils.utils.sswitch_p4runtime_API import SimpleSwitchP4RuntimeAPI
 from p4utils.utils.sswitch_thrift_API import SimpleSwitchThriftAPI
 
-sys.path.append('../Get_stats_API')
+sys.path.append('../../Get_stats_API')
 from statistics_API import stats_API
 
 CPU_HEADER_PROTO = 253
@@ -44,8 +44,6 @@ class Controller():
         # seq_no -> Sequence Number of the attribute
         # port -> Next port into which the packet will send packets to reach the destination
         self.elected_attr = {}
-        #stored promised attributes -> {destination:  [distance,seq_no,port]}
-        self.promised_attr = {}
 
         #probes counter
         self.count_states=0 # To count the number of changing of states
@@ -82,6 +80,9 @@ class Controller():
 
 
     def add_boadcast_groups(self):
+        print("==========================================")
+        print()
+        print("Creating the multicast groups...")
         interfaces_to_port = self.topo.get_node_intfs(fields=['port'])[self.sw_name].copy()
         # Filter lo, cpu port and port to hosts
         interfaces_to_port.pop('lo', None)
@@ -178,13 +179,12 @@ class Controller():
             elected = self.make_decision(self.sw_name, params)
             if elected != None:
                 print(f"DEBUG: {self.sw_name} | Changed its state {self.count_states} times")
-                
                 self.announce_attribute(pkt, elected, dst)
 
+    # Send elected probe back to the switch's Data Plane
     def announce_attribute(self, packet, elected, dst):
         #print(f"DEBUG: {self.sw_name} | announcing an elected attribute for subnet {params[0]}")
         #print(f"DEBUG {self.sw_name} | elected = {self.elected_attr}")
-        #print(f"DEBUG {self.sw_name} | promised = {self.promised_attr}")
         #print()
         cpu_header = CPU_header(ingress_port = elected[3])
         packet[IP].remove_payload()
@@ -200,42 +200,21 @@ class Controller():
         iface = self.topo.get_interfaces(self.sw_name)[0]
         sendp(packet, iface=iface, verbose=False)
 
-    #Returns an elected or promised attribute that corresponds to a given Destination
+    #Returns an elected attribute that corresponds to a given Destination
     #dst : string -> node's name
-    #type : string -> "elected" or "promised"
-    def search_stored_attr(self, dst, type:str):
-        if not(type == "elected" or type == "promised"):
-            raise AssertionError('Type must be elected or promised')
-
-        if type == "elected":
-            for host in self.elected_attr:
-                if dst == host:
-                    return self.elected_attr[dst]
-        elif type == "promised":
-            for host in self.promised_attr:
-                if dst == host:
-                    return self.promised_attr[dst]
+    def search_stored_attr(self, dst):
+        for host in self.elected_attr:
+            if dst == host:
+                return self.elected_attr[dst]
         return None
 
     #This function will update or add a new attribute in the elected or promised attributes
     # attr : list[] -> list with [distance, seq_no, port]
-    #type : string -> "elected" or "promised"
-    def save_attribute(self, dst, attr, type:str):
+    def save_attribute(self, dst, attr):
         if not len(attr) == 3:
             raise AssertionError('attr must have length 3: [distance, seq_no, port]')
-        if not(type == "elected" or type == "promised"):
-            raise AssertionError('Type must be elected or promised')
 
-        if type == "elected":
-            self.elected_attr[dst] = attr
-            return
-        elif type == "promised":
-            self.promised_attr[dst] = attr
-            return
-
-    def delete_promised(self, dst):
-        attr = [float('inf'), self.elected_attr[dst][1]+1, 0]
-        self.promised_attr[dst] = attr
+        self.elected_attr[dst] = attr
         return
 
     # returns True if first is better than second
@@ -254,11 +233,10 @@ class Controller():
     def elect_attribute(self,dst, attr):
         neighbor = self.topo.port_to_node(self.sw_name, attr[2])
         dst_mac = self.topo.node_to_node_mac(self.sw_name, neighbor)
-        self.save_attribute(dst, attr, "elected")
+        self.save_attribute(dst, attr)
         success = self.controller.table_modify_match("ipv4_lpm", "ipv4_forward",
                                 [dst], [dst_mac, str(attr[2])])
         #print("DEBUG: {} | Adding new ipv4 rule for dst= {} and port={} ".format(self.sw_name,dst,ingress_port))
-        self.delete_promised(dst)
         return success
 
     def save_data(self, seq_no):
@@ -279,14 +257,11 @@ class Controller():
         ingress_port = packetIn_params[3]
         attr = [distance, seq_no, ingress_port]
 
-        elected = self.search_stored_attr(dst_addr, "elected")
-        promised = self.search_stored_attr(dst_addr, "promised")
+        elected = self.search_stored_attr(dst_addr)
 
         # New computation when ingress_port is the cpu port
         if ingress_port == self.cpu_port:
-            self.save_attribute(dst_addr, attr, "elected")
-            promised = [float('inf'), self.elected_attr[dst_addr][1]+1, 0]
-            self.save_attribute(dst_addr, promised, "promised")
+            self.save_attribute(dst_addr, attr)
             self.save_data(seq_no)
             print(f"DEBUG: {self.sw_name} | Starting a new computation for destination {dst_addr}")
             return packetIn_params
@@ -294,94 +269,44 @@ class Controller():
         elif elected is None:
             neighbor = self.topo.port_to_node(self.sw_name, ingress_port)
             dst_mac = self.topo.node_to_node_mac(self.sw_name, neighbor)
-            self.save_attribute(dst_addr, attr, "elected")
+            self.save_attribute(dst_addr, attr)
             self.controller.table_add("ipv4_lpm", "ipv4_forward",
                                     [dst_addr], [dst_mac, str(ingress_port)])
             self.count_states += 1
-            self.delete_promised(dst_addr)
             self.save_data(seq_no)
             print (f"DEBUG: {self.sw_name} | Elected attribute for a new destination")
             return packetIn_params
 
         # Detect link failure
         elif seq_no-elected[1] > 2:
-            neighbor = self.topo.port_to_node(self.sw_name, ingress_port)
-            dst_mac = self.topo.node_to_node_mac(self.sw_name, neighbor)
-            self.save_attribute(dst_addr, attr, "elected")
-            self.controller.table_modify_match("ipv4_lpm", "ipv4_forward",
-                                    [dst_addr], [dst_mac, str(ingress_port)])
+            self.elect_attribute(dst_addr, attr)
             self.count_states += 1
-            self.delete_promised(dst_addr)
             self.save_data(seq_no)
             print(f"DEBUG: {self.sw_name} | Detected a link failure, electing new attribute")
             return packetIn_params
 
-        # same next hop as the elected
-        elif ingress_port == elected[2]:
-            if seq_no > promised[1]:
-                self.save_attribute(dst_addr, attr, "elected")
-                self.delete_promised(dst_addr)
-                print(f"DEBUG: {self.sw_name} | Same attribute as the elected, more recent than promised")
-                return packetIn_params
-            elif seq_no == promised[1]:
-                if distance <= promised[0]:
-                    self.save_attribute(dst_addr, attr, "elected")
-                    self.delete_promised(dst_addr)
-                    print(f"DEBUG: {self.sw_name} | Same attribute as the elected, same computation as promised")
-                    return packetIn_params
-                else:
-                    self.elect_attribute(dst_addr, promised)
-                    self.count_states += 1
-                    self.save_data(seq_no)
-                    print(f"DEBUG: {self.sw_name} | elected got worse, promised elected")
-                    promised.insert(0,dst_addr)
-                    return promised
-
-        # same next hop as the promised
-        elif ingress_port == promised[2]:
-            if self.compare_metric(distance, elected[0], "distance"):
-                self.elect_attribute(dst_addr, attr)
+        # Better attribute => > seq_num OR (= seq_num AND < distance)
+        elif seq_no > elected[1]:
+            if ingress_port != elected[2]:
                 self.count_states += 1
-                self.save_data(seq_no)
-                print(f"DEBUG: {self.sw_name} | promised got better, is now the elected")
-                return packetIn_params
+                self.elect_attribute(dst_addr, attr)
             else:
-                self.save_attribute(dst_addr, attr, "promised")
-                print(f"DEBUG: {self.sw_name} | promised got updated")
-                return None
+                self.save_attribute(dst_addr, attr)
 
-        # Different next hop
-        else:
-            if seq_no == elected[1]:
-                if self.compare_metric(distance, elected[0], "distance"):
-                    self.elect_attribute(dst_addr, attr)
-                    self.count_states += 1
-                    self.save_data(seq_no)
-                    print(f"DEBUG: {self.sw_name} | new attribute elected with same computation as elected")
-                    return packetIn_params
-            elif seq_no > promised[1]:
-                if self.compare_metric(distance, elected[0], "distance"):
-                    self.elect_attribute(dst_addr, attr)
-                    self.count_states += 1
-                    self.save_data(seq_no)
-                    print(f"DEBUG: {self.sw_name} | new attribute elected more recent than promised")
-                    return packetIn_params
-                else:
-                    self.save_attribute(dst_addr, attr, "promised")
-                    print(f"DEBUG: {self.sw_name} | new promised")
-                    return None
-            elif seq_no == promised[1]:
-                if self.compare_metric(distance, elected[0], "distance"):
-                    self.elect_attribute(dst_addr, attr)
-                    self.count_states += 1
-                    self.save_data(seq_no)
-                    self.delete_promised(dst_addr)
-                    print(f"DEBUG: {self.sw_name} | new attribute elected with same seq_no as promised")
-                    return packetIn_params
-                elif distance < promised[0]:
-                    self.save_attribute(dst_addr, attr, "promised")
-                    print(f"DEBUG: {self.sw_name} | promised changed with a better attribute from the same computation")
-                    return None
+            self.save_data(seq_no)
+            print(f"DEBUG {self.sw_name} | Better attribute elected")
+            return packetIn_params
+        elif seq_no == elected[1] and self.compare_metric(distance, elected[0],"distance"):
+            if ingress_port != elected[2]:
+                self.count_states += 1
+                self.elect_attribute(dst_addr, attr)
+            else:
+                self.save_attribute(dst_addr, attr)
+            
+            self.save_data(seq_no)
+            print(f"DEBUG {self.sw_name} | Same seq_no, better metric")
+            return packetIn_params
+
         #otherwise discard
         print(f"DEBUG: {self.sw_name} | This probe will be discarded")
         return None
