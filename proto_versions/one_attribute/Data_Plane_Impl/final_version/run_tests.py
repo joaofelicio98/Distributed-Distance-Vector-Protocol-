@@ -66,22 +66,31 @@ def run_shell_1(topo_file, lock):
     child.expect("mininet> ")
     logs.append(child.before.decode('utf-8').splitlines())
 
-    #child.sendline("pingall")
-    #child.expect("mininet> ")
-    #logs.append(child.before.decode('utf-8').splitlines())
+    child.sendline("pingall")
+    child.expect("mininet> ",timeout=1000)
+    print("X" in child.before)
+    print()
+    print(child.before)
+    logs.append(child.before.decode('utf-8').splitlines())
     lock.release()
 
-    #lock.acquire()
-    #child.sendline("pingall")
-    #child.expect("mininet> ")
-    #logs.append(child.before.decode('utf-8').splitlines())
+    lock.acquire()
+    print()
+    print("Will start to print logs!")
+    print()
+    child.sendline("pingall",timeout = 400)
+    child.expect("mininet> ")
+    print( )
+    print(child.before)
+    print()
+    logs.append(child.before.decode('utf-8').splitlines())
     child.close()
 
     # Print logs to the file
     with open(log_file,"a") as f:
         for l in logs:
             for line in l:
-                f.write(line)
+                f.write(line + "\n")
 
     lock.release()
 
@@ -126,7 +135,10 @@ def  run_shell_2(lock):
     child.expect("Press your command...")
     lock.release()
 
-    lock.acquire()    
+    lock.acquire()
+    print()
+    print("Will start to recover the failed link!")
+    print()    
     child.sendline("x")
     child.expect("Press your command...")
     child.sendline("x")

@@ -52,7 +52,6 @@ class Controller():
         self.init()
         """
         self.is_Valid = False # False when doing tests
-
          Configs to login the DB
         config = {
             "user":"joao",
@@ -109,6 +108,12 @@ class Controller():
                 hosts_ports.append(ingress_port)
         for intf in intf_to_pop:
             interfaces_to_port.pop(intf, None)
+
+        #for port in hosts_ports:
+            # Add multicast group and ports
+        #    self.controller.mc_mgrp_create(port, list(interfaces_to_port.values()))
+            # Fill broadcast table
+        #    self.controller.table_add("broadcast_elected_attr", "set_mcast_grp", [str(port)], [str(port)])
 
         for ingress_port in interfaces_to_port.values():
             port_list = list(interfaces_to_port.values())
@@ -201,12 +206,17 @@ class Controller():
                 current_time = round(time.time()*1000)
                 self.stats_api.insert_new_value(seq_no, self.count_states, current_time)
             else:
+                #now = datetime.now()
+                #current_time = now.strftime("%H:%M:%S")
+                #print("Adding new entry... time = ",current_time)
                 self.count_states += 1
                 print(f"DEBUG {self.sw_name} | changed its state {self.count_states} times.")
 
                 current_time = round(time.time()*1000) # get current time in miliseconds
                 # Insert new entry to json file
                 self.stats_api.insert_new_value(seq_no, self.count_states, current_time)
+                #self.register_data(self.topology, self.Try, seq_no, self.sw_name, self.count_states, self.is_Valid)
+
                 if is_new == 1:
                     self.add_new_entry(subnet, port)
                 else:
