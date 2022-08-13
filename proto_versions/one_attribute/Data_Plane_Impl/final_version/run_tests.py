@@ -1,11 +1,13 @@
 import pexpect, sys, threading, time, random
 from subprocess import Popen, PIPE
+import multiprocessing
 
-topologies = ['Abilene', 'China Telecom', 'IRIS Networks', 'Bell South']
+topologies = ['Abilene', 'ChinaTelecom', 'IRISNetworks', 'BellSouth']
 lines = []
 n_try = 1
 log_file = "test_logs.txt" # File where we write the logs
 links = [] # network's links
+expect_time = 1000000
 
 # Change the number of try in the script
 def update_try(topo_file):
@@ -39,110 +41,61 @@ def get_links(topo_file):
 # This will run the topology script
 def run_shell_1(topo_file, lock):
     lock.acquire()
-    print()
-    print("ENTERED SHELL 1")
-    print()
-    # Logs to write on the log_file
-    logs=[]
-
     child = pexpect.spawn(f"sudo python {topo_file}.py")
-    #child.logfile = sys.stdout.buffer
-    child.expect("mininet> ")
-    logs.append(child.before.decode('utf-8').splitlines())
+    child.logfile = sys.stdout.buffer
+    child.expect("mininet> ",timeout=expect_time)
     lock.release()
-    print()
-    print("SHELL 1 FIRST RELEASE")
-    print()
+
+    time.sleep(1)
 
     lock.acquire()
-    print()
-    print("SHELL 1 AQUIRED")
-    print()
+    time.sleep(10)
+    child.sendline("pingall")
+    child.expect("mininet> ",timeout=expect_time)
+    
+    #Get random link that doesn't connect to a host
     index = random.randint(0,len(links))
-    print()
-    print(f"NODE1 = {links[index][0]} | NODE2 = {links[index][1]}")
-    print()
+    while 'h' in links[index][0] or 'h' in links[index][1]:
+        index = random.randint(0,len(links))
     child.sendline(f"link {links[index][0]} {links[index][1]} down")
     child.expect("mininet> ")
-    logs.append(child.before.decode('utf-8').splitlines())
 
     child.sendline("pingall")
-    child.expect("mininet> ",timeout=1000)
-    print("X" in child.before)
-    print()
-    print(child.before)
-    logs.append(child.before.decode('utf-8').splitlines())
+    child.expect("mininet> ",timeout=expect_time)
     lock.release()
+
+    time.sleep(1)
 
     lock.acquire()
-    print()
-    print("Will start to print logs!")
-    print()
-    child.sendline("pingall",timeout = 400)
-    child.expect("mininet> ")
-    print( )
-    print(child.before)
-    print()
-    logs.append(child.before.decode('utf-8').splitlines())
+    time.sleep(10)
+    child.sendline("pingall")
+    child.expect("mininet> ",timeout=expect_time)
     child.close()
-
-    # Print logs to the file
-    with open(log_file,"a") as f:
-        for l in logs:
-            for line in l:
-                f.write(line + "\n")
-
     lock.release()
-
-    
-
-#    logs = []
-#    child = pexpect.spawn(f"sudo python {topo_file}.py")
-#    child.logfile = sys.stdout.buffer
-#    child.expect("mininet> ")
-#    logs.append(child.before.decode('utf-8').splitlines())
-#    child.sendline("pingall")
-#    child.expect("mininet> ")
-#    logs.append(child.before.decode('utf-8').splitlines())
-#    for x in range(len(topologies)):
-#        if topo_file == topologies[x]
-#        break
-#    index = random.randint(0,len(topologies[x]))
-#    child.sendline(f"link {topologies[x][index][0]} {topologies[x][index][0]} down")
-#    #TODO Give the lock to wait for further instructions
-#    child.close()
-
-    #with open(log_file,"w") as f:
 
 # This will run the script that sends the probes
 def  run_shell_2(lock):
-    # Must wait first for the other thread to do its tasks 
-    while lock.locked() == False:
-        print()
-        print("GOT INTO THE WHILE")
-        print()
-        continue
-    print()
-    print("GOT OUT OF THE WHILE")
-    print()
+    # Must wait first for the other thread to do its taskst
+    time.sleep(1)
     lock.acquire()
-    print()
-    print("ACQUIRED!!")
-    print()
+    time.sleep(5)
     child = pexpect.spawn(f"sudo python sendComputations.py")
+    child.logfile = sys.stdout.buffer
     child.expect("Press your command...")
     child.sendline("x")
     child.expect("Press your command...")
     lock.release()
 
+    time.sleep(3)
+
     lock.acquire()
-    print()
-    print("Will start to recover the failed link!")
-    print()    
+    time.sleep(5)
     child.sendline("x")
     child.expect("Press your command...")
+    time.sleep(5)
     child.sendline("x")
     child.expect("Press your command...")
+    time.sleep(5)
     child.sendline("x")
     child.expect("Press your command...")
     child.close()
@@ -152,13 +105,15 @@ def main():
     #TODO make a loop to go through each topo 
 
     # A lock for synchronization
-    lock = threading.Lock()
-    # Create 2 threads: One to run the topology and another to send probes
-    shell_1 = threading.Thread(target=run_shell_1, args=(topologies[0], lock))
-    shell_2 = threading.Thread(target=run_shell_2, args=(lock,))
+    #lock = threading.Lock()
+    lock = multiprocessing.Lock()
 
-    update_try(topologies[0])
-    get_links(topologies[0])
+    update_try(topologies[2])
+    get_links(topologies[2])
+
+    # Create 2 processes: One to run the topology and another to send probes
+    shell_1 = multiprocessing.Process(target=run_shell_1, args=(topologies[2], lock))
+    shell_2 = multiprocessing.Process(target=run_shell_2, args=(lock,))
 
     shell_1.start()
     shell_2.start()

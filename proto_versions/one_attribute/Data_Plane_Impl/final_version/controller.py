@@ -11,6 +11,7 @@ import threading
 import nnpy
 from datetime import datetime
 import time
+from subprocess import Popen, PIPE
 
 from p4utils.utils.helper import load_topo
 from p4utils.utils.sswitch_p4runtime_API import SimpleSwitchP4RuntimeAPI
@@ -45,7 +46,7 @@ class Controller():
                                                    json_path=sw_data['json_path'])
 
         self.count_states=0 # To count the number of changing of states
-        self.topology = "Abilene" # Topology I am currently using
+        self.topology = "IRISNetworks" # Topology I am currently using
         self.Try = 1 # Number of try
         self.stats_api = stats_API(self.sw_name, self.Try, self.topology)
 
@@ -82,6 +83,9 @@ class Controller():
         controller_thrift = SimpleSwitchThriftAPI(thrift_port)
         # Reset forwarding states
         controller_thrift.reset_state()
+        if os.path.exists(os.getcwd() + 'topology.json'):
+            p = Popen('sudo rm topology.json', shell=True,
+                stdout=PIPE, stderr=PIPE)
 
     def init(self):
         self.reset()
