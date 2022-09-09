@@ -118,13 +118,13 @@ control MyIngress(inout headers hdr,
                     if (hdr.probe.distance == 0){
                         elect_attribute();
                         meta.flag = 20;
-			meta.E_NH = standard_metadata.ingress_port;
+			            meta.E_NH = standard_metadata.ingress_port;
                         broadcast_elected_attr.apply();
                     }else{
                         // Destination unknown
                         meta.is_new = true;
                         elect_attribute();
-			meta.E_NH = standard_metadata.ingress_port;
+			            meta.E_NH = standard_metadata.ingress_port;
                         update_table();
                         broadcast_elected_attr.apply();
                     }
@@ -132,19 +132,27 @@ control MyIngress(inout headers hdr,
 
                 else{
                     get_info();
-                    // Starting a new computation
-                    if (hdr.probe.distance == 0){
+                    // Check for link failure cases
+                    if (hdr.probe.seq_no - meta.E_seq_no > 2){
                         elect_attribute();
-			meta.E_NH = standard_metadata.ingress_port;
+                        meta.flag = 10;
+			            update_table();
+                        broadcast_elected_attr.apply();
+                    }
+
+                    // Starting a new computation
+                    else if (hdr.probe.distance == 0){
+                        elect_attribute();
+			            meta.E_NH = standard_metadata.ingress_port;
                         broadcast_elected_attr.apply();
                     }
 
                     else if(hdr.probe.seq_no > meta.E_seq_no){
                         elect_attribute();
                         if (meta.E_NH != standard_metadata.ingress_port){
-			    update_table();
+			                update_table();
                         }
-			meta.E_NH = standard_metadata.ingress_port;
+			            meta.E_NH = standard_metadata.ingress_port;
                         broadcast_elected_attr.apply();
                     }
 
@@ -153,7 +161,7 @@ control MyIngress(inout headers hdr,
                         if (meta.E_NH != standard_metadata.ingress_port){
                             update_table();
                         }
-			meta.E_NH = standard_metadata.ingress_port;
+			            meta.E_NH = standard_metadata.ingress_port;
                         broadcast_elected_attr.apply();
                     }
                 }

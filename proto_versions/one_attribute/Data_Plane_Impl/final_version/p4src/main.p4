@@ -179,7 +179,7 @@ control MyIngress(inout headers hdr,
                     if (hdr.probe.seq_no - meta.E_seq_no > 2){
                         elect_attribute();
                         meta.flag = 10;
-			update_table();
+			            update_table();
                         broadcast_elected_attr.apply();
                     }
 

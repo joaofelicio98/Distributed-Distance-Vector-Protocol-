@@ -45,13 +45,12 @@ class Controller():
 
         self.count_states=0 # To count the number of changing of states
         self.topology = "IRIS Networks"
-        self.Try = 23 # Number of try
+        self.Try = 1 # Number of try
         self.stats_api = stats_API(self.sw_name, self.Try, self.topology)
 
         self.init()
         """
         self.is_Valid = False # False when doing tests
-
          Configs to login the DB
         config = {
             "user":"joao",
@@ -82,6 +81,10 @@ class Controller():
         controller_thrift = SimpleSwitchThriftAPI(thrift_port)
         # Reset forwarding states
         controller_thrift.reset_state()
+        if os.path.exists(os.getcwd() + 'topology.json'):
+            p = Popen('sudo rm topology.json', shell=True,
+                stdout=PIPE, stderr=PIPE)
+        
 
     def init(self):
         self.reset()
@@ -203,6 +206,9 @@ class Controller():
             # Count every elected attribute that changes the state of the table
             if flag != 20:
                 self.count_states += 1
+
+            if flag == 10:
+                print("Recovering from a failled link")
 
             current_time = round(time.time()*1000) # get current time in miliseconds
             # Insert new entry to json file

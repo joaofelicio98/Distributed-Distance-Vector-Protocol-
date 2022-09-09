@@ -290,20 +290,20 @@ class Controller():
             if ingress_port != elected[2]:
                 self.count_states += 1
                 self.elect_attribute(dst_addr, attr)
+                self.save_data(seq_no)
             else:
                 self.save_attribute(dst_addr, attr)
 
-            self.save_data(seq_no)
             print(f"DEBUG {self.sw_name} | Better attribute elected")
             return packetIn_params
         elif seq_no == elected[1] and self.compare_metric(distance, elected[0],"distance"):
             if ingress_port != elected[2]:
                 self.count_states += 1
                 self.elect_attribute(dst_addr, attr)
+                self.save_data(seq_no)
             else:
                 self.save_attribute(dst_addr, attr)
             
-            self.save_data(seq_no)
             print(f"DEBUG {self.sw_name} | Same seq_no, better metric")
             return packetIn_params
 

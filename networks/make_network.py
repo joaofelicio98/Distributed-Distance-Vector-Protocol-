@@ -5,7 +5,9 @@ name = ""
 nodes = []
 links = []
 index = 0
-with open("BellSouth","r") as f:
+min_delay=108
+max_delay=132
+with open("IRISNetworks","r") as f:
 
     for line in f:
         stripped = line.strip()
@@ -42,7 +44,7 @@ with open(f"{name}.py","w") as f:
     f.write('\n')
     for link in links:
         f.write(f'net.addLink("s{link[0]}", "s{link[1]}")\n')
-        delay = random.randint(25,300)
+        delay = random.randint(min_delay,max_delay)
         f.write(f'net.setDelay("s{link[0]}", "s{link[1]}", {delay})\n')
         f.write(f'net.setBw("s{link[0]}", "s{link[1]}", 1)\n')
 
@@ -50,7 +52,7 @@ with open(f"{name}.py","w") as f:
     f.write('net.mixed()\n')
     f.write('# Nodes general options\n')
     f.write('net.enableCpuPortAll()\n')
-    f.write('net.enablePcapDumpAll()\n')
-    f.write('net.enableLogAll()\n')
+    f.write('#net.enablePcapDumpAll()\n')
+    f.write('#net.enableLogAll()\n')
     f.write('net.enableCli()\n')
     f.write('net.startNetwork()\n')
