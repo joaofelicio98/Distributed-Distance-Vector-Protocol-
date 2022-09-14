@@ -15,7 +15,7 @@ class bcolors:
 
 topologies = ['IRISNetworks', 'Abilene', 'ChinaTelecom', 'BellSouth']
 links = [] # network's links
-expect_time = 1000000
+expect_time = 10000000
 
 # Change the number of try in the script
 def update_try(n_try, topo_file):
@@ -60,7 +60,7 @@ def run_shell_1(topo_file, lock, topo_links, n):
     time.sleep(1)
 
     lock.acquire()
-    time.sleep(20)
+    time.sleep(40)
     #child.sendline("pingall")
     #child.expect("mininet> ",timeout=expect_time)
     
@@ -78,12 +78,10 @@ def run_shell_1(topo_file, lock, topo_links, n):
     time.sleep(1)
 
     lock.acquire()
-    time.sleep(20)
+    time.sleep(40)
     if n%25 == 0:
         child.sendline("pingall")
         child.expect("mininet> ",timeout=expect_time)
-    else:
-        time.sleep(5)
     child.close()
     lock.release()
 
@@ -92,7 +90,7 @@ def  run_shell_2(lock):
     # Must wait first for the other thread to do its tasks
     time.sleep(1)
     lock.acquire()
-    time.sleep(15)
+    time.sleep(35)
     child = pexpect.spawn(f"sudo python sendComputations.py")
     child.logfile = sys.stdout.buffer
     child.expect("Press your command...")
@@ -103,13 +101,13 @@ def  run_shell_2(lock):
     time.sleep(3)
 
     lock.acquire()
-    time.sleep(15)
+    time.sleep(35)
     child.sendline("x")
     child.expect("Press your command...")
-    time.sleep(15)
+    time.sleep(35)
     child.sendline("x")
     child.expect("Press your command...")
-    time.sleep(15)
+    time.sleep(35)
     child.sendline("x")
     child.expect("Press your command...")
     child.close()
@@ -135,8 +133,9 @@ def main():
             shell_2.start()
 
             shell_1.join()
-            shell_2.join()
-            time.sleep(2)          
+            shell_2.join()  
+            time.sleep(30)   
+        time.sleep(60)     
 
 
 if __name__ == "__main__":
