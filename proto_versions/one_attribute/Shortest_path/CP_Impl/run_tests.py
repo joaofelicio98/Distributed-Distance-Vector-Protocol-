@@ -13,9 +13,9 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-topologies = ['Abilene', 'ChinaTelecom', 'IRISNetworks', 'BellSouth']
+topologies = ['IRISNetworks', 'Abilene', 'ChinaTelecom', 'BellSouth']
 links = [] # network's links
-expect_time = 1000000
+expect_time = 10000000
 
 # Change the number of try in the script
 def update_try(n_try, topo_file):
@@ -50,7 +50,7 @@ def get_links(topo_file):
     return links
 
 # This will run the topology script
-def run_shell_1(topo_file, lock, topo_links):
+def run_shell_1(topo_file, lock, topo_links, n):
     lock.acquire()
     child = pexpect.spawn(f"sudo python {topo_file}.py")
     child.logfile = sys.stdout.buffer
@@ -60,9 +60,9 @@ def run_shell_1(topo_file, lock, topo_links):
     time.sleep(1)
 
     lock.acquire()
-    time.sleep(10)
-    child.sendline("pingall")
-    child.expect("mininet> ",timeout=expect_time)
+    time.sleep(60)
+    #child.sendline("pingall")
+    #child.expect("mininet> ",timeout=expect_time)
     
     #Get random link that doesn't connect to a host
     index = random.randint(0,len(topo_links)-1)
@@ -71,16 +71,17 @@ def run_shell_1(topo_file, lock, topo_links):
     child.sendline(f"link {topo_links[index][0]} {topo_links[index][1]} down")
     child.expect("mininet> ")
 
-    child.sendline("pingall")
-    child.expect("mininet> ",timeout=expect_time)
+    #child.sendline("pingall")
+    #child.expect("mininet> ",timeout=expect_time)
     lock.release()
 
-    time.sleep(1)
+    time.sleep(5)
 
     lock.acquire()
-    time.sleep(10)
-    child.sendline("pingall")
-    child.expect("mininet> ",timeout=expect_time)
+    time.sleep(60)
+    if n%25 == 0:
+        child.sendline("pingall")
+        child.expect("mininet> ",timeout=expect_time)
     child.close()
     lock.release()
 
@@ -89,7 +90,7 @@ def  run_shell_2(lock):
     # Must wait first for the other thread to do its tasks
     time.sleep(1)
     lock.acquire()
-    time.sleep(5)
+    time.sleep(60)
     child = pexpect.spawn(f"sudo python sendComputations.py")
     child.logfile = sys.stdout.buffer
     child.expect("Press your command...")
@@ -97,16 +98,16 @@ def  run_shell_2(lock):
     child.expect("Press your command...")
     lock.release()
 
-    time.sleep(3)
+    time.sleep(5)
 
     lock.acquire()
-    time.sleep(5)
+    time.sleep(60)
     child.sendline("x")
     child.expect("Press your command...")
-    time.sleep(5)
+    time.sleep(60)
     child.sendline("x")
     child.expect("Press your command...")
-    time.sleep(5)
+    time.sleep(60)
     child.sendline("x")
     child.expect("Press your command...")
     child.close()
@@ -114,6 +115,8 @@ def  run_shell_2(lock):
 
 def main():
     for topo in topologies:
+        if topo != 'BellSouth':
+            continue
         links = get_links(topo) # Update topology info
         for n in range(100):
             update_try(n+1, topo)
@@ -125,14 +128,16 @@ def main():
             lock = multiprocessing.Lock()
 
             # Create 2 processes: One to run the topology and another to send probes
-            shell_1 = multiprocessing.Process(target=run_shell_1, args=(topo, lock, links))
+            shell_1 = multiprocessing.Process(target=run_shell_1, args=(topo, lock, links, n))
             shell_2 = multiprocessing.Process(target=run_shell_2, args=(lock,))
 
             shell_1.start()
             shell_2.start()
 
             shell_1.join()
-            shell_2.join()          
+            shell_2.join()  
+            time.sleep(50)   
+        time.sleep(120)     
 
 
 if __name__ == "__main__":

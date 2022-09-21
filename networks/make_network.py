@@ -7,7 +7,7 @@ links = []
 index = 0
 min_delay=108
 max_delay=132
-with open("IRISNetworks","r") as f:
+with open("GtsCe","r") as f:
 
     for line in f:
         stripped = line.strip()
@@ -34,19 +34,21 @@ with open(f"{name}.py","w") as f:
     for node in nodes:
         f.write(f'net.execScript("python controller.py s{node} &", reboot=True)\n')
         f.write(f'net.addP4RuntimeSwitch("s{node}")\n')
-        f.write(f'net.addHost("h{node}")\n')
+        if (node-1) % 4 == 0:
+            f.write(f'net.addHost("h{node}")\n')
     f.write('net.setP4SourceAll("./p4src/main.p4")\n')
 
     f.write('\n')
     for node in nodes:
-        f.write(f'net.addLink("s{node}", "h{node}")\n')
+        if node-1 % 4 == 0:
+            f.write(f'net.addLink("s{node}", "h{node}")\n')
 
     f.write('\n')
     for link in links:
         f.write(f'net.addLink("s{link[0]}", "s{link[1]}")\n')
         delay = random.randint(min_delay,max_delay)
         f.write(f'net.setDelay("s{link[0]}", "s{link[1]}", {delay})\n')
-        f.write(f'net.setBw("s{link[0]}", "s{link[1]}", 1)\n')
+        f.write(f'net.setBw("s{link[0]}", "s{link[1]}", 10)\n')
 
     f.write('# Assignment strategy\n')
     f.write('net.mixed()\n')
