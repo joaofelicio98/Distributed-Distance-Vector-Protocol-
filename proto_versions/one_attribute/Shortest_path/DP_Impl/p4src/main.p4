@@ -73,6 +73,7 @@ control MyIngress(inout headers hdr,
     action elect_attribute() {
         elected_distance.write(meta.register_index, hdr.probe.distance);
         elected_seq_num.write(meta.register_index, hdr.probe.seq_no);
+        elected_NH.write(meta.register_index, standard_metadata.ingress_port);
 
         // update metadata
         meta.E_distance = hdr.probe.distance;
@@ -111,6 +112,8 @@ control MyIngress(inout headers hdr,
                 meta.is_new = false;
                 // Read elected sequence number
                 elected_seq_num.read(meta.E_seq_no, meta.register_index);
+                elected_NH.read(meta.E_NH, meta.register_index);
+                elected_distance.read(meta.E_distance, meta.register_index);
 
                 // If True means that there is no information on the registers yet => no elected attribute
                 if(meta.E_seq_no == 0){
