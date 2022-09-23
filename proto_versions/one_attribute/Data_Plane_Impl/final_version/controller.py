@@ -46,7 +46,7 @@ class Controller():
                                                    json_path=sw_data['json_path'])
 
         self.count_states=0 # To count the number of changing of states
-        self.topology = "BellSouth" # Topology I am currently using
+        self.topology = "GTSCE" # Topology I am currently using
         self.Try = 100 # Number of try
         self.stats_api = stats_API(self.sw_name, self.Try, self.topology)
 

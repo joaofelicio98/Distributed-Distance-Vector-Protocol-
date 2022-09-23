@@ -13,9 +13,9 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-topologies = ['Abilene', 'ChinaTelecom', 'IRISNetworks', 'BellSouth']
+topologies = ['IRISNetworks', 'Abilene', 'ChinaTelecom', 'BellSouth']
 links = [] # network's links
-expect_time = 1000000
+expect_time = 10000000
 
 # Change the number of try in the script
 def update_try(n_try, topo_file):
@@ -60,7 +60,7 @@ def run_shell_1(topo_file, lock, topo_links, n):
     time.sleep(1)
 
     lock.acquire()
-    time.sleep(10)
+    time.sleep(100)
     #child.sendline("pingall")
     #child.expect("mininet> ",timeout=expect_time)
     
@@ -78,8 +78,8 @@ def run_shell_1(topo_file, lock, topo_links, n):
     time.sleep(1)
 
     lock.acquire()
-    time.sleep(10)
-    if n%10 == 0:
+    time.sleep(100)
+    if n%25 == 0:
         child.sendline("pingall")
         child.expect("mininet> ",timeout=expect_time)
     child.close()
@@ -90,7 +90,7 @@ def  run_shell_2(lock):
     # Must wait first for the other thread to do its tasks
     time.sleep(1)
     lock.acquire()
-    time.sleep(5)
+    time.sleep(100)
     child = pexpect.spawn(f"sudo python sendComputations.py")
     child.logfile = sys.stdout.buffer
     child.expect("Press your command...")
@@ -101,39 +101,42 @@ def  run_shell_2(lock):
     time.sleep(3)
 
     lock.acquire()
-    time.sleep(5)
+    time.sleep(100)
     child.sendline("x")
     child.expect("Press your command...")
-    time.sleep(5)
+    time.sleep(100)
     child.sendline("x")
     child.expect("Press your command...")
-    time.sleep(5)
+    time.sleep(100)
     child.sendline("x")
     child.expect("Press your command...")
     child.close()
     lock.release()
 
 def main():
-    for topo in topologies:
-        links = get_links(topo) # Update topology info
-        for n in range(100):
-            update_try(n+1, topo)
+    #for topo in topologies:
+    topo = "GTSCE"
+    links = get_links(topo) # Update topology info
+    for n in range(100):
+        update_try(n+1, topo)
             
-            print()
-            print(f"{bcolors.WARNING}\nDEBUG: Try: {n+1} | Topo: {topo}\n{bcolors.ENDC}")
+        print()
+        print(f"{bcolors.WARNING}\nDEBUG: Try: {n+1} | Topo: {topo}\n{bcolors.ENDC}")
 
-            # A lock for synchronization
-            lock = multiprocessing.Lock()
+        # A lock for synchronization
+        lock = multiprocessing.Lock()
 
-            # Create 2 processes: One to run the topology and another to send probes
-            shell_1 = multiprocessing.Process(target=run_shell_1, args=(topo, lock, links, n))
-            shell_2 = multiprocessing.Process(target=run_shell_2, args=(lock,))
+        # Create 2 processes: One to run the topology and another to send probes
+        shell_1 = multiprocessing.Process(target=run_shell_1, args=(topo, lock, links, n))
+        shell_2 = multiprocessing.Process(target=run_shell_2, args=(lock,))
 
-            shell_1.start()
-            shell_2.start()
+        shell_1.start()
+        shell_2.start()
 
-            shell_1.join()
-            shell_2.join()          
+        shell_1.join()
+        shell_2.join()  
+        time.sleep(100)   
+        #time.sleep(60)     
 
 
 if __name__ == "__main__":
