@@ -61,18 +61,22 @@ def main():
 
             if c == 'x':
                 for sw in controllers:
-                    """
-                    host = topo.get_hosts_connected_to(sw)[0]
-                    subnet = topo.subnet(host,sw)
-                    start_computation(subnet, sw, controllers[sw])
-                    controllers[sw] = controllers[sw] + 1
-                    """
-                    host = topo.get_hosts_connected_to(sw)[0]
-                    #dst_ip = topo.node_to_node_interface_ip(host,sw)
-                    dst_ip = topo.get_host_ip(host)
-                    start_computation(dst_ip, sw, controllers[sw])
-                    controllers[sw] = controllers[sw] + 1
-                    #sleep(0.7)
+                    #This condition is used for bigger networks
+                    n = int(sw.replace("s",""))
+                    print(n)
+                    if (n-1)%4 == 0:
+                        """
+                        host = topo.get_hosts_connected_to(sw)[0]
+                        subnet = topo.subnet(host,sw)
+                        start_computation(subnet, sw, controllers[sw])
+                        controllers[sw] = controllers[sw] + 1
+                        """
+                        host = topo.get_hosts_connected_to(sw)[0]
+                        #dst_ip = topo.node_to_node_interface_ip(host,sw)
+                        dst_ip = topo.get_host_ip(host)
+                        start_computation(dst_ip, sw, controllers[sw])
+                        controllers[sw] = controllers[sw] + 1
+                        #sleep(0.7)
 
             elif c in controllers:
                 """
