@@ -60,7 +60,7 @@ def run_shell_1(topo_file, lock, topo_links, n):
     time.sleep(1)
 
     lock.acquire()
-    time.sleep(40)
+    time.sleep(60)
     #child.sendline("pingall")
     #child.expect("mininet> ",timeout=expect_time)
     
@@ -75,10 +75,10 @@ def run_shell_1(topo_file, lock, topo_links, n):
     #child.expect("mininet> ",timeout=expect_time)
     lock.release()
 
-    time.sleep(1)
+    time.sleep(5)
 
     lock.acquire()
-    time.sleep(40)
+    time.sleep(60)
     if n%25 == 0:
         child.sendline("pingall")
         child.expect("mininet> ",timeout=expect_time)
@@ -90,7 +90,7 @@ def  run_shell_2(lock):
     # Must wait first for the other thread to do its tasks
     time.sleep(1)
     lock.acquire()
-    time.sleep(35)
+    time.sleep(55)
     child = pexpect.spawn(f"sudo python sendComputations.py")
     child.logfile = sys.stdout.buffer
     child.expect("Press your command...")
@@ -98,16 +98,16 @@ def  run_shell_2(lock):
     child.expect("Press your command...")
     lock.release()
 
-    time.sleep(3)
+    time.sleep(5)
 
     lock.acquire()
-    time.sleep(35)
+    time.sleep(55)
     child.sendline("x")
     child.expect("Press your command...")
-    time.sleep(35)
+    time.sleep(55)
     child.sendline("x")
     child.expect("Press your command...")
-    time.sleep(35)
+    time.sleep(55)
     child.sendline("x")
     child.expect("Press your command...")
     child.close()
@@ -115,6 +115,8 @@ def  run_shell_2(lock):
 
 def main():
     for topo in topologies:
+        if topo != 'BellSouth':
+            continue
         links = get_links(topo) # Update topology info
         for n in range(100):
             update_try(n+1, topo)
@@ -134,8 +136,8 @@ def main():
 
             shell_1.join()
             shell_2.join()  
-            time.sleep(30)   
-        time.sleep(60)     
+            time.sleep(40)   
+        #time.sleep(100)     
 
 
 if __name__ == "__main__":
