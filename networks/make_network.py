@@ -40,7 +40,7 @@ with open(f"{name}.py","w") as f:
 
     f.write('\n')
     for node in nodes:
-        if node-1 % 4 == 0:
+        if (node-1) % 4 == 0:
             f.write(f'net.addLink("s{node}", "h{node}")\n')
 
     f.write('\n')
