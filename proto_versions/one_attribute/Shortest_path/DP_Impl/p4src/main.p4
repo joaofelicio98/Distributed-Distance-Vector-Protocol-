@@ -78,7 +78,7 @@ control MyIngress(inout headers hdr,
         // update metadata
         meta.E_distance = hdr.probe.distance;
         meta.E_seq_no = hdr.probe.seq_no;
-        meta.E_NH = standard_metadata.ingress_port
+        meta.E_NH = standard_metadata.ingress_port;
 
         // Update probe's distance to broadcast it
         hdr.probe.distance = meta.E_distance + 1;

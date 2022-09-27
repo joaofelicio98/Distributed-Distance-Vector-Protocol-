@@ -1,7 +1,7 @@
-# 1 "/root/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/main.p4"
+# 1 "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/main.p4"
 # 1 "<built-in>"
 # 1 "<command-line>"
-# 1 "/root/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/main.p4"
+# 1 "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/main.p4"
 /* -*- P4_16 -*- */
 # 1 "/usr/local/share/p4c/p4include/core.p4" 1
 /*
@@ -86,7 +86,7 @@ match_kind {
     /// Longest-prefix match.
     lpm
 }
-# 3 "/root/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/main.p4" 2
+# 3 "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/main.p4" 2
 # 1 "/usr/local/share/p4c/p4include/v1model.p4" 1
 /*
 Copyright 2013-present Barefoot Networks, Inc.
@@ -865,8 +865,8 @@ package V1Switch<H, M>(Parser<H, M> p,
                        ComputeChecksum<H, M> ck,
                        Deparser<H> dep
                        );
-# 4 "/root/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/main.p4" 2
-# 1 "/root/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/include/headers.p4" 1
+# 4 "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/main.p4" 2
+# 1 "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/include/headers.p4" 1
 const bit<16> TYPE_IPV4 = 0x800;
 const bit<16> TYPE_ARP = 0x806;
 const bit<8> TCP_PROTOCOL = 6;
@@ -974,8 +974,8 @@ struct headers {
     tcp_t tcp;
     udp_t udp;
 }
-# 5 "/root/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/main.p4" 2
-# 1 "/root/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/include/parsers.p4" 1
+# 5 "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/main.p4" 2
+# 1 "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/include/parsers.p4" 1
 /*************************************************************************
 *********************** P A R S E R  ***********************************
 *************************************************************************/
@@ -1084,7 +1084,7 @@ control MyDeparser(packet_out packet, in headers hdr) {
         packet.emit(hdr.udp);
     }
 }
-# 6 "/root/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/main.p4" 2
+# 6 "/home/joao/Desktop/Distributed-Distance-Vector-Protocol-/proto_versions/one_attribute/Shortest_path/DP_Impl/p4src/main.p4" 2
 
 
 
@@ -1160,6 +1160,7 @@ control MyIngress(inout headers hdr,
         // update metadata
         meta.E_distance = hdr.probe.distance;
         meta.E_seq_no = hdr.probe.seq_no;
+        meta.E_NH = standard_metadata.ingress_port
 
         // Update probe's distance to broadcast it
         hdr.probe.distance = meta.E_distance + 1;
@@ -1194,8 +1195,6 @@ control MyIngress(inout headers hdr,
                 meta.is_new = false;
                 // Read elected sequence number
                 elected_seq_num.read(meta.E_seq_no, meta.register_index);
-                elected_NH.read(meta.E_NH, meta.register_index);
-                elected_distance.read(meta.E_distance, meta.register_index);
 
                 // If True means that there is no information on the registers yet => no elected attribute
                 if(meta.E_seq_no == 0){
@@ -1237,7 +1236,6 @@ control MyIngress(inout headers hdr,
                         if (meta.E_NH != standard_metadata.ingress_port){
                    update_table();
                         }
-               meta.E_NH = standard_metadata.ingress_port;
                         broadcast_elected_attr.apply();
                     }
 
@@ -1246,7 +1244,6 @@ control MyIngress(inout headers hdr,
                         if (meta.E_NH != standard_metadata.ingress_port){
                             update_table();
                         }
-               meta.E_NH = standard_metadata.ingress_port;
                         broadcast_elected_attr.apply();
                     }
                 }
