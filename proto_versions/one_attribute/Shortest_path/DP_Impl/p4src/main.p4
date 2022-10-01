@@ -78,7 +78,6 @@ control MyIngress(inout headers hdr,
         // update metadata
         meta.E_distance = hdr.probe.distance;
         meta.E_seq_no = hdr.probe.seq_no;
-        meta.E_NH = standard_metadata.ingress_port;
 
         // Update probe's distance to broadcast it
         hdr.probe.distance = meta.E_distance + 1;
@@ -126,7 +125,7 @@ control MyIngress(inout headers hdr,
                         // Destination unknown
                         meta.is_new = true;
                         elect_attribute();
-			            meta.E_NH = standard_metadata.ingress_port;
+                        meta.E_NH = standard_metadata.ingress_port;
                         update_table();
                         broadcast_elected_attr.apply();
                     }
@@ -138,6 +137,7 @@ control MyIngress(inout headers hdr,
                     if (hdr.probe.seq_no - meta.E_seq_no > 2){
                         elect_attribute();
                         meta.flag = 10;
+                        meta.E_NH = standard_metadata.ingress_port;
 			            update_table();
                         broadcast_elected_attr.apply();
                     }
@@ -154,6 +154,7 @@ control MyIngress(inout headers hdr,
                         if (meta.E_NH != standard_metadata.ingress_port){
 			                update_table();
                         }
+                        meta.E_NH = standard_metadata.ingress_port;
                         broadcast_elected_attr.apply();
                     }
 
@@ -162,6 +163,7 @@ control MyIngress(inout headers hdr,
                         if (meta.E_NH != standard_metadata.ingress_port){
                             update_table();
                         }
+                        meta.E_NH = standard_metadata.ingress_port;
                         broadcast_elected_attr.apply();
                     }
                 }

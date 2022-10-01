@@ -44,8 +44,8 @@ class Controller():
                                                    json_path=sw_data['json_path'])
 
         self.count_states=0 # To count the number of changing of states
-        self.topology = "IRISNetworks" # Topology I am currently using
-        self.Try = 1 # Number of try
+        self.topology = "BellSouth" # Topology I am currently using
+        self.Try = 100 # Number of try
         self.stats_api = stats_API(self.sw_name, self.Try, self.topology)
 
         self.init()
@@ -203,13 +203,7 @@ class Controller():
             print(f"DEBUG {self.sw_name} | is_new = {is_new}")
             flag = cpu_header.flag
 
-            # Count every elected attribute that changes the state of the table
-            if flag != 20:
-                self.count_states += 1
-
-            if flag == 10:
-                print("Recovering from a failled link")
-
+            self.count_states += 1
             current_time = round(time.time()*1000) # get current time in miliseconds
             # Insert new entry to json file
             self.stats_api.insert_new_value(seq_no, self.count_states, current_time)
@@ -260,3 +254,4 @@ if __name__ == "__main__":
     import sys
     sw_name = sys.argv[1]
     controller = Controller(sw_name).run()
+

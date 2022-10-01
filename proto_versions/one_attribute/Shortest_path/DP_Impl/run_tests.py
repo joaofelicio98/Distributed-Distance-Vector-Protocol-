@@ -13,7 +13,7 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
-topologies = ['IRISNetworks', 'Abilene', 'ChinaTelecom', 'BellSouth']
+topologies = ['IRISNetworks', 'Abilene', 'BellSouth']
 links = [] # network's links
 expect_time = 10000000
 
@@ -115,8 +115,6 @@ def  run_shell_2(lock):
 
 def main():
     for topo in topologies:
-        if topo == 'BellSouth':
-            break
         links = get_links(topo) # Update topology info
         for n in range(100):
             update_try(n+1, topo)
