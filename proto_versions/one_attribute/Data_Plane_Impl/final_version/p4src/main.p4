@@ -17,11 +17,11 @@ control MyIngress(inout headers hdr,
 
     register<bit<16>>(REGISTER_SIZE) elected_distance;
     register<bit<32>>(REGISTER_SIZE) elected_seq_num;
-    register<bit<8>>(REGISTER_SIZE) elected_NH;
+    register<bit<9>>(REGISTER_SIZE) elected_NH;
 
     register<bit<16>>(REGISTER_SIZE) promised_distance;
     register<bit<32>>(REGISTER_SIZE) promised_seq_num;
-    register<bit<8>>(REGISTER_SIZE) promised_NH;
+    register<bit<9>>(REGISTER_SIZE) promised_NH;
 
     action drop() {
         mark_to_drop(standard_metadata);
